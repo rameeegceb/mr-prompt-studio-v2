@@ -135,3 +135,5 @@ export default function LearningContent({
         </div>
       </div>
     </div>
+  );
+}
