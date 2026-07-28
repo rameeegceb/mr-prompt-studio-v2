@@ -4,18 +4,32 @@ import LearningSidebar from "../components/LearningSidebar";
 import LearningToolbar from "../components/LearningToolbar";
 import LearningContent from "../components/LearningContent";
 
+import LearningProgress from "../components/LearningProgress";
+import ContinueLearningCard from "../components/ContinueLearningCard";
+import BookmarkPanel from "../components/BookmarkPanel";
+import FavoritesPanel from "../components/FavoritesPanel";
+
+import { chapters } from "../data/chapters";
+
 import useLearning from "../hooks/useLearning";
 
 export default function LearningHub() {
   const {
     selectedChapter,
     setSelectedChapter,
+
     search,
     setSearch,
-    readingProgress,
+
     bookmarks,
     favorites,
+
+    readingProgress,
   } = useLearning();
+
+  const currentChapter =
+    chapters.find((c) => c.id === selectedChapter) ??
+    chapters[0];
 
   return (
     <div className="flex h-full flex-col">
@@ -24,67 +38,68 @@ export default function LearningHub() {
         description="Master Enterprise Prompt Engineering"
       />
 
-      <div className="mt-4 rounded-xl border border-slate-200 bg-white px-6 py-4 shadow-sm">
-        <div className="flex items-center justify-between gap-6">
-          <div className="flex-1">
-            <div className="mb-2 flex items-center justify-between text-sm">
-              <span className="font-medium text-slate-700">
-                Learning Progress
-              </span>
+      <div className="mt-6 grid grid-cols-12 gap-6">
 
-              <span className="font-semibold text-blue-600">
-                {readingProgress}%
-              </span>
-            </div>
-
-            <div className="h-2 overflow-hidden rounded-full bg-slate-200">
-              <div
-                className="h-full rounded-full bg-blue-600 transition-all duration-300"
-                style={{ width: `${readingProgress}%` }}
-              />
-            </div>
-          </div>
-
-          <div className="hidden gap-6 md:flex">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-slate-800">
-                {bookmarks.length}
-              </p>
-              <p className="text-xs uppercase tracking-wide text-slate-500">
-                Bookmarks
-              </p>
-            </div>
-
-            <div className="text-center">
-              <p className="text-2xl font-bold text-slate-800">
-                {favorites.length}
-              </p>
-              <p className="text-xs uppercase tracking-wide text-slate-500">
-                Favorites
-              </p>
-            </div>
-          </div>
+        <div className="col-span-12 lg:col-span-8">
+          <ContinueLearningCard
+            chapter={currentChapter}
+            onContinue={setSelectedChapter}
+          />
         </div>
+
+        <div className="col-span-12 lg:col-span-4">
+          <LearningProgress
+            progress={readingProgress}
+            chaptersCompleted={
+              Math.floor(
+                (readingProgress / 100) *
+                  chapters.length
+              )
+            }
+            totalChapters={chapters.length}
+          />
+        </div>
+
       </div>
 
       <div className="mt-6 flex flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
         <LearningSidebar
           selectedChapter={selectedChapter}
           onSelectChapter={setSelectedChapter}
         />
 
         <div className="flex flex-1 flex-col">
+
           <LearningToolbar
             search={search}
             onSearch={setSearch}
           />
 
-          <div className="flex-1 overflow-y-auto p-6">
-            <LearningContent
-              selectedChapter={selectedChapter}
-            />
+          <div className="grid flex-1 grid-cols-12 overflow-hidden">
+
+            <div className="col-span-12 xl:col-span-9 overflow-y-auto">
+              <LearningContent
+                selectedChapter={selectedChapter}
+              />
+            </div>
+
+            <aside className="hidden xl:flex xl:col-span-3 flex-col gap-4 overflow-y-auto border-l border-slate-200 bg-slate-50 p-5">
+
+              <BookmarkPanel
+                bookmarks={bookmarks}
+              />
+
+              <FavoritesPanel
+                favorites={favorites}
+              />
+
+            </aside>
+
           </div>
+
         </div>
+
       </div>
     </div>
   );
