@@ -1,32 +1,42 @@
-import usePromptLibraryContext from "../state/usePromptLibraryContext";
+import TemplateCard from "../components/TemplateCard";
 
-export default function GalleryPanel() {
-  const library = usePromptLibraryContext();
-
+export default function GalleryPanel({
+  templates,
+  selected,
+  onSelect,
+  onFavorite,
+}) {
   return (
-    <div className="rounded-xl border bg-white shadow-sm">
-      <div className="border-b p-5">
-        <h2 className="text-lg font-semibold">
-          Templates
-        </h2>
+    <div className="space-y-4">
 
-        <p className="mt-1 text-sm text-slate-500">
-          {library.templates.length} Templates
-        </p>
-      </div>
+      {templates.map((template) => (
+        <TemplateCard
+          key={template.id}
+          template={template}
+          selected={
+            selected?.id === template.id
+          }
+          onClick={() =>
+            onSelect(template)
+          }
+          onFavorite={() =>
+            onFavorite(template.id)
+          }
+        />
+      ))}
 
-      <div className="flex min-h-[600px] items-center justify-center">
-        <div className="text-center">
-          <h3 className="text-xl font-semibold">
-            Enterprise Template Gallery
+      {!templates.length && (
+        <div className="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center">
+          <h3 className="font-semibold">
+            No prompts found
           </h3>
 
-          <p className="mt-3 text-slate-500">
-            Responsive template cards will be added
-            in the next implementation.
+          <p className="mt-2 text-sm text-slate-500">
+            Try changing your filters.
           </p>
         </div>
-      </div>
+      )}
+
     </div>
   );
 }
