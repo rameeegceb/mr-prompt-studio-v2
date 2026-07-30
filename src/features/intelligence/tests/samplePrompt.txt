@@ -1,0 +1,23 @@
+# Role
+Technical Writer
+
+# Goal
+Explain Scrum Events
+
+# Context
+Need executive buy-in
+
+# Audience
+Executives
+
+# Constraints
+Person is not cooperative
+
+# Output Format
+Markdown
+
+# Examples
+Use a banking transformation project
+
+# Success Criteria
+Executives approve Scrum adoption

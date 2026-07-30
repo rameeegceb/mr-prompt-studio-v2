@@ -1,88 +1,86 @@
-const FAVORITES_KEY = "mrpromptstudio.library.favorites";
-const RECENT_KEY = "mrpromptstudio.library.recent";
+import templates from "../data";
+import TemplateRepository from "../repository/TemplateRepository";
 
-class TemplateRepository {
-  // -----------------------------
-  // Favorites
-  // -----------------------------
+class TemplateService {
+  query({
+    search = "",
+    category = "All",
+    framework = "All",
+    difficulty = "All",
+    sort = "title",
+  }) {
+    const normalizedSearch = search.trim().toLowerCase();
+
+    let results = templates.filter((template) => {
+      const matchesSearch =
+        !normalizedSearch ||
+        template.title.toLowerCase().includes(normalizedSearch) ||
+        template.description.toLowerCase().includes(normalizedSearch) ||
+        template.prompt.toLowerCase().includes(normalizedSearch);
+
+      const matchesCategory =
+        category === "All" ||
+        template.category === category;
+
+      const matchesFramework =
+        framework === "All" ||
+        template.framework === framework;
+
+      const matchesDifficulty =
+        difficulty === "All" ||
+        template.difficulty === difficulty;
+
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesFramework &&
+        matchesDifficulty
+      );
+    });
+
+    switch (sort) {
+      case "title":
+        results.sort((a, b) =>
+          a.title.localeCompare(b.title)
+        );
+        break;
+      case "difficulty":
+        results.sort((a, b) =>
+          a.difficulty.localeCompare(b.difficulty)
+        );
+        break;
+      default:
+        break;
+    }
+
+    return results;
+  }
 
   getFavorites() {
-    return JSON.parse(
-      localStorage.getItem(FAVORITES_KEY) ?? "[]"
-    );
+    return TemplateRepository.getFavorites();
   }
-
-  saveFavorites(ids) {
-    localStorage.setItem(
-      FAVORITES_KEY,
-      JSON.stringify(ids)
-    );
-  }
-
-  addFavorite(id) {
-    const favorites = this.getFavorites();
-
-    if (!favorites.includes(id)) {
-      favorites.push(id);
-      this.saveFavorites(favorites);
-    }
-  }
-
-  removeFavorite(id) {
-    const favorites = this.getFavorites().filter(
-      (item) => item !== id
-    );
-
-    this.saveFavorites(favorites);
-  }
-
-  isFavorite(id) {
-    return this.getFavorites().includes(id);
-  }
-
-  // -----------------------------
-  // Recently Used
-  // -----------------------------
 
   getRecent() {
-    return JSON.parse(
-      localStorage.getItem(RECENT_KEY) ?? "[]"
+    return TemplateRepository.getRecent();
+  }
+
+  toggleFavorite(id) {
+    if (TemplateRepository.isFavorite(id)) {
+      TemplateRepository.removeFavorite(id);
+    } else {
+      TemplateRepository.addFavorite(id);
+    }
+
+    return TemplateRepository.getFavorites();
+  }
+
+  useTemplate(id) {
+    TemplateRepository.addRecent(id);
+
+    return templates.find(
+      (template) => template.id === id
     );
-  }
-
-  saveRecent(ids) {
-    localStorage.setItem(
-      RECENT_KEY,
-      JSON.stringify(ids)
-    );
-  }
-
-  addRecent(id) {
-    const recent = this.getRecent().filter(
-      (item) => item !== id
-    );
-
-    recent.unshift(id);
-
-    this.saveRecent(recent.slice(0, 20));
-  }
-
-  isRecent(id) {
-    return this.getRecent().includes(id);
-  }
-
-  clearRecent() {
-    localStorage.removeItem(RECENT_KEY);
-  }
-
-  clearFavorites() {
-    localStorage.removeItem(FAVORITES_KEY);
-  }
-
-  clearAll() {
-    this.clearFavorites();
-    this.clearRecent();
   }
 }
 
-export default new TemplateRepository();
+export default new TemplateService();

@@ -1,11 +1,8 @@
 import { useMemo, useState } from "react";
 
 import TemplateService from "../services/TemplateService";
-import usePromptStudioContext from "../../studio/state/usePromptStudioContext";
 
 export default function usePromptLibrary() {
-  const studio = usePromptStudioContext();
-
   const [search, setSearch] = useState("");
 
   const [category, setCategory] = useState("All");
@@ -45,8 +42,6 @@ export default function usePromptLibrary() {
 
   function useTemplate(template) {
     TemplateService.useTemplate(template.id);
-
-    studio.setPrompt(template.prompt);
 
     setSelectedTemplate(template);
 

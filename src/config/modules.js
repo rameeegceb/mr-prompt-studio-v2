@@ -3,42 +3,59 @@ import {
   BookOpen,
   Sparkles,
   Library,
-  BadgeCheck,
+  ShieldCheck,
+  Settings,
+  Bot
 } from "lucide-react";
 
 export const modules = [
   {
     id: "dashboard",
     title: "Dashboard",
-    path: "/",
     icon: LayoutDashboard,
+    path: "/",
   },
 
   {
     id: "learning",
     title: "Learning Hub",
-    path: "/learning",
     icon: BookOpen,
+    path: "/learning",
   },
 
   {
     id: "studio",
     title: "Prompt Studio",
-    path: "/studio",
     icon: Sparkles,
+    path: "/studio",
   },
 
   {
     id: "library",
     title: "Prompt Library",
-    path: "/library",
     icon: Library,
+    path: "/library",
   },
 
   {
     id: "best-practices",
     title: "Best Practices",
+    icon: ShieldCheck,
     path: "/best-practices",
-    icon: BadgeCheck,
+  },
+
+  {
+    id: "settings",
+    title: "Settings",
+    icon: Settings,
+    path: "/settings",
+  },
+
+  // Temporary developer page
+  {
+    id: "ai-test",
+    title: "AI Test",
+    icon: Bot,
+    path: "/ai-test",
   },
 ];

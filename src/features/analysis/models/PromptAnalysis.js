@@ -1,0 +1,10 @@
+{
+    intent,
+    domain,
+    audience,
+    complexity,
+    outputType,
+    constraints,
+    confidence,
+    keywords
+}

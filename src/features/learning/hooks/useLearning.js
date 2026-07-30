@@ -1,113 +1,68 @@
-import { useEffect, useMemo, useState } from "react";
-
-const STORAGE_KEY = "mps-learning-state";
+import useLearningContext from "../state/useLearningContext";
 
 export default function useLearning() {
-  const [selectedChapter, setSelectedChapter] = useState("welcome");
-  const [search, setSearch] = useState("");
-  const [bookmarks, setBookmarks] = useState([]);
-  const [favorites, setFavorites] = useState([]);
-  const [readingProgress, setReadingProgress] = useState(0);
+  const {
+    loading,
 
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-
-    if (!saved) return;
-
-    try {
-      const state = JSON.parse(saved);
-
-      setSelectedChapter(state.selectedChapter ?? "welcome");
-      setBookmarks(state.bookmarks ?? []);
-      setFavorites(state.favorites ?? []);
-      setReadingProgress(state.readingProgress ?? 0);
-    } catch {
-      // Ignore invalid local storage
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
-        selectedChapter,
-        bookmarks,
-        favorites,
-        readingProgress,
-      })
-    );
-  }, [
-    selectedChapter,
-    bookmarks,
-    favorites,
-    readingProgress,
-  ]);
-
-  useEffect(() => {
-    const chapterProgress = {
-      welcome: 5,
-      aiBasics: 10,
-      promptEngineering: 20,
-      promptAnatomy: 35,
-      promptTechniques: 50,
-      promptFrameworks: 70,
-      examples: 85,
-      bestPractices: 100,
-    };
-
-    setReadingProgress(
-      chapterProgress[selectedChapter] ?? readingProgress
-    );
-  }, [selectedChapter]);
-
-  const toggleBookmark = (chapter) => {
-    setBookmarks((current) =>
-      current.includes(chapter)
-        ? current.filter((c) => c !== chapter)
-        : [...current, chapter]
-    );
-  };
-
-  const toggleFavorite = (chapter) => {
-    setFavorites((current) =>
-      current.includes(chapter)
-        ? current.filter((c) => c !== chapter)
-        : [...current, chapter]
-    );
-  };
-
-  const isBookmarked = (chapter) =>
-    bookmarks.includes(chapter);
-
-  const isFavorite = (chapter) =>
-    favorites.includes(chapter);
-
-  const stats = useMemo(
-    () => ({
-      bookmarked: bookmarks.length,
-      favorites: favorites.length,
-      progress: readingProgress,
-    }),
-    [bookmarks, favorites, readingProgress]
-  );
-
-  return {
-    selectedChapter,
-    setSelectedChapter,
+    course,
 
     search,
     setSearch,
 
-    bookmarks,
-    favorites,
+    selectedChapter,
+    setSelectedChapter,
 
+    selectedSection,
+    setSelectedSection,
+
+    bookmarks,
     toggleBookmark,
+
+    favorites,
     toggleFavorite,
 
-    isBookmarked,
-    isFavorite,
+    completedLessons,
+    completeLesson,
+  } = useLearningContext();
+
+  const currentChapter =
+    course?.getChapter(selectedChapter) ??
+    null;
+
+  const readingProgress =
+    course && course.totalChapters > 0
+      ? Math.round(
+          (completedLessons.length /
+            course.totalChapters) *
+            100
+        )
+      : 0;
+
+  return {
+    loading,
+
+    course,
+
+    currentChapter,
+
+    search,
+    setSearch,
+
+    selectedChapter,
+    setSelectedChapter,
+
+    selectedSection,
+    setSelectedSection,
+
+    bookmarks,
+    toggleBookmark,
+
+    favorites,
+    toggleFavorite,
+
+    completedLessons,
+    completeLesson,
 
     readingProgress,
-    stats,
   };
 }

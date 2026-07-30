@@ -6,12 +6,20 @@ import {
   Heart,
 } from "lucide-react";
 
-import { chapters } from "../data/chapters";
+import useLearning from "../hooks/useLearning";
 
-export default function LearningSidebar({
-  selectedChapter,
-  onSelectChapter,
-}) {
+export default function LearningSidebar() {
+  const {
+    course,
+    selectedChapter,
+    setSelectedChapter,
+    bookmarks,
+    favorites,
+    completedLessons,
+  } = useLearning();
+
+  const chapters = course?.chapters ?? [];
+
   return (
     <aside className="flex w-80 flex-col border-r border-slate-200 bg-slate-50">
       <div className="border-b border-slate-200 bg-white p-6">
@@ -44,6 +52,11 @@ export default function LearningSidebar({
           </p>
 
           <button
+            onClick={() => {
+              if (chapters.length > 0) {
+                setSelectedChapter(selectedChapter ?? chapters[0].id);
+              }
+            }}
             className="mt-3 flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700"
           >
             Continue
@@ -60,10 +73,17 @@ export default function LearningSidebar({
         {chapters.map((chapter, index) => {
           const active = selectedChapter === chapter.id;
 
+          const bookmarked = bookmarks.includes(chapter.id);
+
+          const favorite = favorites.includes(chapter.id);
+
+          const completed =
+            completedLessons.includes(chapter.id);
+
           return (
             <button
               key={chapter.id}
-              onClick={() => onSelectChapter(chapter.id)}
+              onClick={() => setSelectedChapter(chapter.id)}
               className={`group mb-3 w-full rounded-xl border p-4 text-left transition-all duration-200 ${
                 active
                   ? "border-blue-600 bg-blue-600 text-white shadow-lg"
@@ -81,17 +101,14 @@ export default function LearningSidebar({
                   Chapter {index + 1}
                 </span>
 
-                {active ? (
-                  <CheckCircle2
-                    size={18}
-                    className="text-white"
-                  />
-                ) : (
-                  <ChevronRight
-                    size={18}
-                    className="text-slate-400 transition-transform group-hover:translate-x-1"
-                  />
-                )}
+                <ChevronRight
+                  size={16}
+                  className={
+                    active
+                      ? "text-white"
+                      : "text-slate-400"
+                  }
+                />
               </div>
 
               <h3
@@ -105,34 +122,46 @@ export default function LearningSidebar({
               </h3>
 
               <p
-                className={`mt-1 text-sm ${
+                className={`mt-2 line-clamp-2 text-sm ${
                   active
                     ? "text-blue-100"
                     : "text-slate-500"
                 }`}
               >
-                {chapter.description}
+                {chapter.description ??
+                  `${chapter.sections?.length ?? 0} sections`}
               </p>
 
               <div className="mt-4 flex items-center justify-between">
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <Bookmark
-                    size={14}
+                    size={15}
                     className={
-                      active
+                      bookmarked
+                        ? "fill-current text-amber-500"
+                        : active
                         ? "text-blue-100"
                         : "text-slate-300"
                     }
                   />
 
                   <Heart
-                    size={14}
+                    size={15}
                     className={
-                      active
+                      favorite
+                        ? "fill-current text-red-500"
+                        : active
                         ? "text-blue-100"
                         : "text-slate-300"
                     }
                   />
+
+                  {completed && (
+                    <CheckCircle2
+                      size={15}
+                      className="text-green-500"
+                    />
+                  )}
                 </div>
 
                 <span

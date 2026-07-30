@@ -33,11 +33,11 @@ export default function usePromptStudio() {
     return () => clearTimeout(timer);
   }, [prompt]);
 
-  const handleImprove = () => {
+  const handleImprove = async () => {
     if (!prompt.trim()) return;
 
     const result =
-      PromptEngine.improve(prompt);
+      await PromptEngine.improve(prompt);
 
     setImprovedPrompt(
       result.improvedPrompt

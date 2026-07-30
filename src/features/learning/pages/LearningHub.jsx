@@ -1,5 +1,7 @@
 import PageHeader from "../../../components/ui/PageHeader";
 
+import LearningProvider from "../state/LearningProvider";
+
 import LearningSidebar from "../components/LearningSidebar";
 import LearningToolbar from "../components/LearningToolbar";
 import LearningContent from "../components/LearningContent";
@@ -9,12 +11,12 @@ import ContinueLearningCard from "../components/ContinueLearningCard";
 import BookmarkPanel from "../components/BookmarkPanel";
 import FavoritesPanel from "../components/FavoritesPanel";
 
-import { chapters } from "../data/chapters";
-
 import useLearning from "../hooks/useLearning";
 
-export default function LearningHub() {
+function LearningHubContent() {
   const {
+    course,
+
     selectedChapter,
     setSelectedChapter,
 
@@ -27,9 +29,17 @@ export default function LearningHub() {
     readingProgress,
   } = useLearning();
 
+  if (!course) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        Loading Learning Hub...
+      </div>
+    );
+  }
+
   const currentChapter =
-    chapters.find((c) => c.id === selectedChapter) ??
-    chapters[0];
+    course.getChapter(selectedChapter) ??
+    course.chapters[0];
 
   return (
     <div className="flex h-full flex-col">
@@ -53,10 +63,10 @@ export default function LearningHub() {
             chaptersCompleted={
               Math.floor(
                 (readingProgress / 100) *
-                  chapters.length
+                  course.totalChapters
               )
             }
-            totalChapters={chapters.length}
+            totalChapters={course.totalChapters}
           />
         </div>
 
@@ -64,10 +74,7 @@ export default function LearningHub() {
 
       <div className="mt-6 flex flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-        <LearningSidebar
-          selectedChapter={selectedChapter}
-          onSelectChapter={setSelectedChapter}
-        />
+        <LearningSidebar />
 
         <div className="flex flex-1 flex-col">
 
@@ -78,13 +85,11 @@ export default function LearningHub() {
 
           <div className="grid flex-1 grid-cols-12 overflow-hidden">
 
-            <div className="col-span-12 xl:col-span-9 overflow-y-auto">
-              <LearningContent
-                selectedChapter={selectedChapter}
-              />
+            <div className="col-span-12 overflow-y-auto xl:col-span-9">
+              <LearningContent />
             </div>
 
-            <aside className="hidden xl:flex xl:col-span-3 flex-col gap-4 overflow-y-auto border-l border-slate-200 bg-slate-50 p-5">
+            <aside className="hidden xl:col-span-3 xl:flex flex-col gap-4 overflow-y-auto border-l border-slate-200 bg-slate-50 p-5">
 
               <BookmarkPanel
                 bookmarks={bookmarks}
@@ -101,6 +106,15 @@ export default function LearningHub() {
         </div>
 
       </div>
+
     </div>
+  );
+}
+
+export default function LearningHub() {
+  return (
+    <LearningProvider>
+      <LearningHubContent />
+    </LearningProvider>
   );
 }
