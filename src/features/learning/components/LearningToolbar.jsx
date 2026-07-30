@@ -1,6 +1,7 @@
 import { Search, Bookmark, Heart } from "lucide-react";
 
 export default function LearningToolbar({
+  course,
   search = "",
   onSearch = () => {},
 }) {
@@ -9,12 +10,14 @@ export default function LearningToolbar({
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-slate-900">
-            Prompt Engineering Guide
+            {course?.title ?? "Learning Guide"}
           </h2>
 
           <p className="text-sm text-slate-500">
-            Learn Prompt Engineering through structured chapters, examples and
-            enterprise best practices.
+            {course?.description ??
+              `Explore the ${
+                course?.title ?? "learning"
+              } curriculum through chapters, examples, and best practices.`}
           </p>
         </div>
 
@@ -29,7 +32,7 @@ export default function LearningToolbar({
               type="text"
               value={search}
               onChange={(e) => onSearch(e.target.value)}
-              placeholder="Search the learning guide..."
+              placeholder={`Search ${course?.title ?? "learning content"}...`}
               className="w-full rounded-lg border border-slate-300 bg-white py-2 pl-10 pr-4 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
             />
           </div>

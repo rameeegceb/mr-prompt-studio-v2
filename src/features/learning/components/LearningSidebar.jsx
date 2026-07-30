@@ -33,11 +33,13 @@ export default function LearningSidebar() {
 
           <div>
             <h2 className="text-lg font-semibold text-slate-900">
-              Learning Hub
+              {course?.title ?? "Learning Hub"}
             </h2>
 
             <p className="text-sm text-slate-500">
-              Enterprise Prompt Engineering
+              {course?.version
+                ? `Version ${course.version}`
+                : "Enterprise Prompt Engineering"}
             </p>
           </div>
         </div>

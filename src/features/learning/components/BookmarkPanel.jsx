@@ -1,4 +1,5 @@
 export default function BookmarkPanel({
+  course,
   bookmarks = [],
 }) {
   return (
@@ -13,14 +14,18 @@ export default function BookmarkPanel({
         </p>
       )}
 
-      {bookmarks.map((bookmark) => (
-        <div
-          key={bookmark}
-          className="rounded-lg border p-3"
-        >
-          {bookmark}
-        </div>
-      ))}
+      {bookmarks.map((bookmark) => {
+        const chapter = course?.getChapter(bookmark);
+
+        return (
+          <div
+            key={bookmark}
+            className="rounded-lg border p-3"
+          >
+            {chapter?.title ?? bookmark}
+          </div>
+        );
+      })}
     </div>
   );
 }

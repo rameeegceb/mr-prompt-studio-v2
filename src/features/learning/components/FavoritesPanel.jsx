@@ -1,4 +1,5 @@
 export default function FavoritesPanel({
+  course,
   favorites = [],
 }) {
   return (
@@ -13,14 +14,18 @@ export default function FavoritesPanel({
         </p>
       )}
 
-      {favorites.map((favorite) => (
-        <div
-          key={favorite}
-          className="rounded-lg border p-3"
-        >
-          {favorite}
-        </div>
-      ))}
+      {favorites.map((favorite) => {
+        const chapter = course?.getChapter(favorite);
+
+        return (
+          <div
+            key={favorite}
+            className="rounded-lg border p-3"
+          >
+            {chapter?.title ?? favorite}
+          </div>
+        );
+      })}
     </div>
   );
 }

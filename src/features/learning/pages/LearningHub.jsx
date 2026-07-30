@@ -44,8 +44,11 @@ function LearningHubContent() {
   return (
     <div className="flex h-full flex-col">
       <PageHeader
-        title="Learning Hub"
-        description="Master Enterprise Prompt Engineering"
+        title={course.title}
+        description={
+          course.description ??
+          `Master ${course.title}`
+        }
       />
 
       <div className="mt-6 grid grid-cols-12 gap-6">
@@ -79,6 +82,7 @@ function LearningHubContent() {
         <div className="flex flex-1 flex-col">
 
           <LearningToolbar
+            course={course}
             search={search}
             onSearch={setSearch}
           />
@@ -92,10 +96,12 @@ function LearningHubContent() {
             <aside className="hidden xl:col-span-3 xl:flex flex-col gap-4 overflow-y-auto border-l border-slate-200 bg-slate-50 p-5">
 
               <BookmarkPanel
+                course={course}
                 bookmarks={bookmarks}
               />
 
               <FavoritesPanel
+                course={course}
                 favorites={favorites}
               />
 
