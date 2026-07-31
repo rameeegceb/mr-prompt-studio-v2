@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import PromptEngine from "../services/PromptEngine";
+import PromptRepository from "../repository/PromptRepository";
 
 export default function usePromptStudio() {
   const [prompt, setPrompt] = useState("");
@@ -11,6 +12,24 @@ export default function usePromptStudio() {
   const [evaluation, setEvaluation] =
     useState(null);
 
+  const [history, setHistory] =
+    useState([]);
+
+  useEffect(() => {
+    const savedPrompt = PromptRepository.load();
+    const savedHistory = PromptRepository.getHistory();
+
+    if (savedPrompt) {
+      setPrompt(savedPrompt);
+    }
+
+    setHistory(savedHistory);
+  }, []);
+
+  const updateHistory = () => {
+    setHistory(PromptRepository.getHistory());
+  };
+
   /*
    * Live Evaluation
    * Debounced to avoid evaluating
@@ -19,9 +38,12 @@ export default function usePromptStudio() {
 
   useEffect(() => {
     if (!prompt.trim()) {
+      PromptRepository.clear();
       setEvaluation(null);
       return;
     }
+
+    PromptRepository.save(prompt);
 
     const timer = setTimeout(() => {
       const result =
@@ -44,6 +66,9 @@ export default function usePromptStudio() {
     );
 
     setEvaluation(result);
+
+    PromptRepository.addToHistory(prompt);
+    updateHistory();
   };
 
   const handleEvaluate = () => {
@@ -53,6 +78,9 @@ export default function usePromptStudio() {
       PromptEngine.evaluate(prompt);
 
     setEvaluation(result);
+
+    PromptRepository.addToHistory(prompt);
+    updateHistory();
   };
 
   const handleConvert = (
@@ -66,6 +94,9 @@ export default function usePromptStudio() {
         format
       )
     );
+
+    PromptRepository.addToHistory(prompt);
+    updateHistory();
   };
 
   const handleClear = () => {
@@ -74,6 +105,28 @@ export default function usePromptStudio() {
     setImprovedPrompt("");
 
     setEvaluation(null);
+
+    PromptRepository.clear();
+  };
+
+  const restoreHistoryItem = (id) => {
+    const item = PromptRepository.getHistory().find(
+      (entry) => entry.id === id
+    );
+
+    if (!item) return;
+
+    setPrompt(item.prompt);
+  };
+
+  const deleteHistoryItem = (id) => {
+    PromptRepository.removeFromHistory(id);
+    updateHistory();
+  };
+
+  const clearHistory = () => {
+    PromptRepository.clearHistory();
+    setHistory([]);
   };
 
   return {
@@ -85,6 +138,8 @@ export default function usePromptStudio() {
 
     evaluation,
 
+    history,
+
     handleImprove,
 
     handleEvaluate,
@@ -92,5 +147,11 @@ export default function usePromptStudio() {
     handleConvert,
 
     handleClear,
+
+    restoreHistoryItem,
+
+    deleteHistoryItem,
+
+    clearHistory,
   };
 }
