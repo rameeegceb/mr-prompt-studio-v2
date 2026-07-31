@@ -1,0 +1,832 @@
+# 16-Architecture-Decision-Records.md
+
+> **Document Version:** 1.0  
+> **Status:** Living Architecture Document  
+> **Document Type:** Architecture Decision Records (ADR)  
+> **Audience:** Enterprise Architects, Solution Architects, Technical Leads, Developers
+
+---
+
+# Architecture Decision Records (ADR)
+
+---
+
+# Purpose
+
+This document captures the key architectural decisions made during the design and evolution of **Mr. Prompt Studio**.
+
+Each Architecture Decision Record (ADR) explains:
+
+- The problem being solved
+- The decision made
+- The rationale
+- Alternatives considered
+- Consequences
+- Future considerations
+
+This document serves as the architectural memory of the project and should be updated whenever significant architectural decisions are made.
+
+---
+
+# ADR-001 — Build an Enterprise Platform, Not a Chatbot
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+The original implementation began as a Custom GPT focused on Prompt Engineering.
+
+As enterprise demand increased, it became clear that users required a structured software platform rather than another conversational AI assistant.
+
+---
+
+## Decision
+
+Mr. Prompt Studio will be designed as an **Enterprise Prompt Engineering & Knowledge Platform**.
+
+It will not be positioned as:
+
+- A chatbot
+- An AI assistant
+- A replacement for Microsoft Copilot
+- A replacement for ChatGPT
+
+---
+
+## Rationale
+
+Enterprise value comes from enabling Prompt Engineering capabilities rather than replacing existing AI assistants.
+
+---
+
+## Consequences
+
+Positive
+
+- Clear product identity
+- Long-term product strategy
+- Enterprise scalability
+
+Negative
+
+- Requires broader application architecture
+- Larger implementation scope
+
+---
+
+# ADR-002 — Knowledge First Architecture
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Prompt Engineering knowledge is often lost inside AI conversations.
+
+Organizations need reusable knowledge rather than temporary conversations.
+
+---
+
+## Decision
+
+Knowledge becomes a first-class architectural layer.
+
+Enterprise knowledge includes:
+
+- Learning content
+- Prompt templates
+- Frameworks
+- Best practices
+- Evaluation rules
+- Scoring models
+
+---
+
+## Rationale
+
+Knowledge represents long-term organizational intellectual property.
+
+---
+
+## Consequences
+
+Benefits
+
+- Reuse
+- Consistency
+- Vendor independence
+
+---
+
+# ADR-003 — AI Provider Independence
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+AI providers continue to evolve rapidly.
+
+The application should not depend on a single provider.
+
+---
+
+## Decision
+
+Introduce an AI Provider abstraction layer.
+
+All AI communication passes through:
+
+```
+Feature
+
+↓
+
+AI Service
+
+↓
+
+Provider Factory
+
+↓
+
+Provider
+```
+
+---
+
+## Rationale
+
+Avoid vendor lock-in while simplifying future integrations.
+
+---
+
+## Consequences
+
+Benefits
+
+- Provider flexibility
+- Easier testing
+- Long-term maintainability
+
+Trade-off
+
+- Additional abstraction layer
+
+---
+
+# ADR-004 — Feature-Based Modular Architecture
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+The application contains multiple independent business capabilities.
+
+---
+
+## Decision
+
+Organize the codebase by feature rather than by technical layer alone.
+
+Each feature owns:
+
+- Components
+- Pages
+- Services
+- Hooks
+- Context
+- Models
+- Utilities
+
+---
+
+## Rationale
+
+Improves maintainability, ownership, and scalability.
+
+---
+
+## Consequences
+
+Benefits
+
+- Reduced coupling
+- Better organization
+- Independent evolution
+
+---
+
+# ADR-005 — Business Logic Outside UI
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Business logic embedded within UI components becomes difficult to maintain and test.
+
+---
+
+## Decision
+
+Business logic resides in services and engines.
+
+UI components focus exclusively on presentation and user interaction.
+
+---
+
+## Rationale
+
+Supports separation of concerns and improves testability.
+
+---
+
+## Consequences
+
+Benefits
+
+- Cleaner components
+- Better unit testing
+- Reusable services
+
+---
+
+# ADR-006 — Prompt Workbench as the Core Product Experience
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Prompt Engineering involves multiple related activities.
+
+Creating separate tools for each activity increases complexity.
+
+---
+
+## Decision
+
+Consolidate Prompt Engineering capabilities into a unified **Prompt Workbench**.
+
+Capabilities include:
+
+- Create
+- Improve
+- Evaluate
+- Compare
+- Convert
+- Score
+- Framework Recommendation
+
+---
+
+## Rationale
+
+Users should complete Prompt Engineering tasks within a single workspace.
+
+---
+
+## Consequences
+
+Benefits
+
+- Simplified navigation
+- Better user experience
+- Unified workflow
+
+---
+
+# ADR-007 — Reuse Existing Enterprise Assets
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Several valuable assets already exist.
+
+Examples include:
+
+- Prompt Engineering HTML Guide
+- Prompt Studio GPT logic
+- Microsoft Copilot Agent
+- Enterprise prompt templates
+
+---
+
+## Decision
+
+Reuse these assets rather than recreating them.
+
+---
+
+## Rationale
+
+Accelerates delivery while preserving proven enterprise knowledge.
+
+---
+
+## Consequences
+
+Benefits
+
+- Reduced implementation effort
+- Faster MVP delivery
+- Consistent Prompt Engineering guidance
+
+---
+
+# ADR-008 — Layered Architecture
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+A clear separation between presentation, business logic, knowledge, and AI execution improves maintainability.
+
+---
+
+## Decision
+
+Adopt a layered architecture.
+
+```
+Presentation
+
+↓
+
+Application
+
+↓
+
+Knowledge
+
+↓
+
+Prompt Engineering
+
+↓
+
+AI Integration
+
+↓
+
+AI Providers
+```
+
+---
+
+## Rationale
+
+Improves scalability and simplifies future enhancements.
+
+---
+
+## Consequences
+
+Benefits
+
+- Clear responsibilities
+- Easier testing
+- Lower coupling
+
+---
+
+# ADR-009 — Context Builder Before AI Execution
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Sending raw user prompts directly to AI often produces inconsistent results.
+
+---
+
+## Decision
+
+Introduce a Context Builder that enriches requests with structured enterprise knowledge before AI execution.
+
+---
+
+## Rationale
+
+Structured context improves response quality and consistency.
+
+---
+
+## Consequences
+
+Benefits
+
+- Better AI responses
+- Reusable context model
+- Explainable processing
+
+---
+
+# ADR-010 — Repository Pattern for Enterprise Knowledge
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Learning content, templates, and Prompt Engineering assets should be managed independently of storage implementation.
+
+---
+
+## Decision
+
+Use repositories to abstract knowledge access.
+
+Examples:
+
+- CourseRepository
+- TemplateRepository
+- KnowledgeRepository
+
+---
+
+## Rationale
+
+Allows future migration from static files to databases or APIs without affecting business logic.
+
+---
+
+## Consequences
+
+Benefits
+
+- Storage independence
+- Easier testing
+- Flexible evolution
+
+---
+
+# ADR-011 — React Context for Shared State
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+The MVP does not require a complex state management framework.
+
+---
+
+## Decision
+
+Use React Context with custom hooks for shared feature state.
+
+---
+
+## Rationale
+
+Provides sufficient capability while minimizing complexity.
+
+---
+
+## Consequences
+
+Benefits
+
+- Simpler architecture
+- Reduced dependencies
+- Easy maintenance
+
+Future Consideration
+
+Evaluate advanced state management only if application complexity justifies it.
+
+---
+
+# ADR-012 — Prompt Engineering as a Business Capability
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Prompt Engineering is often treated as an AI feature.
+
+---
+
+## Decision
+
+Treat Prompt Engineering as a standalone business capability.
+
+AI supports Prompt Engineering rather than defining it.
+
+---
+
+## Rationale
+
+Keeps the product focused on enterprise capability building.
+
+---
+
+## Consequences
+
+Benefits
+
+- Strong product differentiation
+- Long-term strategic value
+- Vendor independence
+
+---
+
+# ADR-013 — Progressive Product Evolution
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+The long-term vision cannot be delivered in a single release.
+
+---
+
+## Decision
+
+Adopt a phased roadmap:
+
+```
+MVP
+
+↓
+
+Personal Workspace
+
+↓
+
+Enterprise AI
+
+↓
+
+Enterprise Knowledge
+
+↓
+
+Enterprise Intelligence
+```
+
+---
+
+## Rationale
+
+Each phase delivers measurable business value while reducing implementation risk.
+
+---
+
+## Consequences
+
+Benefits
+
+- Incremental delivery
+- Easier adoption
+- Continuous validation
+
+---
+
+# ADR-014 — AI Enhances, Application Owns
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+AI models excel at language generation but should not control application workflows.
+
+---
+
+## Decision
+
+The application owns:
+
+- Navigation
+- Business workflows
+- Prompt Engineering methodology
+- Knowledge
+- Validation
+
+AI providers perform language generation only.
+
+---
+
+## Rationale
+
+Maintains predictable behavior and simplifies governance.
+
+---
+
+## Consequences
+
+Benefits
+
+- Explainable architecture
+- Consistent business rules
+- Easier provider replacement
+
+---
+
+# ADR-015 — Enterprise Knowledge Lifecycle
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Knowledge should evolve over time rather than remain static.
+
+---
+
+## Decision
+
+Adopt a managed knowledge lifecycle.
+
+```
+Create
+
+↓
+
+Review
+
+↓
+
+Publish
+
+↓
+
+Consume
+
+↓
+
+Improve
+
+↓
+
+Reuse
+
+↓
+
+Govern
+
+↓
+
+Evolve
+```
+
+---
+
+## Rationale
+
+Ensures enterprise knowledge remains accurate, reusable, and continuously improved.
+
+---
+
+## Consequences
+
+Benefits
+
+- Sustainable knowledge management
+- Continuous improvement
+- Organizational learning
+
+---
+
+# ADR-016 — Documentation as an Architectural Asset
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Traditional documentation quickly becomes outdated and often describes files rather than explaining the system.
+
+---
+
+## Decision
+
+Treat architecture documentation as a living knowledge asset.
+
+Documentation should explain:
+
+- Why the system exists
+- How business capabilities interact
+- Architectural decisions
+- Product evolution
+- Future extension points
+
+rather than simply listing files or classes.
+
+---
+
+## Rationale
+
+Improves onboarding, architectural consistency, and long-term maintainability.
+
+---
+
+## Consequences
+
+Benefits
+
+- Better knowledge transfer
+- Faster onboarding
+- Stronger architectural governance
+
+---
+
+# ADR Summary
+
+These Architecture Decision Records establish the foundational principles that guide the evolution of Mr. Prompt Studio.
+
+They ensure the platform remains:
+
+- Knowledge-first
+- Vendor-independent
+- Modular
+- Scalable
+- Enterprise-focused
+- Maintainable
+- Extensible
+
+Future architectural decisions should build upon these principles and be documented as additional ADRs to preserve the project's architectural history and support informed decision-making throughout the platform's lifecycle.
+
+---
+
+# Document Set Complete
+
+The core architecture documentation for **Mr. Prompt Studio MVP** now consists of:
+
+1. Executive Summary
+2. Product Vision
+3. Business Requirements
+4. Product Requirements Document (PRD)
+5. User Experience Blueprint
+6. Functional Specification
+7. Solution Architecture
+8. Technical Architecture
+9. Knowledge Architecture
+10. AI Architecture
+11. Development Standards
+12. Implementation Roadmap
+13. Testing Strategy
+14. Deployment Strategy
+15. Future Roadmap
+16. Architecture Decision Records (ADR)
+
+These documents together form the **Enterprise Architecture Blueprint** for Mr. Prompt Studio and provide a comprehensive foundation for product planning, implementation, governance, onboarding, and future evolution.

@@ -6,20 +6,9 @@ import DashboardPage from "../features/dashboard/pages/DashboardPage";
 import LearningHub from "../features/learning/pages/LearningHub";
 import PromptStudio from "../features/studio/pages/PromptStudio";
 import PromptLibrary from "../features/library/pages/PromptLibrary";
+import BestPractices from "../features/best-practices/pages/BestPractices";
 import SettingsPage from "../features/settings/pages/SettingsPage";
 import AITestPage from "../features/ai/pages/AITestPage";
-
-const Placeholder = ({ title }) => (
-  <div className="rounded-2xl bg-white p-10 shadow-sm">
-    <h1 className="text-3xl font-bold text-slate-900">
-      {title}
-    </h1>
-
-    <p className="mt-3 text-slate-500">
-      Coming Soon
-    </p>
-  </div>
-);
 
 export default function AppRoutes() {
   return (
@@ -53,7 +42,7 @@ export default function AppRoutes() {
         {/* Best Practices */}
         <Route
           path="/best-practices"
-          element={<Placeholder title="Best Practices" />}
+          element={<BestPractices />}
         />
 
         {/* Settings */}
