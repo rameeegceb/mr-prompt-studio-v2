@@ -4,22 +4,49 @@ import CourseRepository from "../repository/CourseRepository";
 
 const STORAGE_KEY = "learning-state";
 
-export default function LearningProvider({ children }) {
-  const [course, setCourse] = useState(null);
-  const [loading, setLoading] = useState(true);
+function readSavedLearningState() {
+  try {
+    return JSON.parse(
+      localStorage.getItem(STORAGE_KEY) || "{}"
+    );
+  } catch {
+    return {};
+  }
+}
 
-  const [selectedChapter, setSelectedChapter] = useState(null);
-  const [selectedSection, setSelectedSection] = useState(null);
+export default function LearningProvider({ children }) {
+  const course =
+    CourseRepository.course ?? null;
+  const loading = false;
+
+  const saved = readSavedLearningState();
+  const firstLearningChapter =
+    course?.chapters.find(
+      (chapter) =>
+        chapter.title !== "Table of Contents"
+    ) ?? course?.chapters[0];
+
+  const [selectedChapter, setSelectedChapter] =
+    useState(
+      saved.selectedChapter ??
+        firstLearningChapter?.id ??
+        null
+    );
+  const [selectedSection, setSelectedSection] =
+    useState(saved.selectedSection ?? null);
 
   const [search, setSearch] = useState("");
 
-  const [bookmarks, setBookmarks] = useState([]);
-  const [favorites, setFavorites] = useState([]);
-  const [completedLessons, setCompletedLessons] = useState([]);
-
-  useEffect(() => {
-    initialize();
-  }, []);
+  const [bookmarks, setBookmarks] = useState(
+    saved.bookmarks ?? []
+  );
+  const [favorites, setFavorites] = useState(
+    saved.favorites ?? []
+  );
+  const [completedLessons, setCompletedLessons] =
+    useState(
+      saved.completedLessons ?? []
+    );
 
   useEffect(() => {
     localStorage.setItem(
@@ -37,44 +64,6 @@ export default function LearningProvider({ children }) {
     favorites,
     completedLessons,
   ]);
-
-  async function initialize() {
-    try {
-      const loadedCourse = await CourseRepository.load();
-
-      const saved = JSON.parse(
-        localStorage.getItem(STORAGE_KEY) || "{}"
-      );
-
-      setCourse(loadedCourse);
-
-      setBookmarks(saved.bookmarks ?? []);
-      setFavorites(saved.favorites ?? []);
-      setCompletedLessons(saved.completedLessons ?? []);
-
-      // Skip the Table of Contents and open the first real chapter
-      const firstLearningChapter =
-        loadedCourse.chapters.find(
-          (chapter) =>
-            chapter.title !== "Table of Contents"
-        ) ?? loadedCourse.chapters[0];
-
-      setSelectedChapter(
-        saved.selectedChapter ??
-          firstLearningChapter?.id ??
-          null
-      );
-
-      setSelectedSection(saved.selectedSection ?? null);
-    } catch (error) {
-      console.error(
-        "Failed to initialize Learning Hub",
-        error
-      );
-    } finally {
-      setLoading(false);
-    }
-  }
 
   function toggleBookmark(id) {
     setBookmarks((previous) =>

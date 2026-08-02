@@ -38,4 +38,39 @@ export default function VersionHistoryPanel({
               <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0">
                   <div className="text-sm font-semibold text-slate-900">
-                    {version.action}{
+                    {version.action}
+                  </div>
+                  <div className="mt-1 text-xs text-slate-500">
+                    {new Date(version.timestamp).toLocaleString()}
+                  </div>
+                  {version.generatedPrompt ? (
+                    <div className="mt-2 text-sm text-slate-600">
+                      {version.generatedPrompt.length > 120
+                        ? `${version.generatedPrompt.slice(0, 120)}...`
+                        : version.generatedPrompt}
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => onRestore(version.id)}
+                    className="rounded-lg bg-blue-600 px-3 py-2 text-sm text-white hover:bg-blue-700"
+                  >
+                    Restore
+                  </button>
+                  <button
+                    onClick={() => onDelete(version.id)}
+                    className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

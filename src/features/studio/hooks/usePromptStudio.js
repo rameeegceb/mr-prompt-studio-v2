@@ -4,7 +4,9 @@ import PromptEngine from "../services/PromptEngine";
 import PromptRepository from "../repository/PromptRepository";
 
 export default function usePromptStudio() {
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState(
+    () => PromptRepository.load() || ""
+  );
 
   const [improvedPrompt, setImprovedPrompt] =
     useState("");
@@ -13,23 +15,10 @@ export default function usePromptStudio() {
     useState(null);
 
   const [history, setHistory] =
-    useState([]);
+    useState(() => PromptRepository.getHistory());
 
   const [versions, setVersions] =
-    useState([]);
-
-  useEffect(() => {
-    const savedPrompt = PromptRepository.load();
-    const savedHistory = PromptRepository.getHistory();
-    const savedVersions = PromptRepository.getVersions();
-
-    if (savedPrompt) {
-      setPrompt(savedPrompt);
-    }
-
-    setHistory(savedHistory);
-    setVersions(savedVersions);
-  }, []);
+    useState(() => PromptRepository.getVersions());
 
   const updateHistory = () => {
     setHistory(PromptRepository.getHistory());
@@ -48,7 +37,6 @@ export default function usePromptStudio() {
   useEffect(() => {
     if (!prompt.trim()) {
       PromptRepository.clear();
-      setEvaluation(null);
       return;
     }
 

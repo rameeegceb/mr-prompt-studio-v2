@@ -1,5 +1,3 @@
-import PromptPatternDetector from "./PromptPatternDetector";
-
 export default class PromptScorer {
   static score(analysis) {
     let score = 0;

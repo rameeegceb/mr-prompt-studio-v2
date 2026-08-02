@@ -4,7 +4,7 @@ export default class AIProvider {
         throw new Error("initialize() not implemented");
     }
 
-    async execute(request) {
+    async execute() {
         throw new Error("execute() not implemented");
     }
 

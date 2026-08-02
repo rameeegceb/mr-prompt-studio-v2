@@ -7,12 +7,12 @@ class CourseRepository {
     this.course = new Course(courseData);
   }
 
-  async loadCourse(forceRefresh = false) {
+  async loadCourse() {
     return this.course;
   }
 
-  async load(forceRefresh = false) {
-    return this.loadCourse(forceRefresh);
+  async load() {
+    return this.loadCourse();
   }
 
   async getCourse() {

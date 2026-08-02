@@ -57,31 +57,25 @@ export default class OllamaProvider extends AIProvider {
    * execute(systemPrompt, userPrompt)
    */
   async execute(systemPrompt, userPrompt = null) {
-    let messages = [];
-
-    // Backward compatibility
-    if (
+    const messages =
       userPrompt === null ||
       userPrompt === undefined
-    ) {
-      messages = [
-        {
-          role: "user",
-          content: systemPrompt,
-        },
-      ];
-    } else {
-      messages = [
-        {
-          role: "system",
-          content: systemPrompt,
-        },
-        {
-          role: "user",
-          content: userPrompt,
-        },
-      ];
-    }
+        ? [
+            {
+              role: "user",
+              content: systemPrompt,
+            },
+          ]
+        : [
+            {
+              role: "system",
+              content: systemPrompt,
+            },
+            {
+              role: "user",
+              content: userPrompt,
+            },
+          ];
 
     try {
       const response = await fetch(

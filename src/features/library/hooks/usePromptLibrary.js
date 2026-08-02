@@ -18,6 +18,9 @@ export default function usePromptLibrary() {
   const [refresh, setRefresh] = useState(0);
 
   const templates = useMemo(() => {
+    // Depend on refresh to recompute after favorite/recent mutations.
+    void refresh;
+
     return TemplateService.query({
       search,
       category,
