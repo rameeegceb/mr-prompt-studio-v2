@@ -1,5 +1,6 @@
 export default function ReviewStep({
   model,
+  prompt,
 }) {
   return (
     <div>
@@ -31,6 +32,11 @@ export default function ReviewStep({
         </div>
 
         <div>
+          <strong>Task</strong>
+          <p>{model.task}</p>
+        </div>
+
+        <div>
           <strong>Constraints</strong>
           <p>{model.constraints}</p>
         </div>
@@ -39,6 +45,15 @@ export default function ReviewStep({
           <strong>Output</strong>
           <p>{model.output}</p>
         </div>
+
+        {prompt ? (
+          <div>
+            <strong>Generated Prompt</strong>
+            <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-white p-4 text-sm text-slate-700">
+              {prompt}
+            </pre>
+          </div>
+        ) : null}
 
       </div>
 

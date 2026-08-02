@@ -4,17 +4,19 @@ import GoalStep from "./GoalStep";
 import RoleStep from "./RoleStep";
 import ContextStep from "./ContextStep";
 import AudienceStep from "./AudienceStep";
+import TaskStep from "./TaskStep";
 import ConstraintsStep from "./ConstraintsStep";
 import OutputStep from "./OutputStep";
 import ReviewStep from "./ReviewStep";
 
 const steps = [
   "Goal",
+  "Audience",
   "Role",
   "Context",
-  "Audience",
-  "Constraints",
+  "Task",
   "Output",
+  "Constraints",
   "Review",
 ];
 
@@ -23,9 +25,10 @@ export default function PromptBuilder({ onGenerate }) {
 
   const [model, setModel] = useState({
     goal: "",
+    audience: "",
     role: "",
     context: "",
-    audience: "",
+    task: "",
     constraints: "",
     output: "Markdown",
   });
@@ -38,29 +41,36 @@ export default function PromptBuilder({ onGenerate }) {
   };
 
   const next = () =>
-    setStep((s) => Math.min(s + 1, 6));
+    setStep((s) => Math.min(s + 1, 7));
 
   const previous = () =>
     setStep((s) => Math.max(s - 1, 0));
 
+  const buildPrompt = () => {
+    const sections = [
+      ["Role", model.role],
+      ["Audience", model.audience],
+      ["Goal", model.goal],
+      ["Context", model.context],
+      ["Task", model.task],
+      ["Constraints", model.constraints],
+      ["Output Format", model.output],
+    ]
+      .filter(([, value]) => value.trim())
+      .map(([label, value]) => `# ${label}\n${value.trim()}`);
+
+    return [
+      "You are an enterprise prompt engineer.",
+      "Create a complete, production-ready prompt using the details below.",
+      "",
+      ...sections,
+      "",
+      "Return only the final prompt and keep it clear, specific, and ready to use.",
+    ].join("\n");
+  };
+
   const generate = () => {
-    const prompt = `# Role
-${model.role}
-
-# Goal
-${model.goal}
-
-# Context
-${model.context}
-
-# Audience
-${model.audience}
-
-# Constraints
-${model.constraints}
-
-# Output Format
-${model.output}`;
+    const prompt = buildPrompt();
 
     onGenerate(prompt);
   };
@@ -107,24 +117,6 @@ ${model.output}`;
         )}
 
         {step === 1 && (
-          <RoleStep
-            value={model.role}
-            onChange={(v) =>
-              update("role", v)
-            }
-          />
-        )}
-
-        {step === 2 && (
-          <ContextStep
-            value={model.context}
-            onChange={(v) =>
-              update("context", v)
-            }
-          />
-        )}
-
-        {step === 3 && (
           <AudienceStep
             value={model.audience}
             onChange={(v) =>
@@ -133,11 +125,29 @@ ${model.output}`;
           />
         )}
 
-        {step === 4 && (
-          <ConstraintsStep
-            value={model.constraints}
+        {step === 2 && (
+          <RoleStep
+            value={model.role}
             onChange={(v) =>
-              update("constraints", v)
+              update("role", v)
+            }
+          />
+        )}
+
+        {step === 3 && (
+          <ContextStep
+            value={model.context}
+            onChange={(v) =>
+              update("context", v)
+            }
+          />
+        )}
+
+        {step === 4 && (
+          <TaskStep
+            value={model.task}
+            onChange={(v) =>
+              update("task", v)
             }
           />
         )}
@@ -152,8 +162,18 @@ ${model.output}`;
         )}
 
         {step === 6 && (
+          <ConstraintsStep
+            value={model.constraints}
+            onChange={(v) =>
+              update("constraints", v)
+            }
+          />
+        )}
+
+        {step === 7 && (
           <ReviewStep
             model={model}
+            prompt={buildPrompt()}
           />
         )}
 
@@ -169,7 +189,7 @@ ${model.output}`;
           Previous
         </button>
 
-        {step < 6 ? (
+        {step < 7 ? (
           <button
             onClick={next}
             className="rounded-lg bg-blue-600 px-5 py-2 text-white"

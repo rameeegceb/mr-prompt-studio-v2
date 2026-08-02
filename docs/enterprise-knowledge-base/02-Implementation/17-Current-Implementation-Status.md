@@ -93,7 +93,7 @@ The current implementation is an early MVP. Business-critical capabilities for l
 ## 6. Business Capability Status
 
 - Learning Hub: user-visible capability for course browsing, chapter navigation, bookmarks, favorites, and progress tracking. Implemented.
-- Prompt Studio: user-visible capability for prompt building, evaluation, improvement, conversion, and analysis. Implemented.
+- Prompt Studio: user-visible capability for guided prompt building, evaluation, improvement, conversion, and analysis. Implemented.
 - Prompt Library: user-visible capability for browsing prompt templates, filtering, favorites, recent use, previewing content, and sending a selected template into Prompt Studio. Implemented.
 - Settings: user-visible capability for selecting AI provider and viewing provider configuration panels. Implemented as UI, with runtime provider support limited.
 - Best Practices: visible route exists but only renders a placeholder page. Not implemented as a full business capability.
@@ -144,6 +144,7 @@ The Prompt Studio is implemented as a route-bound feature page under `/studio`.
   - `src/features/studio/repository/PromptRepository.js`
   - `src/features/studio/repository/VersionRepository.js`
 - UI composition: `PromptWorkbench`, `BuilderPanel`, `EditorPanel`, `AnalysisPanel`, and prompt builder/editor/action components.
+- Guided prompt building is implemented in the existing builder surface and writes directly into the studio editor through the shared runtime state.
 - Runtime flows:
   - Prompt state is managed in `usePromptStudio`.
   - Debounced live evaluation persists prompt edits through `PromptRepository` and recomputes prompt analysis, knowledge context, framework recommendation, and score in-browser.

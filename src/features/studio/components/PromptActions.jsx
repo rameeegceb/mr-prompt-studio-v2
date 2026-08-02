@@ -11,6 +11,7 @@ const statusTone = {
 };
 
 export default function PromptActions({
+  onOpenBuilder,
   onImprove,
   onEvaluate,
   onConvert,
@@ -27,6 +28,13 @@ export default function PromptActions({
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-3">
+
+        <Button
+          onClick={onOpenBuilder}
+          variant="outline"
+        >
+          Guided Prompt Builder
+        </Button>
 
         <Button
           onClick={onImprove}

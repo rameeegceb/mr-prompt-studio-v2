@@ -12,7 +12,30 @@ export default function PromptWorkbench() {
   return (
     <div className="grid gap-6 xl:grid-cols-12">
       <aside className="xl:col-span-3">
-        <BuilderPanel />
+        {studio.isBuilderOpen ? (
+          <BuilderPanel onClose={studio.closeBuilder} />
+        ) : (
+          <div className="rounded-xl border bg-white shadow-sm">
+            <div className="border-b p-5">
+              <h2 className="text-lg font-semibold">
+                Guided Prompt Builder
+              </h2>
+
+              <p className="mt-1 text-sm text-slate-500">
+                Build a structured enterprise prompt with a guided workflow.
+              </p>
+            </div>
+
+            <div className="p-5">
+              <button
+                onClick={studio.openBuilder}
+                className="w-full rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              >
+                Open Guided Prompt Builder
+              </button>
+            </div>
+          </div>
+        )}
       </aside>
 
       <main className="xl:col-span-5">

@@ -53,6 +53,8 @@ export default function usePromptStudio() {
 
   const [error, setError] = useState("");
 
+  const [isBuilderOpen, setIsBuilderOpen] = useState(true);
+
   const setPrompt = (nextPrompt) => {
     setPromptState(nextPrompt);
 
@@ -542,6 +544,14 @@ export default function usePromptStudio() {
     toast.success("Delete Completed");
   };
 
+  const openBuilder = () => {
+    setIsBuilderOpen(true);
+  };
+
+  const closeBuilder = () => {
+    setIsBuilderOpen(false);
+  };
+
   const currentVersion =
     VersionHistoryService.getCurrentVersion(
       versions,
@@ -601,6 +611,8 @@ export default function usePromptStudio() {
 
     error,
 
+    isBuilderOpen,
+
     metrics,
 
     isLoading,
@@ -614,6 +626,10 @@ export default function usePromptStudio() {
     isSaving,
 
     clearError,
+
+    openBuilder,
+
+    closeBuilder,
 
     saveCurrentVersion,
 
