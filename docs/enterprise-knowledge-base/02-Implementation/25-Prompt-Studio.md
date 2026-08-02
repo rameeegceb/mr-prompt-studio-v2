@@ -55,6 +55,8 @@ On first render, `usePromptStudio` loads persisted values from `PromptRepository
 - prompt history
 - prompt versions
 
+This same repository-backed initialization path is used when Prompt Library saves a template prompt and navigates the user to `/studio`.
+
 ### Live evaluation
 
 A `useEffect` hook persists the current prompt on change and runs debounced evaluation after 350ms.
@@ -94,6 +96,8 @@ Supported operations:
 - save / load / clear current prompt with write deduplication
 - get / add / remove / clear prompt history
 - get / add / update / delete / clear prompt versions
+
+Prompt Library reuses `PromptRepository.save(template.prompt)` before navigation so Prompt Studio loads the selected template through its existing initialization logic instead of through a separate state or routing channel.
 
 History storage maintains up to 20 recent prompts.
 Versions storage maintains up to 50 saved versions with duplicate prevention for repeated identical saves.

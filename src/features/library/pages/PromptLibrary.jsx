@@ -1,4 +1,5 @@
 import PageHeader from "../../../components/ui/PageHeader";
+import { useNavigate } from "react-router-dom";
 
 import categories from "../constants/categories";
 
@@ -6,6 +7,7 @@ import PromptLibraryLayout from "../layouts/PromptLibraryLayout";
 
 import PromptLibraryProvider from "../state/PromptLibraryProvider";
 import usePromptLibraryContext from "../state/usePromptLibraryContext";
+import PromptRepository from "../../studio/repository/PromptRepository";
 
 import FilterPanel from "../panels/FilterPanel";
 import GalleryPanel from "../panels/GalleryPanel";
@@ -21,12 +23,28 @@ export default function PromptLibrary() {
 
 function PromptLibraryContent() {
   const library = usePromptLibraryContext();
+  const navigate = useNavigate();
 
   const statistics = {
     total: library.templates.length,
     categories: categories.length - 1,
     favorites: library.favorites.length,
     recent: library.recent.length,
+  };
+
+  const handleUseInStudio = (template) => {
+    const resolvedTemplate =
+      library.useTemplate(template);
+
+    if (!resolvedTemplate?.prompt) {
+      return;
+    }
+
+    PromptRepository.save(
+      resolvedTemplate.prompt
+    );
+
+    navigate("/studio");
   };
 
   return (
@@ -82,12 +100,14 @@ function PromptLibraryContent() {
             selected={library.selectedTemplate}
             onSelect={library.setSelectedTemplate}
             onFavorite={library.toggleFavorite}
+            onUseInStudio={handleUseInStudio}
           />
         }
         preview={
           <PreviewPanel
             template={library.selectedTemplate}
             onUse={library.useTemplate}
+            onUseInStudio={handleUseInStudio}
           />
         }
       />

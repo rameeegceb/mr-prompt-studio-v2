@@ -5,6 +5,7 @@ export default function GalleryPanel({
   selected,
   onSelect,
   onFavorite,
+  onUseInStudio,
 }) {
   return (
     <div className="space-y-4">
@@ -21,6 +22,9 @@ export default function GalleryPanel({
           }
           onFavorite={() =>
             onFavorite(template.id)
+          }
+          onUseInStudio={() =>
+            onUseInStudio(template)
           }
         />
       ))}

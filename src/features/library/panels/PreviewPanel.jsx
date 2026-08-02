@@ -6,6 +6,7 @@ import ScoreBadge from "../components/ScoreBadge";
 export default function PreviewPanel({
   template,
   onUse,
+  onUseInStudio,
 }) {
   if (!template) {
     return (
@@ -66,12 +67,21 @@ export default function PreviewPanel({
 
         </div>
 
-        <button
-          onClick={() => onUse(template)}
-          className="w-full rounded-lg bg-blue-600 py-3 font-medium text-white transition hover:bg-blue-700"
-        >
-          Use Prompt
-        </button>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <button
+            onClick={() => onUse(template)}
+            className="w-full rounded-lg border border-slate-300 bg-white py-3 font-medium text-slate-700 transition hover:bg-slate-50"
+          >
+            Use Prompt
+          </button>
+
+          <button
+            onClick={() => onUseInStudio(template)}
+            className="w-full rounded-lg bg-blue-600 py-3 font-medium text-white transition hover:bg-blue-700"
+          >
+            Use in Studio
+          </button>
+        </div>
 
       </div>
 

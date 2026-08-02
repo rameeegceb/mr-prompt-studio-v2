@@ -6,8 +6,8 @@ The Prompt Library feature provides a searchable repository of enterprise prompt
 
 ## Scope
 
-The feature covers the library page, filter controls, prompt template browsing, favorite toggling, recent usage tracking, prompt preview, and local persistence of favorites and recent prompt selections.
-It does not currently include a direct cross-feature transfer of selected prompt templates into Prompt Studio or an advanced sorting UI for all query state fields.
+The feature covers the library page, filter controls, prompt template browsing, favorite toggling, recent usage tracking, prompt preview, local persistence of favorites and recent prompt selections, and direct handoff of a selected template into Prompt Studio.
+It does not currently include an advanced sorting UI for all query state fields.
 
 ## Runtime Entry
 
@@ -72,6 +72,7 @@ It does not currently include a direct cross-feature transfer of selected prompt
 5. `TemplateService.query` computes `templates` based on current search and category filters.
 6. `FilterPanel`, `GalleryPanel`, and `PreviewPanel` render using context state.
 7. User actions update context state and repository persistence.
+8. A template can be saved into `PromptRepository` and then opened in Prompt Studio through route navigation.
 
 ## Runtime Flow
 
@@ -88,6 +89,8 @@ Search / Categories
 Prompt Selection
 ↓
 User Interaction
+↓
+Prompt Studio Handoff
 
 ### Dashboard
 
@@ -121,14 +124,23 @@ User Interaction
 
 - `GalleryPanel.jsx` renders the filtered `templates` list with `TemplateCard`.
 - Selecting a template via `onSelect` sets `selectedTemplate` in library state.
-- `PreviewPanel.jsx` displays the selected template detail and provides a `Use Prompt` button.
+- `PreviewPanel.jsx` displays the selected template detail and provides `Use Prompt` and `Use in Studio` actions.
 
 ### User Interaction
 
-- `TemplateCard` renders a `Favorite` button and a view button.
+- `TemplateCard` renders a `Favorite` button, a view button, and a `Use in Studio` action.
 - `toggleFavorite(id)` in `usePromptLibrary` toggles favorite status through `TemplateService.toggleFavorite`.
 - `useTemplate(template)` in `usePromptLibrary` records usage through `TemplateService.useTemplate` and updates `selectedTemplate`.
 - Favorite count and recent count are computed from repository state and reflected in statistics.
+
+### Prompt Studio Handoff
+
+- `PromptLibrary.jsx` owns the handoff workflow.
+- When `Use in Studio` is triggered, the page:
+  - records template usage through the existing library hook
+  - saves `template.prompt` through `PromptRepository.save(...)`
+  - navigates to `/studio` with `react-router-dom`
+- Prompt Studio then loads the selected template from `PromptRepository` through `usePromptStudio` initialization.
 
 ## Page Structure
 
@@ -165,7 +177,7 @@ User Interaction
   - Evidence: rendered by `PromptLibrary.jsx`.
 
 - `PreviewPanel.jsx`
-  - Purpose: show selected template detail and `Use Prompt` action.
+  - Purpose: show selected template detail and `Use Prompt` / `Use in Studio` actions.
   - Runtime Status: active.
   - Evidence: rendered by `PromptLibrary.jsx`.
 
@@ -180,7 +192,7 @@ User Interaction
   - Evidence: used in `FilterPanel.jsx`.
 
 - `TemplateCard.jsx`
-  - Purpose: display template preview and favorite action.
+  - Purpose: display template preview, favorite action, and direct studio handoff.
   - Runtime Status: active.
   - Evidence: used in `GalleryPanel.jsx`.
 
@@ -207,6 +219,7 @@ User Interaction
 - Favorite operations: `getFavorites()`, `addFavorite()`, `removeFavorite()`, `isFavorite()`, `clearFavorites()`.
 - Recent operations: `getRecent()`, `addRecent()`, `isRecent()`, `clearRecent()`, `clearAll()`.
 - Recent IDs are capped at 20 items.
+- Prompt Library does not persist template prompt content in `TemplateRepository`; studio handoff reuses `PromptRepository` as the source of truth for the editor prompt.
 
 ## Services
 
@@ -216,6 +229,12 @@ User Interaction
   - `getRecent()` returns recent IDs from repository.
   - `toggleFavorite(id)` adds or removes favorites.
   - `useTemplate(id)` records recent usage and returns the template object.
+
+## Cross-Feature Integration
+
+- `PromptLibrary.jsx` imports `PromptRepository` from the studio feature.
+- The library page does not create separate prompt persistence or routing state for studio loading.
+- The existing studio repository and provider remain the single prompt-loading path.
 
 ## Models
 

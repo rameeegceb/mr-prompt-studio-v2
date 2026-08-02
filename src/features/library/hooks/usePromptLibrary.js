@@ -49,6 +49,8 @@ export default function usePromptLibrary() {
     setSelectedTemplate(template);
 
     setRefresh((value) => value + 1);
+
+    return template;
   }
 
   function clearFilters() {
