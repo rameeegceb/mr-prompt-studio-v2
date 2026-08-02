@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate markdown style and syntax
-        uses: DavidAnson/markdownlint-cli2-action@v20
+        uses: DavidAnson/markdownlint-cli2-action@v24
         with:
           globs: |
             docs/**/*.md
