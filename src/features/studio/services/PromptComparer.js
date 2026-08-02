@@ -1,10 +1,18 @@
 export default class PromptComparer {
   static compare(original, improved) {
-    const originalSections =
-      this.extractSections(original);
+    const originalSectionMap =
+      this.extractSectionMap(original);
 
-    const improvedSections =
-      this.extractSections(improved);
+    const improvedSectionMap =
+      this.extractSectionMap(improved);
+
+    const originalSections = [
+      ...originalSectionMap.keys(),
+    ];
+
+    const improvedSections = [
+      ...improvedSectionMap.keys(),
+    ];
 
     const added = improvedSections.filter(
       (section) =>
@@ -21,19 +29,31 @@ export default class PromptComparer {
         improvedSections.includes(section)
     );
 
+    const changed = retained.filter(
+      (section) =>
+        this.normalizeText(
+          originalSectionMap.get(section)
+        ) !==
+        this.normalizeText(
+          improvedSectionMap.get(section)
+        )
+    );
+
     return {
       added,
 
       removed,
 
       retained,
+
+      changed,
     };
   }
 
-  static extractSections(text) {
-    if (!text) return [];
+  static extractSectionMap(text) {
+    const sectionMap = new Map();
 
-    const sections = [];
+    if (!text) return sectionMap;
 
     const labels = [
       "Role",
@@ -41,6 +61,7 @@ export default class PromptComparer {
       "Objective",
       "Context",
       "Audience",
+      "Task",
       "Instructions",
       "Constraints",
       "Output",
@@ -49,16 +70,80 @@ export default class PromptComparer {
       "Success Criteria",
     ];
 
+    const normalizeLabel = (value) =>
+      value
+        .replace(/^#{1,6}\s*/, "")
+        .replace(/^<\/?/, "")
+        .replace(/>$/, "")
+        .replace(/:$/, "")
+        .trim()
+        .toLowerCase();
+
+    const lines = String(text).split(/\r?\n/);
+
+    let currentLabel = null;
+    let buffer = [];
+
+    const flush = () => {
+      if (!currentLabel) return;
+
+      sectionMap.set(
+        currentLabel,
+        buffer.join("\n").trim()
+      );
+
+      buffer = [];
+    };
+
+    lines.forEach((line) => {
+      const normalizedLine =
+        normalizeLabel(line);
+
+      const matchedLabel = labels.find(
+        (label) =>
+          normalizedLine ===
+          label.toLowerCase()
+      );
+
+      if (matchedLabel) {
+        flush();
+        currentLabel = matchedLabel;
+        return;
+      }
+
+      if (currentLabel) {
+        buffer.push(line.trim());
+      }
+    });
+
+    flush();
+
+    if (sectionMap.size > 0) {
+      return sectionMap;
+    }
+
     labels.forEach((label) => {
       if (
         text
           .toLowerCase()
           .includes(label.toLowerCase())
       ) {
-        sections.push(label);
+        sectionMap.set(label, label);
       }
     });
 
-    return sections;
+    return sectionMap;
+  }
+
+  static extractSections(text) {
+    return [
+      ...this.extractSectionMap(text).keys(),
+    ];
+  }
+
+  static normalizeText(value = "") {
+    return String(value)
+      .trim()
+      .replace(/\s+/g, " ");
   }
 }
