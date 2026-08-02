@@ -9,8 +9,38 @@ import Recommendations from "../components/Recommendations";
 
 import usePromptStudioContext from "../state/usePromptStudioContext";
 
+const mapTechniqueLabels = (
+  techniques = []
+) =>
+  techniques.map((technique) =>
+    technique.description
+      ? `${technique.title}: ${technique.description}`
+      : technique.title
+  );
+
+const mapArticleLabels = (
+  articles = []
+) =>
+  articles.map((article) => {
+    if (article.title?.trim()) {
+      return article.title;
+    }
+
+    return article.content;
+  });
+
 export default function AnalysisPanel() {
   const studio = usePromptStudioContext();
+
+  const relatedTechniques =
+    mapTechniqueLabels(
+      studio.evaluation?.relatedTechniques
+    );
+
+  const knowledgeRecommendations =
+    mapArticleLabels(
+      studio.evaluation?.recommendedArticles
+    );
 
   if (!studio.evaluation) {
     return (
@@ -37,13 +67,13 @@ export default function AnalysisPanel() {
       />
 
       <ConfidenceMeter
-        confidence={
-          studio.evaluation.score?.confidence
-        }
+        confidence={studio.evaluation.confidence}
+        description="Based on the strongest knowledge match returned by the Knowledge Engine."
       />
 
       <FrameworkReason
         framework={studio.evaluation.framework}
+        subtitle="Selected by the Knowledge Engine when a repository framework match is available."
       />
 
       <PromptMetadata
@@ -62,6 +92,19 @@ export default function AnalysisPanel() {
         items={
           studio.evaluation.recommendations
         }
+        title="Prompt Recommendations"
+      />
+
+      <Recommendations
+        items={relatedTechniques}
+        title="Related Techniques"
+        emptyMessage="No related techniques were returned by the Knowledge Engine for this prompt."
+      />
+
+      <Recommendations
+        items={knowledgeRecommendations}
+        title="Knowledge Recommendations"
+        emptyMessage="No repository-backed knowledge recommendations were returned for this prompt."
       />
     </div>
   );

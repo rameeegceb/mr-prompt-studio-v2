@@ -1,50 +1,47 @@
 export default function EditorStatistics({
-  prompt,
-  analysis,
+  metrics,
 }) {
-  const words =
-    prompt.trim().length === 0
-      ? 0
-      : prompt.trim().split(/\s+/).length;
-
-  const characters =
-    prompt.length;
-
-  const tokens =
-    Math.ceil(words * 1.3);
-
-  const readingTime =
-    Math.max(1, Math.ceil(words / 200));
-
   return (
-    <div className="grid grid-cols-2 gap-3 rounded-lg border bg-slate-50 p-4 md:grid-cols-5">
+    <div className="grid grid-cols-2 gap-3 rounded-lg border bg-slate-50 p-4 md:grid-cols-4 xl:grid-cols-8">
 
       <Stat
         title="Words"
-        value={words}
+        value={metrics.wordCount}
       />
 
       <Stat
         title="Characters"
-        value={characters}
+        value={metrics.characterCount}
       />
 
       <Stat
         title="Tokens"
-        value={tokens}
+        value={metrics.tokenCount}
       />
 
       <Stat
         title="Reading"
-        value={`${readingTime} min`}
+        value={`${metrics.readingTime} min`}
       />
 
       <Stat
         title="Complexity"
-        value={
-          analysis?.complexity ??
-          "-"
-        }
+        value={metrics.complexity}
+      />
+
+      <Stat
+        title="Score"
+        value={metrics.promptScore}
+      />
+
+      <Stat
+        title="History"
+        value={metrics.historyCount}
+      />
+
+      <Stat
+        title="Version"
+        value={metrics.currentVersion}
       />
 
     </div>

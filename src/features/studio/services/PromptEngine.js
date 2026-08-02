@@ -6,6 +6,7 @@ import PromptComparer from "./PromptComparer";
 import ImprovementService from "./ImprovementService";
 import PromptConverter from "./PromptConverter";
 import FrameworkEngine from "./FrameworkEngine";
+import KnowledgeEngine from "../../knowledge/engine/KnowledgeEngine";
 
 export default class PromptEngine {
   static evaluate(prompt) {
@@ -16,14 +17,27 @@ export default class PromptEngine {
     const analysis =
       PromptAnalyzer.analyze(prompt);
 
+    const knowledgeContext =
+      KnowledgeEngine.execute(prompt);
+
     result.analysis = analysis;
 
     const framework =
       FrameworkEngine.recommend(
-        analysis.intent
+        analysis.intent,
+        knowledgeContext
       );
 
     result.framework = framework;
+    result.recommendedFramework =
+      framework.recommendedFramework;
+    result.confidence =
+      framework.confidence || 0;
+    result.reason = framework.reason;
+    result.relatedTechniques =
+      framework.relatedTechniques;
+    result.recommendedArticles =
+      framework.recommendedArticles;
 
     const score =
       PromptScorer.score(analysis);
@@ -31,7 +45,8 @@ export default class PromptEngine {
     result.score = {
       overall: score.overall,
       maturity: score.maturity,
-      confidence: score.confidence,
+      confidence:
+        result.confidence || score.confidence,
       breakdown: score.breakdown,
     };
 
@@ -89,9 +104,15 @@ export default class PromptEngine {
     prompt,
     format = "poml"
   ) {
+    const normalizedFormat =
+      typeof format === "string" &&
+      format.trim()
+        ? format
+        : "poml";
+
     return PromptConverter.convert(
       prompt,
-      format
+      normalizedFormat
     );
   }
 

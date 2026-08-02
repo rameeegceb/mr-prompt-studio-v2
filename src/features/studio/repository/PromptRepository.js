@@ -1,51 +1,55 @@
+import StorageService from "../../../core/services/StorageService";
+import VersionRepository from "./VersionRepository";
+
 class PromptRepository {
 
     STORAGE_KEY =
-        "mrpromptstudio.prompt";
+        "prompt";
 
     HISTORY_KEY =
-        "mrpromptstudio.prompt.history";
-
-    VERSIONS_KEY =
-        "mrpromptstudio.prompt.versions";
+        "prompt.history";
 
     save(prompt) {
-        localStorage.setItem(
+        const nextPrompt =
+            prompt ?? "";
+        const currentPrompt =
+            this.load() ?? "";
+
+        if (currentPrompt === nextPrompt) {
+            return false;
+        }
+
+        StorageService.set(
             this.STORAGE_KEY,
-            JSON.stringify(prompt)
+            nextPrompt
         );
+
+        return true;
     }
 
     load() {
-        const value =
-            localStorage.getItem(
-                this.STORAGE_KEY
-            );
-
-        if (!value) return null;
-
-        return JSON.parse(value);
+        return StorageService.get(
+            this.STORAGE_KEY,
+            null
+        );
     }
 
     clear() {
-        localStorage.removeItem(
+        StorageService.remove(
             this.STORAGE_KEY
         );
     }
 
     getHistory() {
-        const value =
-            localStorage.getItem(
-                this.HISTORY_KEY
+        const history =
+            StorageService.get(
+                this.HISTORY_KEY,
+                []
             );
 
-        if (!value) return [];
-
-        try {
-            return JSON.parse(value);
-        } catch {
-            return [];
-        }
+        return Array.isArray(history)
+            ? history
+            : [];
     }
 
     addToHistory(prompt) {
@@ -71,10 +75,12 @@ class PromptRepository {
 
         const nextHistory = history.slice(0, 20);
 
-        localStorage.setItem(
+        StorageService.set(
             this.HISTORY_KEY,
-            JSON.stringify(nextHistory)
+            nextHistory
         );
+
+        return nextHistory[0] ?? null;
     }
 
     removeFromHistory(id) {
@@ -84,82 +90,47 @@ class PromptRepository {
             (item) => item.id !== id
         );
 
-        localStorage.setItem(
+        StorageService.set(
             this.HISTORY_KEY,
-            JSON.stringify(nextHistory)
+            nextHistory
         );
+
+        return nextHistory;
     }
 
     clearHistory() {
-        localStorage.removeItem(
+        StorageService.remove(
             this.HISTORY_KEY
         );
     }
 
     getVersions() {
-        const value =
-            localStorage.getItem(
-                this.VERSIONS_KEY
-            );
+        return VersionRepository.getAll();
+    }
 
-        if (!value) return [];
-
-        try {
-            return JSON.parse(value);
-        } catch {
-            return [];
-        }
+    getVersion(id) {
+        return VersionRepository.findById(id);
     }
 
     addVersion(version) {
-        if (!version) return;
+        if (!version) return null;
 
-        const originalPrompt = version.originalPrompt?.trim();
-        const generatedPrompt = version.generatedPrompt?.trim();
-        const action = version.action?.trim();
+        return VersionRepository.save(version);
+    }
 
-        if (!originalPrompt || !action) return;
-
-        const storedVersions = this.getVersions();
-
-        const nextVersion = {
-            id: version.id || `${Date.now()}-${Math.random()}`,
-            timestamp:
-                version.timestamp ||
-                new Date().toISOString(),
-            originalPrompt,
-            generatedPrompt: generatedPrompt ?? "",
-            action,
-        };
-
-        const nextVersions = [
-            nextVersion,
-            ...storedVersions,
-        ].slice(0, 50);
-
-        localStorage.setItem(
-            this.VERSIONS_KEY,
-            JSON.stringify(nextVersions)
+    updateVersion(id, changes) {
+        return VersionRepository.update(
+            id,
+            changes
         );
     }
 
     deleteVersion(id) {
-        const versions = this.getVersions();
-
-        const nextVersions = versions.filter(
-            (item) => item.id !== id
-        );
-
-        localStorage.setItem(
-            this.VERSIONS_KEY,
-            JSON.stringify(nextVersions)
-        );
+        VersionRepository.delete(id);
     }
 
     clearVersions() {
-        localStorage.removeItem(
-            this.VERSIONS_KEY
-        );
+        VersionRepository.clear();
     }
 
 }

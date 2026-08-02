@@ -27,18 +27,25 @@ The hook manages local component state for:
 - `evaluation`
 - `history`
 - `versions`
+- `status`
+- `error`
+- `metrics`
 
 It exposes actions used by UI components:
 - `setPrompt`
 - `handleImprove`
 - `handleEvaluate`
 - `handleConvert`
+- `saveCurrentVersion`
 - `handleClear`
+- `clearError`
 - `restoreHistoryItem`
 - `deleteHistoryItem`
 - `clearHistory`
 - `restoreVersion`
 - `deleteVersion`
+- `saveVersionComment`
+- `compareVersions`
 - `clearVersions`
 
 ### Initialization
@@ -52,22 +59,44 @@ On first render, `usePromptStudio` loads persisted values from `PromptRepository
 
 A `useEffect` hook persists the current prompt on change and runs debounced evaluation after 350ms.
 - If prompt is empty, it clears persisted prompt and resets evaluation.
-- Otherwise, it saves prompt and computes evaluation using `PromptEngine.evaluate(prompt)`.
+- Otherwise, it saves prompt only when the content actually changes and computes evaluation using `PromptEngine.evaluate(prompt)`.
+
+### Unified runtime pipeline
+
+The runtime now follows a shared orchestration path inside `usePromptStudio`:
+
+- prompt changes persist through `PromptRepository`
+- live evaluation updates prompt analysis, knowledge context, and framework recommendation
+- improve, evaluate, convert, save, restore, and delete actions all pass through shared runtime helpers
+- runtime status and errors are normalized before being exposed to the UI
+- toast notifications are emitted for successful actions and runtime failures
+- history and version persistence are refreshed through repository methods, not component logic
+
+### Runtime status and metrics
+
+`usePromptStudio` exposes a shared runtime contract for the workbench:
+
+- status values such as `Idle`, `Evaluating`, `Improving`, `Converting`, `Saving`, `Completed`, and `Error`
+- derived loading flags: `isLoading`, `isEvaluating`, `isImproving`, `isConverting`, `isSaving`
+- centralized `error` state with `clearError()`
+- runtime metrics including current version, history count, version count, word count, character count, token count, reading time, prompt score, and complexity
 
 ## Persistence
 
-`PromptRepository` in `src/features/studio/repository/PromptRepository.js` persists studio data in `localStorage` using:
+`PromptRepository` in `src/features/studio/repository/PromptRepository.js` persists studio data through `StorageService` using:
 - `mrpromptstudio.prompt`
 - `mrpromptstudio.prompt.history`
+
+`VersionRepository` persists version data through `StorageService` using:
 - `mrpromptstudio.prompt.versions`
 
 Supported operations:
-- save / load / clear current prompt
+- save / load / clear current prompt with write deduplication
 - get / add / remove / clear prompt history
-- get / add / delete / clear prompt versions
+- get / add / update / delete / clear prompt versions
 
 History storage maintains up to 20 recent prompts.
-Versions storage maintains up to 50 saved versions.
+Versions storage maintains up to 50 saved versions with duplicate prevention for repeated identical saves.
 
 ## Workbench layout
 
@@ -143,15 +172,18 @@ This generated prompt is supplied to the editor via `onGenerate`.
 - `Convert`
 - `Clear`
 
+It also renders runtime status, loading feedback, and dismissible runtime errors.
+
 Behavior in `usePromptStudio`:
-- `handleImprove`: calls `PromptEngine.improve`, stores result, updates history and versions
-- `handleEvaluate`: calls `PromptEngine.evaluate`, stores history and versions
-- `handleConvert`: calls `PromptEngine.convert(format)` and stores history and versions
-- `handleClear`: clears prompt, improved prompt, evaluation, and persisted prompt
+- `handleImprove`: calls `PromptEngine.improve`, stores the improved result, updates history, saves a version, persists prompt state, and shows a success toast
+- `handleEvaluate`: runs `PromptEngine.evaluate`, updates analysis, saves history and version state, and shows a success toast
+- `handleConvert`: runs `PromptEngine.convert(format)`, updates output, saves history and version state, and shows a success toast
+- `saveCurrentVersion`: saves the current prompt as a numbered version with an optional comment
+- `handleClear`: clears prompt, improved prompt, evaluation, error, status, and persisted prompt
 
 ## Prompt output
 
-`PromptOutput` displays `studio.improvedPrompt` or a placeholder when blank.
+`PromptOutput` displays `studio.improvedPrompt`, runtime status, or an error-aware placeholder when blank.
 
 ## Prompt engine and analysis stack
 
@@ -161,17 +193,25 @@ Behavior in `usePromptStudio`:
 
 `PromptEngine.evaluate(prompt)` performs:
 - prompt analysis via `PromptAnalyzer.analyze(prompt)`
-- framework recommendation via `FrameworkEngine.recommend(analysis.intent)`
+- knowledge execution via `KnowledgeEngine.execute(prompt)`
+- framework recommendation via `FrameworkEngine.recommend(analysis.intent, knowledgeContext)`
 - scoring via `PromptScorer.score(analysis)`
 - populates `EvaluationResult` with:
   - original prompt
   - analysis
   - framework
+  - recommended framework metadata
+  - knowledge confidence
+  - framework reason
+  - related techniques
+  - recommended articles derived from repository-backed framework examples
   - score
   - strengths
   - weaknesses
   - recommendations
   - improvements
+
+The knowledge engine executes once per evaluation and reuses the same knowledge analysis result when building recommendation context.
 
 ### Improve
 
@@ -205,12 +245,24 @@ This confirms the studio feature leverages the shared AI service layer for promp
 
 The Prompt Studio feature depends on the following analysis components:
 - `PromptAnalyzer` (`src/features/studio/services/PromptAnalyzer.js`)
+- `KnowledgeEngine` (`src/features/knowledge/engine/KnowledgeEngine.ts`)
 - `PromptScorer` (`src/features/studio/services/PromptScorer.js`)
 - `PromptComparer` (`src/features/studio/services/PromptComparer.js`)
 - `PromptConverter` (`src/features/studio/services/PromptConverter.js`)
 - `FrameworkEngine` (`src/features/studio/services/FrameworkEngine.js`)
 
-These services provide structured prompt quality analysis, scoring, framework recommendations, and format conversion.
+These services provide structured prompt quality analysis, repository-backed knowledge matching, framework recommendations, scoring, and format conversion.
+
+## Analysis dashboard
+
+`AnalysisPanel` continues to use existing studio UI components and now renders:
+- prompt score and health
+- knowledge-backed confidence
+- recommended framework and reason
+- prompt metadata
+- prompt recommendations
+- related techniques returned from the knowledge engine
+- knowledge recommendations derived from matched framework examples
 
 ## Summary
 

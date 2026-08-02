@@ -5,6 +5,7 @@ import {
 
 export default function FrameworkReason({
   framework,
+  subtitle = "Selected by the Prompt Engine",
 }) {
   if (!framework) return null;
 
@@ -22,7 +23,7 @@ export default function FrameworkReason({
           </h2>
 
           <p className="text-sm text-slate-500">
-            Selected by the Prompt Engine
+            {subtitle}
           </p>
 
         </div>

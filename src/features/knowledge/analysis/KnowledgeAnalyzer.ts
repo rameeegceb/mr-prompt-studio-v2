@@ -25,9 +25,11 @@ class KnowledgeAnalyzer {
 
             recommendedFramework: best?.item,
 
-            relatedTechniques: [],
+            relatedTechniques:
+                best?.item?.techniques ?? [],
 
-            relatedExamples: [],
+            relatedExamples:
+                best?.item?.examples ?? [],
 
             confidence: best?.confidence ?? 0
 

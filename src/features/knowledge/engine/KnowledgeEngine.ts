@@ -17,7 +17,10 @@ class KnowledgeEngine {
             KnowledgeAnalyzer.analyze(prompt);
 
         const recommendation =
-            RecommendationEngine.recommend(prompt);
+            RecommendationEngine.recommend(
+                prompt,
+                analysis
+            );
 
         return ContextBuilder.build(
 

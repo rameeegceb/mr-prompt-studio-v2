@@ -4,6 +4,7 @@ import BuilderPanel from "../panels/BuilderPanel";
 import EditorPanel from "../panels/EditorPanel";
 import AnalysisPanel from "../panels/AnalysisPanel";
 import HistoryPanel from "../components/workbench/HistoryPanel";
+import VersionHistoryPanel from "../components/workbench/VersionHistoryPanel";
 
 export default function PromptWorkbench() {
   const studio = usePromptStudioContext();
@@ -24,6 +25,17 @@ export default function PromptWorkbench() {
           onRestore={studio.restoreHistoryItem}
           onDelete={studio.deleteHistoryItem}
           onClear={studio.clearHistory}
+        />
+
+        <VersionHistoryPanel
+          versions={studio.versions}
+          currentPrompt={studio.prompt}
+          onSaveVersion={studio.saveCurrentVersion}
+          onRestore={studio.restoreVersion}
+          onDelete={studio.deleteVersion}
+          onClear={studio.clearVersions}
+          onSaveComment={studio.saveVersionComment}
+          onCompareVersions={studio.compareVersions}
         />
 
         <AnalysisPanel />

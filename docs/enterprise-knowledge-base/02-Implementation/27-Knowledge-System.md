@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Knowledge System provides a runtime knowledge repository and search engine for enterprise frameworks and prompt analysis. It is used to initialize the knowledge data set at startup and power prompt improvement workflows via a knowledge-backed context.
+The Knowledge System provides a runtime knowledge repository and search engine for enterprise frameworks and prompt analysis. It is used to initialize the knowledge data set at startup, power prompt improvement workflows via a knowledge-backed context, and enrich Prompt Studio evaluation with repository-backed framework recommendations.
 
 ## Scope
 
@@ -15,6 +15,7 @@ The Knowledge System covers:
 - prompt analysis using knowledge search
 - recommendation context generation for prompt improvement
 - runtime execution of knowledge-backed improvement requests
+- Prompt Studio framework recommendation and analysis enrichment
 
 The system does not currently include UI components, React providers, or feature-specific contexts under `src/features/knowledge`.
 
@@ -23,6 +24,7 @@ The system does not currently include UI components, React providers, or feature
 - Startup initialization: `src/main.jsx` imports `{ KnowledgeRepository }` from `src/features/knowledge` and calls `KnowledgeRepository.initialize()`.
 - Runtime entry points:
   - `KnowledgeRepository.initialize()` (startup)
+  - `PromptEngine.evaluate(prompt)` in Prompt Studio
   - `KnowledgeEngine.execute(prompt)` via `RequestPipeline` and `RuntimeEngine`
   - `KnowledgeSearchService.search(prompt)` (search backend)
 - Exports:
@@ -59,6 +61,7 @@ The system does not currently include UI components, React providers, or feature
 - Calls `KnowledgeRepository.initialize()` during its own `initialize()` method.
 - Executes prompt analysis and recommendation generation.
 - Builds a runtime knowledge context via `ContextBuilder`.
+- Prompt Studio invokes `KnowledgeEngine.execute(prompt)` during `PromptEngine.evaluate(prompt)`.
 
 ### Knowledge Repository
 
@@ -90,7 +93,8 @@ The system does not currently include UI components, React providers, or feature
   - extracted keywords
   - framework matches
   - recommended framework
-  - related techniques and examples (currently empty)
+  - related techniques from the matched framework when available
+  - related examples from the matched framework when available
   - confidence value
 
 ### Context Builder
@@ -109,7 +113,7 @@ The system does not currently include UI components, React providers, or feature
 ### Recommendation Engine
 
 `src/features/knowledge/recommendation/RecommendationEngine.ts`
-- Uses `KnowledgeAnalyzer.analyze(prompt)`.
+- Reuses a provided `KnowledgeAnalyzer` result when available.
 - Returns recommendation context with framework, techniques, examples, and system instructions.
 - Builds instructions by appending the recommended framework title and content.
 
@@ -164,6 +168,7 @@ Other model interfaces:
 5. `KnowledgeIndexer.build()` extracts metadata and populates `SearchIndex`.
 6. The app renders and `AIProvider` wraps the React tree.
 7. Knowledge runtime is consumed later by improvement workflows through `RuntimeEngine.execute(...)`.
+8. Prompt Studio evaluation also consumes the knowledge runtime through `PromptEngine.evaluate(prompt)`.
 
 ## Runtime Flow
 
@@ -173,6 +178,7 @@ Other model interfaces:
 - `KnowledgeAnalyzer.analyze()` generates prompt analysis and selects a recommended framework.
 - `RecommendationEngine.recommend()` uses the analyzer output to build recommendation context.
 - `KnowledgeEngine.execute(prompt)` composes the final knowledge context with `ContextBuilder`.
+- `PromptEngine.evaluate(prompt)` consumes the knowledge context to populate framework reason, confidence, related techniques, and knowledge recommendations in `EvaluationResult`.
 - `RuntimeEngine.execute(request)` dispatches feature requests using `RequestPipeline`.
 - `RequestPipeline.executeImprove(request)` executes knowledge analysis and returns a mock AI improvement response template.
 
