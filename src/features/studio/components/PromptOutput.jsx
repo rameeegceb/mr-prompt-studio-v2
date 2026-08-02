@@ -40,13 +40,13 @@ export default function PromptOutput({
   };
 
   return (
-    <div>
-      <div className="mb-2 flex items-center justify-between gap-3">
-        <h3 className="font-semibold">
-          Improved Prompt
+    <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <h3 className="text-sm font-semibold text-slate-900">
+          Prompt Output
         </h3>
 
-        <span className="text-xs text-slate-500">
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
           {status}
         </span>
       </div>
@@ -67,16 +67,17 @@ export default function PromptOutput({
         <div>
           <button
             onClick={copyImprovedPrompt}
-            className="mb-2 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+            className="mb-2 inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+            title="Copy improved prompt"
           >
             📋 Copy Improved Prompt
           </button>
 
-          <div className="min-h-48 whitespace-pre-wrap rounded-xl bg-slate-50 p-4 text-slate-700">
+          <div className="min-h-48 whitespace-pre-wrap rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
             {improvedText}
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }

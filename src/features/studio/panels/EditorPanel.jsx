@@ -9,7 +9,7 @@ export default function EditorPanel() {
   const studio = usePromptStudioContext();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 2xl:space-y-6">
       <EditorStatistics
         metrics={studio.metrics}
       />

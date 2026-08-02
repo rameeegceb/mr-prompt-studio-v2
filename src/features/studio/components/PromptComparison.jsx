@@ -49,12 +49,18 @@ export default function PromptComparison({
   return (
     <div className="space-y-4">
 
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="text-sm font-semibold text-slate-900">
+          Prompt Comparison
+        </h3>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-2">
 
         <div>
-          <h3 className="mb-2 font-semibold">
+          <h4 className="mb-2 text-sm font-semibold text-slate-800">
             Original Prompt
-          </h3>
+          </h4>
 
           <button
             onClick={() =>
@@ -68,15 +74,15 @@ export default function PromptComparison({
             📋 Copy Original Prompt
           </button>
 
-          <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4">
+          <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700">
             {originalText}
           </div>
         </div>
 
         <div>
-          <h3 className="mb-2 font-semibold">
+          <h4 className="mb-2 text-sm font-semibold text-slate-800">
             Improved Prompt
-          </h3>
+          </h4>
 
           <button
             onClick={() =>
@@ -90,7 +96,7 @@ export default function PromptComparison({
             📋 Copy Improved Prompt
           </button>
 
-          <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4">
+          <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700">
             {improvedText}
           </div>
         </div>

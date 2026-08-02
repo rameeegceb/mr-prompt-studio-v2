@@ -62,8 +62,8 @@ export default function AnalysisPanel() {
   return (
     <div className="space-y-6">
       {comparison ? (
-        <div className="rounded-xl border bg-white p-5 shadow-sm">
-          <h3 className="text-lg font-semibold text-slate-900">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-700">
             Comparison Analysis Summary
           </h3>
 
@@ -71,8 +71,8 @@ export default function AnalysisPanel() {
             Runtime comparison between the original and improved prompt.
           </p>
 
-          <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
               <div className="text-xs uppercase tracking-wide text-slate-500">
                 Score Improvement
               </div>
@@ -88,7 +88,7 @@ export default function AnalysisPanel() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
               <div className="text-xs uppercase tracking-wide text-slate-500">
                 Framework Change
               </div>
@@ -104,7 +104,7 @@ export default function AnalysisPanel() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
               <div className="text-xs uppercase tracking-wide text-slate-500">
                 Confidence Change
               </div>
@@ -120,7 +120,7 @@ export default function AnalysisPanel() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
               <div className="text-xs uppercase tracking-wide text-slate-500">
                 Knowledge Recommendation Changes
               </div>
