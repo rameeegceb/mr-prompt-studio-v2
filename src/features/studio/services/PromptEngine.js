@@ -9,6 +9,43 @@ import FrameworkEngine from "./FrameworkEngine";
 import KnowledgeEngine from "../../knowledge/engine/KnowledgeEngine";
 
 export default class PromptEngine {
+  static diffItems(
+    originalItems = [],
+    improvedItems = []
+  ) {
+    const normalizeItem = (item) => {
+      if (typeof item === "string") {
+        return item.trim();
+      }
+
+      return (
+        item?.title?.trim() ||
+        item?.content?.trim() ||
+        JSON.stringify(item)
+      );
+    };
+
+    const originalNormalized =
+      originalItems.map(normalizeItem);
+    const improvedNormalized =
+      improvedItems.map(normalizeItem);
+
+    return {
+      added: improvedNormalized.filter(
+        (item) =>
+          !originalNormalized.includes(item)
+      ),
+      removed: originalNormalized.filter(
+        (item) =>
+          !improvedNormalized.includes(item)
+      ),
+      retained: originalNormalized.filter(
+        (item) =>
+          improvedNormalized.includes(item)
+      ),
+    };
+  }
+
   static evaluate(prompt) {
     const result = createEvaluationResult();
 
@@ -80,6 +117,18 @@ export default class PromptEngine {
     const original =
       this.evaluate(prompt);
 
+    const recommendationsDiff =
+      this.diffItems(
+        original.recommendations,
+        evaluation.recommendations
+      );
+
+    const knowledgeRecommendationsDiff =
+      this.diffItems(
+        original.recommendedArticles,
+        evaluation.recommendedArticles
+      );
+
     evaluation.comparison = {
       ...PromptComparer.compare(
         prompt,
@@ -95,6 +144,44 @@ export default class PromptEngine {
       scoreIncrease:
         evaluation.score.overall -
         original.score.overall,
+
+      originalFramework:
+        original.framework,
+
+      improvedFramework:
+        evaluation.framework,
+
+      frameworkChanged:
+        original.framework?.name !==
+        evaluation.framework?.name,
+
+      originalConfidence:
+        original.confidence || 0,
+
+      improvedConfidence:
+        evaluation.confidence || 0,
+
+      confidenceChange:
+        (evaluation.confidence || 0) -
+        (original.confidence || 0),
+
+      originalRecommendations:
+        original.recommendations || [],
+
+      improvedRecommendations:
+        evaluation.recommendations || [],
+
+      recommendationChanges:
+        recommendationsDiff,
+
+      originalKnowledgeRecommendations:
+        original.recommendedArticles || [],
+
+      improvedKnowledgeRecommendations:
+        evaluation.recommendedArticles || [],
+
+      knowledgeRecommendationChanges:
+        knowledgeRecommendationsDiff,
     };
 
     return evaluation;
