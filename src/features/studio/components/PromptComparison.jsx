@@ -1,8 +1,33 @@
+import toast from "react-hot-toast";
+
 export default function PromptComparison({
   original,
   improved,
   comparison,
 }) {
+  const originalText =
+    original || "No prompt entered.";
+  const improvedText =
+    improved || "No improved prompt yet.";
+
+  const copyPrompt = async (
+    label,
+    text
+  ) => {
+    try {
+      await navigator.clipboard.writeText(
+        text
+      );
+      toast.success(
+        `${label} copied`
+      );
+    } catch {
+      toast.error(
+        `Unable to copy ${label.toLowerCase()}.`
+      );
+    }
+  };
+
   const sectionBadges = [
     {
       title: "Added Sections",
@@ -31,8 +56,20 @@ export default function PromptComparison({
             Original Prompt
           </h3>
 
+          <button
+            onClick={() =>
+              copyPrompt(
+                "Original Prompt",
+                originalText
+              )
+            }
+            className="mb-2 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+          >
+            📋 Copy Original Prompt
+          </button>
+
           <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4">
-            {original || "No prompt entered."}
+            {originalText}
           </div>
         </div>
 
@@ -41,8 +78,20 @@ export default function PromptComparison({
             Improved Prompt
           </h3>
 
+          <button
+            onClick={() =>
+              copyPrompt(
+                "Improved Prompt",
+                improvedText
+              )
+            }
+            className="mb-2 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+          >
+            📋 Copy Improved Prompt
+          </button>
+
           <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4">
-            {improved || "No improved prompt yet."}
+            {improvedText}
           </div>
         </div>
 
