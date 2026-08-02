@@ -85,7 +85,7 @@ The current implementation is an early MVP. Business-critical capabilities for l
 | Dashboard | `/` | `DashboardPage` | none | none | none | none | Implemented |
 | Learning Hub | `/learning` | `LearningHub` | `LearningProvider` | `LearningContext` | `CourseRepository` load workflow | `CourseRepository` | Implemented |
 | Prompt Studio | `/studio` | `PromptStudio` | `PromptStudioProvider` | `PromptStudioContext` | `PromptEngine`, `PromptAnalyzer`, `KnowledgeEngine`, `FrameworkEngine`, `PromptScorer`, `PromptComparer`, `PromptConverter`, `ImprovementService`, `VersionHistoryService` | `PromptRepository`, `VersionRepository` | Implemented with unified runtime persistence and knowledge-backed evaluation |
-| Prompt Library | `/library` | `PromptLibrary` | `PromptLibraryProvider` | `PromptLibraryContext` | `TemplateService` | `TemplateRepository` | Implemented |
+| Prompt Library | `/library` | `PromptLibrary` | `PromptLibraryProvider` | `PromptLibraryContext` | `TemplateService` | `TemplateRepository` | Implemented with Prompt Studio handoff |
 | Settings | `/settings` | `SettingsPage` | root `AIProvider` | `AIContext` | `AIService` configuration | none | Partially implemented |
 | Best Practices | `/best-practices` | Placeholder | none | none | none | none | Placeholder |
 | AI Test Console | `/ai-test` | `AITestPage` | root `AIProvider` | `AIContext` | `AIService` | none | Internal utility |
@@ -94,7 +94,7 @@ The current implementation is an early MVP. Business-critical capabilities for l
 
 - Learning Hub: user-visible capability for course browsing, chapter navigation, bookmarks, favorites, and progress tracking. Implemented.
 - Prompt Studio: user-visible capability for prompt building, evaluation, improvement, conversion, and analysis. Implemented.
-- Prompt Library: user-visible capability for browsing prompt templates, filtering, favorites, recent use, and previewing content. Implemented.
+- Prompt Library: user-visible capability for browsing prompt templates, filtering, favorites, recent use, previewing content, and sending a selected template into Prompt Studio. Implemented.
 - Settings: user-visible capability for selecting AI provider and viewing provider configuration panels. Implemented as UI, with runtime provider support limited.
 - Best Practices: visible route exists but only renders a placeholder page. Not implemented as a full business capability.
 - AI Test Console: visible utility route for direct prompt execution. Implemented as a diagnostic/testing surface, not a core business capability.
@@ -165,10 +165,10 @@ The Prompt Library is implemented as a route-bound feature page under `/library`
 - Context: `src/features/library/state/PromptLibraryContext.jsx`.
 - Primary service: `src/features/library/services/TemplateService.js`.
 - Repository: `src/features/library/repository/TemplateRepository.js`.
-- Runtime behavior: `TemplateService` filters static prompt templates with search, category, framework, difficulty, and sort criteria. `TemplateRepository` persists favorites and recent templates in `localStorage`.
+- Runtime behavior: `TemplateService` filters static prompt templates with search, category, framework, difficulty, and sort criteria. `TemplateRepository` persists favorites and recent templates in `localStorage`. `PromptLibrary.jsx` can save a selected template prompt into `PromptRepository` and navigate to `/studio`, where the existing studio provider hydrates the prompt from repository state.
 - UI composition: `FilterPanel`, `GalleryPanel`, `PreviewPanel`, and prompt library layout.
 
-Status: Implemented and operational for template browsing, favoriting, recent use, and filtering.
+Status: Implemented and operational for template browsing, favoriting, recent use, filtering, and Prompt Studio handoff.
 
 ## 11. Settings Implementation
 

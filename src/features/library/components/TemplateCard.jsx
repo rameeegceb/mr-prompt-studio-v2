@@ -3,6 +3,7 @@ export default function TemplateCard({
   selected,
   onClick,
   onFavorite,
+  onUseInStudio,
 }) {
   return (
     <div
@@ -31,12 +32,21 @@ export default function TemplateCard({
         </button>
       </div>
 
-      <button
-        onClick={onClick}
-        className="w-full rounded-lg bg-slate-100 px-4 py-3 text-left text-sm text-slate-700 hover:bg-slate-200"
-      >
-        View prompt
-      </button>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <button
+          onClick={onClick}
+          className="w-full rounded-lg bg-slate-100 px-4 py-3 text-left text-sm text-slate-700 hover:bg-slate-200"
+        >
+          View prompt
+        </button>
+
+        <button
+          onClick={onUseInStudio}
+          className="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
+        >
+          Use in Studio
+        </button>
+      </div>
     </div>
   );
 }
