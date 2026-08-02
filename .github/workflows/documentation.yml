@@ -1,0 +1,98 @@
+name: Documentation Validation
+
+on:
+  push:
+    paths:
+      - "docs/**"
+      - ".github/**"
+  pull_request:
+    paths:
+      - "docs/**"
+      - ".github/**"
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate markdown style and syntax
+        uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: |
+            docs/**/*.md
+            .github/**/*.md
+
+      - name: Validate internal markdown links and duplicate references
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+
+          const roots = ['docs', '.github'];
+          const mdFiles = [];
+
+          function walk(dir) {
+            if (!fs.existsSync(dir)) return;
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) walk(full);
+              else if (entry.isFile() && entry.name.toLowerCase().endsWith('.md')) mdFiles.push(full);
+            }
+          }
+
+          roots.forEach(walk);
+
+          const linkRe = /\[[^\]]+\]\(([^)]+)\)/g;
+          const errors = [];
+          const duplicateWarnings = [];
+
+          for (const file of mdFiles) {
+            const content = fs.readFileSync(file, 'utf8');
+            const seen = new Map();
+            let match;
+
+            while ((match = linkRe.exec(content)) !== null) {
+              const rawTarget = match[1].trim();
+              if (!rawTarget) continue;
+              if (rawTarget.startsWith('#')) continue;
+              if (rawTarget.startsWith('http://') || rawTarget.startsWith('https://') || rawTarget.startsWith('mailto:')) continue;
+
+              const target = rawTarget.split('#')[0].split('?')[0];
+              if (!target) continue;
+
+              const normalizedKey = rawTarget;
+              seen.set(normalizedKey, (seen.get(normalizedKey) || 0) + 1);
+
+              const resolved = path.resolve(path.dirname(file), target);
+              if (!fs.existsSync(resolved)) {
+                errors.push(`${file}: missing link target -> ${rawTarget}`);
+              }
+            }
+
+            for (const [target, count] of seen.entries()) {
+              if (count > 1) {
+                duplicateWarnings.push(`${file}: duplicate reference appears ${count} times -> ${target}`);
+              }
+            }
+          }
+
+          if (duplicateWarnings.length > 0) {
+            console.log('Duplicate references detected:');
+            for (const msg of duplicateWarnings) console.log(`- ${msg}`);
+          }
+
+          if (errors.length > 0) {
+            console.error('Broken internal markdown links detected:');
+            for (const msg of errors) console.error(`- ${msg}`);
+            process.exit(1);
+          }
+
+          console.log(`Validated ${mdFiles.length} markdown files.`);
+          NODE
