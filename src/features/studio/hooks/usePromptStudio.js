@@ -15,19 +15,28 @@ export default function usePromptStudio() {
   const [history, setHistory] =
     useState([]);
 
+  const [versions, setVersions] =
+    useState([]);
+
   useEffect(() => {
     const savedPrompt = PromptRepository.load();
     const savedHistory = PromptRepository.getHistory();
+    const savedVersions = PromptRepository.getVersions();
 
     if (savedPrompt) {
       setPrompt(savedPrompt);
     }
 
     setHistory(savedHistory);
+    setVersions(savedVersions);
   }, []);
 
   const updateHistory = () => {
     setHistory(PromptRepository.getHistory());
+  };
+
+  const updateVersions = () => {
+    setVersions(PromptRepository.getVersions());
   };
 
   /*
@@ -68,7 +77,14 @@ export default function usePromptStudio() {
     setEvaluation(result);
 
     PromptRepository.addToHistory(prompt);
+    PromptRepository.addVersion({
+      originalPrompt: prompt,
+      generatedPrompt: result.improvedPrompt,
+      action: "Improve",
+    });
+
     updateHistory();
+    updateVersions();
   };
 
   const handleEvaluate = () => {
@@ -80,7 +96,14 @@ export default function usePromptStudio() {
     setEvaluation(result);
 
     PromptRepository.addToHistory(prompt);
+    PromptRepository.addVersion({
+      originalPrompt: prompt,
+      generatedPrompt: "",
+      action: "Evaluate",
+    });
+
     updateHistory();
+    updateVersions();
   };
 
   const handleConvert = (
@@ -88,15 +111,23 @@ export default function usePromptStudio() {
   ) => {
     if (!prompt.trim()) return;
 
-    setImprovedPrompt(
+    const convertedPrompt =
       PromptEngine.convert(
         prompt,
         format
-      )
-    );
+      );
+
+    setImprovedPrompt(convertedPrompt);
 
     PromptRepository.addToHistory(prompt);
+    PromptRepository.addVersion({
+      originalPrompt: prompt,
+      generatedPrompt: convertedPrompt,
+      action: "Convert",
+    });
+
     updateHistory();
+    updateVersions();
   };
 
   const handleClear = () => {
@@ -129,6 +160,26 @@ export default function usePromptStudio() {
     setHistory([]);
   };
 
+  const restoreVersion = (id) => {
+    const item = PromptRepository.getVersions().find(
+      (entry) => entry.id === id
+    );
+
+    if (!item) return;
+
+    setPrompt(item.originalPrompt);
+  };
+
+  const deleteVersion = (id) => {
+    PromptRepository.deleteVersion(id);
+    updateVersions();
+  };
+
+  const clearVersions = () => {
+    PromptRepository.clearVersions();
+    setVersions([]);
+  };
+
   return {
     prompt,
 
@@ -139,6 +190,8 @@ export default function usePromptStudio() {
     evaluation,
 
     history,
+
+    versions,
 
     handleImprove,
 
@@ -153,5 +206,11 @@ export default function usePromptStudio() {
     deleteHistoryItem,
 
     clearHistory,
+
+    restoreVersion,
+
+    deleteVersion,
+
+    clearVersions,
   };
 }

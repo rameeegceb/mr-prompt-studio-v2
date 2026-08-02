@@ -6,6 +6,9 @@ class PromptRepository {
     HISTORY_KEY =
         "mrpromptstudio.prompt.history";
 
+    VERSIONS_KEY =
+        "mrpromptstudio.prompt.versions";
+
     save(prompt) {
         localStorage.setItem(
             this.STORAGE_KEY,
@@ -90,6 +93,72 @@ class PromptRepository {
     clearHistory() {
         localStorage.removeItem(
             this.HISTORY_KEY
+        );
+    }
+
+    getVersions() {
+        const value =
+            localStorage.getItem(
+                this.VERSIONS_KEY
+            );
+
+        if (!value) return [];
+
+        try {
+            return JSON.parse(value);
+        } catch {
+            return [];
+        }
+    }
+
+    addVersion(version) {
+        if (!version) return;
+
+        const originalPrompt = version.originalPrompt?.trim();
+        const generatedPrompt = version.generatedPrompt?.trim();
+        const action = version.action?.trim();
+
+        if (!originalPrompt || !action) return;
+
+        const storedVersions = this.getVersions();
+
+        const nextVersion = {
+            id: version.id || `${Date.now()}-${Math.random()}`,
+            timestamp:
+                version.timestamp ||
+                new Date().toISOString(),
+            originalPrompt,
+            generatedPrompt: generatedPrompt ?? "",
+            action,
+        };
+
+        const nextVersions = [
+            nextVersion,
+            ...storedVersions,
+        ].slice(0, 50);
+
+        localStorage.setItem(
+            this.VERSIONS_KEY,
+            JSON.stringify(nextVersions)
+        );
+    }
+
+    deleteVersion(id) {
+        const versions = this.getVersions();
+
+        const nextVersions = versions.filter(
+            (item) => item.id !== id
+        );
+
+        localStorage.setItem(
+            this.VERSIONS_KEY,
+            JSON.stringify(nextVersions)
+        );
+    }
+
+    clearVersions() {
+        localStorage.removeItem(
+            this.VERSIONS_KEY
         );
     }
 
