@@ -26,12 +26,27 @@ export default function PromptActions({
   isSaving,
 }) {
   return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-3">
+    <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <h3 className="text-sm font-semibold text-slate-900">
+          Actions
+        </h3>
+
+        <span
+          className={`rounded-full px-3 py-1 text-xs font-medium ${statusTone[status] ?? statusTone.Idle}`}
+          title="Current runtime status"
+        >
+          Runtime: {status}
+        </span>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2.5">
 
         <Button
           onClick={onOpenBuilder}
           variant="outline"
+          size="sm"
+          title="Open the guided prompt builder"
         >
           Guided Prompt Builder
         </Button>
@@ -40,6 +55,8 @@ export default function PromptActions({
           onClick={onImprove}
           loading={isImproving}
           disabled={isLoading && !isImproving}
+          size="sm"
+          title="Generate an improved prompt"
         >
           Improve
         </Button>
@@ -50,6 +67,8 @@ export default function PromptActions({
           loading={isEvaluating}
           disabled={isLoading && !isEvaluating}
           className="bg-violet-600 text-white hover:bg-violet-700 focus:ring-violet-500"
+          size="sm"
+          title="Evaluate prompt quality"
         >
           Evaluate
         </Button>
@@ -60,6 +79,8 @@ export default function PromptActions({
           loading={isConverting}
           disabled={isLoading && !isConverting}
           className="bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500"
+          size="sm"
+          title="Convert prompt format"
         >
           Convert
         </Button>
@@ -68,33 +89,27 @@ export default function PromptActions({
           onClick={onClear}
           variant="outline"
           disabled={isSaving}
+          size="sm"
+          title="Clear current prompt and output"
         >
           Clear
         </Button>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <span
-          className={`rounded-full px-3 py-1 text-xs font-medium ${statusTone[status] ?? statusTone.Idle}`}
-        >
-          Runtime: {status}
-        </span>
-
-        {error ? (
-          <div className="flex flex-wrap items-center gap-2 text-sm text-rose-600">
-            <span>{error}</span>
-            <Button
-              onClick={onClearError}
-              variant="ghost"
-              size="sm"
-              className="text-rose-600"
-            >
-              Dismiss
-            </Button>
-          </div>
-        ) : null}
-      </div>
-
-    </div>
+      {error ? (
+        <div className="mt-3 flex flex-wrap items-center gap-2 rounded-lg border border-rose-200 bg-rose-50 p-2.5 text-sm text-rose-700">
+          <span>{error}</span>
+          <Button
+            onClick={onClearError}
+            variant="ghost"
+            size="sm"
+            className="text-rose-700"
+            title="Dismiss error message"
+          >
+            Dismiss
+          </Button>
+        </div>
+      ) : null}
+    </section>
   );
 }

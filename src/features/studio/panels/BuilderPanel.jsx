@@ -6,10 +6,10 @@ export default function BuilderPanel({ onClose }) {
   const studio = usePromptStudioContext();
 
   return (
-    <div className="rounded-xl border bg-white shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
       <div className="flex items-start justify-between gap-4 border-b p-5">
         <div>
-          <h2 className="text-lg font-semibold">
+          <h2 className="text-lg font-semibold text-slate-900">
             Guided Prompt Builder
           </h2>
 

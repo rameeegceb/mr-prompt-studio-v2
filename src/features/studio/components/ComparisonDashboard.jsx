@@ -10,24 +10,24 @@ function Section({
   items,
 }) {
   return (
-    <div className="rounded-lg border p-5">
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
 
-      <div className="mb-4 flex items-center gap-2">
+      <div className="mb-3 flex items-center gap-2">
 
         {icon}
 
-        <h3 className="font-semibold">
+        <h3 className="text-sm font-semibold text-slate-900">
           {title}
         </h3>
 
       </div>
 
       {items.length === 0 ? (
-        <p className="text-sm text-slate-500">
+        <p className="text-xs text-slate-500">
           None
         </p>
       ) : (
-        <ul className="space-y-2">
+        <ul className="space-y-1.5 text-sm text-slate-700">
 
           {items.map((item) => (
             <li key={item}>
@@ -48,13 +48,13 @@ export default function ComparisonDashboard({
   if (!comparison) return null;
 
   return (
-    <div className="rounded-xl border bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
-      <h2 className="mb-6 text-lg font-semibold">
-        Prompt Comparison
+      <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-700">
+        Section Deltas
       </h2>
 
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className="grid gap-3 lg:grid-cols-3">
 
         <Section
           title="Added"
