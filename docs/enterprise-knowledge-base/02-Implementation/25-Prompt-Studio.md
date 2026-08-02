@@ -114,6 +114,8 @@ Versions storage maintains up to 50 saved versions with duplicate prevention for
 - `src/features/studio/panels/BuilderPanel.jsx`
 - contains `PromptBuilder` from `src/features/studio/components/builder/PromptBuilder.jsx`
 - generates a structured prompt and passes it to `studio.setPrompt`.
+- the panel is exposed through the `Guided Prompt Builder` action in `PromptActions`
+- the panel can be collapsed and reopened without leaving the studio runtime
 
 ### EditorPanel
 
@@ -151,26 +153,25 @@ Versions storage maintains up to 50 saved versions with duplicate prevention for
 
 `PromptBuilder` provides a step-by-step prompt construction workflow with fields:
 - Goal
+- Audience
 - Role
 - Context
-- Audience
+- Task
+- Output Format
 - Constraints
-- Output
 - Review
 
-The builder generates prompt text using a fixed template with section headings:
-- `# Role`
-- `# Goal`
-- `# Context`
-- `# Audience`
-- `# Constraints`
-- `# Output Format`
+The builder generates a complete enterprise prompt using the collected values and writes the result into the existing Prompt Studio editor through `studio.setPrompt`. The generated prompt includes:
+- an enterprise prompt-engineer role preamble
+- the selected goal, audience, role, context, task, constraints, and output format
+- a closing instruction to return only the final prompt
 
 This generated prompt is supplied to the editor via `onGenerate`.
 
 ## Prompt actions
 
 `PromptActions` offers buttons for:
+- `Guided Prompt Builder`
 - `Improve`
 - `Evaluate`
 - `Convert`

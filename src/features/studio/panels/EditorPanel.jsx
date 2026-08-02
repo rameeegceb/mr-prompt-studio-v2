@@ -20,6 +20,7 @@ export default function EditorPanel() {
       />
 
       <PromptActions
+        onOpenBuilder={studio.openBuilder}
         onImprove={studio.handleImprove}
         onEvaluate={studio.handleEvaluate}
         onConvert={studio.handleConvert}
