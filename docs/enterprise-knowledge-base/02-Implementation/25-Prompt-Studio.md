@@ -132,6 +132,7 @@ Versions storage maintains up to 50 saved versions with duplicate prevention for
 - `src/features/studio/panels/AnalysisPanel.jsx`
 - renders enterprise analysis only when `studio.evaluation` exists
 - otherwise shows a placeholder calling for prompt input
+- when `studio.evaluation.comparison` exists, renders a comparison analysis summary using the existing comparison payload
 - displayed components:
   - `EnterpriseScoreCard`
   - `PromptHealthIndicator`
@@ -261,6 +262,11 @@ These services provide structured prompt quality analysis, repository-backed kno
 ## Analysis dashboard
 
 `AnalysisPanel` continues to use existing studio UI components and now renders:
+- comparison analysis summary (render-only from `evaluation.comparison`):
+  - score improvement
+  - framework change state
+  - confidence change
+  - knowledge recommendation additions/removals
 - prompt score and health
 - knowledge-backed confidence
 - recommended framework and reason

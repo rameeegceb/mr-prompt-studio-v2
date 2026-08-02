@@ -93,7 +93,7 @@ The current implementation is an early MVP. Business-critical capabilities for l
 ## 6. Business Capability Status
 
 - Learning Hub: user-visible capability for course browsing, chapter navigation, bookmarks, favorites, and progress tracking. Implemented.
-- Prompt Studio: user-visible capability for guided prompt building, evaluation, improvement, conversion, and analysis. Implemented.
+- Prompt Studio: user-visible capability for guided prompt building, evaluation, improvement, conversion, comparison summary analysis, and analysis dashboard. Implemented.
 - Prompt Library: user-visible capability for browsing prompt templates, filtering, favorites, recent use, previewing content, and sending a selected template into Prompt Studio. Implemented.
 - Settings: user-visible capability for selecting AI provider and viewing provider configuration panels. Implemented as UI, with runtime provider support limited.
 - Best Practices: visible route exists but only renders a placeholder page. Not implemented as a full business capability.
@@ -151,6 +151,7 @@ The Prompt Studio is implemented as a route-bound feature page under `/studio`.
   - `PromptEngine.evaluate` and `PromptEngine.convert` run locally in the browser.
   - `PromptEngine.evaluate` calls `PromptAnalyzer`, then `KnowledgeEngine.execute(prompt)`, then `FrameworkEngine.recommend(...)`, then `PromptScorer.score(...)`.
   - `PromptEngine.improve` calls `ImprovementService.improve`, which uses `AIService` and a fixed improve prompt template.
+  - Comparison deltas produced by `evaluation.comparison` are rendered in `AnalysisPanel` as a summary of score, framework, confidence, and knowledge recommendation changes.
   - Prompt Studio analysis surfaces knowledge-backed framework reason, confidence, related techniques, and recommended articles derived from matched framework examples when available.
   - Shared runtime helpers coordinate improve, evaluate, convert, save, restore, history, version, notification, and error flows.
   - Runtime state exposes status, derived loading flags, centralized errors, and computed workbench metrics.
