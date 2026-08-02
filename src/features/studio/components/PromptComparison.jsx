@@ -1,28 +1,81 @@
 export default function PromptComparison({
   original,
   improved,
+  comparison,
 }) {
+  const sectionBadges = [
+    {
+      title: "Added Sections",
+      items: comparison?.added || [],
+      tone: "bg-emerald-50 text-emerald-700",
+    },
+    {
+      title: "Removed Sections",
+      items: comparison?.removed || [],
+      tone: "bg-rose-50 text-rose-700",
+    },
+    {
+      title: "Changed Sections",
+      items: comparison?.changed || [],
+      tone: "bg-amber-50 text-amber-700",
+    },
+  ];
+
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
+    <div className="space-y-4">
 
-      <div>
-        <h3 className="mb-2 font-semibold">
-          Original Prompt
-        </h3>
+      <div className="grid gap-6 lg:grid-cols-2">
 
-        <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4">
-          {original || "No prompt entered."}
+        <div>
+          <h3 className="mb-2 font-semibold">
+            Original Prompt
+          </h3>
+
+          <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4">
+            {original || "No prompt entered."}
+          </div>
         </div>
+
+        <div>
+          <h3 className="mb-2 font-semibold">
+            Improved Prompt
+          </h3>
+
+          <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4">
+            {improved || "No improved prompt yet."}
+          </div>
+        </div>
+
       </div>
 
-      <div>
-        <h3 className="mb-2 font-semibold">
-          Improved Prompt
-        </h3>
+      <div className="grid gap-3 lg:grid-cols-3">
+        {sectionBadges.map((group) => (
+          <div
+            key={group.title}
+            className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+          >
+            <h4 className="text-sm font-semibold text-slate-800">
+              {group.title}
+            </h4>
 
-        <div className="min-h-52 whitespace-pre-wrap rounded-xl border border-slate-200 bg-white p-4">
-          {improved || "No improved prompt yet."}
-        </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {group.items.length > 0 ? (
+                group.items.map((item) => (
+                  <span
+                    key={`${group.title}-${item}`}
+                    className={`rounded-full px-2.5 py-1 text-xs font-medium ${group.tone}`}
+                  >
+                    {item}
+                  </span>
+                ))
+              ) : (
+                <span className="text-xs text-slate-500">
+                  None
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
 
     </div>

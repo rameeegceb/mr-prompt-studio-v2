@@ -1,7 +1,7 @@
 import {
   PlusCircle,
   MinusCircle,
-  CheckCircle2,
+  Pencil,
 } from "lucide-react";
 
 function Section({
@@ -73,10 +73,10 @@ export default function ComparisonDashboard({
         />
 
         <Section
-          title="Retained"
-          items={comparison.retained}
+          title="Changed"
+          items={comparison.changed || []}
           icon={
-            <CheckCircle2 className="h-5 w-5 text-blue-600" />
+            <Pencil className="h-5 w-5 text-amber-600" />
           }
         />
 
