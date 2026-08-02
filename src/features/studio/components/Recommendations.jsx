@@ -1,17 +1,20 @@
 export default function Recommendations({
   items = [],
+  title = "Recommendations",
+  emptyMessage =
+    "Prompt evaluation results will appear here.",
 }) {
   return (
     <div>
       <h3 className="mb-3 font-semibold">
-        Recommendations
+        {title}
       </h3>
 
       <div className="rounded-xl bg-slate-50 p-4">
 
         {items.length === 0 ? (
           <p className="text-slate-500">
-            Prompt evaluation results will appear here.
+            {emptyMessage}
           </p>
         ) : (
           <ul className="list-disc space-y-2 pl-5">

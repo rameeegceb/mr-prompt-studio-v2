@@ -19,6 +19,16 @@ export const createEvaluationResult = () => ({
     reason: "",
   },
 
+  recommendedFramework: null,
+
+  confidence: 0,
+
+  reason: "",
+
+  relatedTechniques: [],
+
+  recommendedArticles: [],
+
   score: {
     overall: 0,
     maturity: "Beginner",

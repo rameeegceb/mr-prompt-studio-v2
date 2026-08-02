@@ -84,7 +84,7 @@ The current implementation is an early MVP. Business-critical capabilities for l
 |---|---|---|---|---|---|---|---|
 | Dashboard | `/` | `DashboardPage` | none | none | none | none | Implemented |
 | Learning Hub | `/learning` | `LearningHub` | `LearningProvider` | `LearningContext` | `CourseRepository` load workflow | `CourseRepository` | Implemented |
-| Prompt Studio | `/studio` | `PromptStudio` | `PromptStudioProvider` | `PromptStudioContext` | `PromptEngine`, `ImprovementService`, `PromptAnalyzer`, `PromptScorer`, `PromptComparer`, `PromptConverter` | `PromptRepository` (present, not wired) | Implemented with partial persistence |
+| Prompt Studio | `/studio` | `PromptStudio` | `PromptStudioProvider` | `PromptStudioContext` | `PromptEngine`, `PromptAnalyzer`, `KnowledgeEngine`, `FrameworkEngine`, `PromptScorer`, `PromptComparer`, `PromptConverter`, `ImprovementService`, `VersionHistoryService` | `PromptRepository`, `VersionRepository` | Implemented with unified runtime persistence and knowledge-backed evaluation |
 | Prompt Library | `/library` | `PromptLibrary` | `PromptLibraryProvider` | `PromptLibraryContext` | `TemplateService` | `TemplateRepository` | Implemented |
 | Settings | `/settings` | `SettingsPage` | root `AIProvider` | `AIContext` | `AIService` configuration | none | Partially implemented |
 | Best Practices | `/best-practices` | Placeholder | none | none | none | none | Placeholder |
@@ -134,19 +134,27 @@ The Prompt Studio is implemented as a route-bound feature page under `/studio`.
 - Context: `src/features/studio/state/PromptStudioContext.jsx`.
 - Primary services:
   - `src/features/studio/services/PromptEngine.js`
+  - `src/features/knowledge/engine/KnowledgeEngine.ts`
   - `src/features/studio/services/ImprovementService.js`
   - `src/features/studio/services/PromptAnalyzer.js`
   - `src/features/studio/services/PromptScorer.js`
   - `src/features/studio/services/PromptComparer.js`
   - `src/features/studio/services/PromptConverter.js`
-- Repository: `src/features/studio/repository/PromptRepository.js` exists, but current UI code does not invoke it.
+- Repositories:
+  - `src/features/studio/repository/PromptRepository.js`
+  - `src/features/studio/repository/VersionRepository.js`
 - UI composition: `PromptWorkbench`, `BuilderPanel`, `EditorPanel`, `AnalysisPanel`, and prompt builder/editor/action components.
 - Runtime flows:
   - Prompt state is managed in `usePromptStudio`.
+  - Debounced live evaluation persists prompt edits through `PromptRepository` and recomputes prompt analysis, knowledge context, framework recommendation, and score in-browser.
   - `PromptEngine.evaluate` and `PromptEngine.convert` run locally in the browser.
+  - `PromptEngine.evaluate` calls `PromptAnalyzer`, then `KnowledgeEngine.execute(prompt)`, then `FrameworkEngine.recommend(...)`, then `PromptScorer.score(...)`.
   - `PromptEngine.improve` calls `ImprovementService.improve`, which uses `AIService` and a fixed improve prompt template.
+  - Prompt Studio analysis surfaces knowledge-backed framework reason, confidence, related techniques, and recommended articles derived from matched framework examples when available.
+  - Shared runtime helpers coordinate improve, evaluate, convert, save, restore, history, version, notification, and error flows.
+  - Runtime state exposes status, derived loading flags, centralized errors, and computed workbench metrics.
 
-Status: Implemented for authoring and evaluation workflows. Persistence and provider integration are partially complete.
+Status: Implemented for authoring, evaluation, conversion, improvement, history, and version workflows with repository-backed persistence and Knowledge System integration.
 
 ## 10. Prompt Library Implementation
 
@@ -214,7 +222,7 @@ Status: AI runtime is present, with working Ollama and mock execution. Support f
 - `Best Practices` route is a placeholder and does not provide business content.
 - `Knowledge` runtime exists but has no visible user interface or navigation surface.
 - `AI` provider factory supports only `OllamaProvider` and `MockProvider`; other provider types are UI-only.
-- `PromptRepository` exists in source but is not wired to the prompt studio workflow.
+- Prompt Studio persistence remains browser-local through `StorageService`; there is no backend storage or cross-device synchronization.
 - Persistence is limited to browser `localStorage`; there is no backend storage or user account integration.
 - There is no authentication, authorization, or enterprise access control in the current code.
 - Provider configuration panels for Azure/OpenAI/Copilot are present as UI stubs.

@@ -11,8 +11,7 @@ export default function EditorPanel() {
   return (
     <div className="space-y-6">
       <EditorStatistics
-        prompt={studio.prompt}
-        analysis={studio.evaluation?.analysis}
+        metrics={studio.metrics}
       />
 
       <PromptEditor
@@ -25,10 +24,20 @@ export default function EditorPanel() {
         onEvaluate={studio.handleEvaluate}
         onConvert={studio.handleConvert}
         onClear={studio.handleClear}
+        onClearError={studio.clearError}
+        status={studio.status}
+        error={studio.error}
+        isLoading={studio.isLoading}
+        isEvaluating={studio.isEvaluating}
+        isImproving={studio.isImproving}
+        isConverting={studio.isConverting}
+        isSaving={studio.isSaving}
       />
 
       <PromptOutput
         value={studio.improvedPrompt}
+        status={studio.status}
+        error={studio.error}
       />
     </div>
   );

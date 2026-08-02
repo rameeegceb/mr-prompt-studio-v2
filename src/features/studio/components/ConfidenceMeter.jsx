@@ -2,6 +2,7 @@ import { ShieldCheck } from "lucide-react";
 
 export default function ConfidenceMeter({
   confidence,
+  description = "Based on prompt completeness and detected prompt structure.",
 }) {
   if (confidence == null) return null;
 
@@ -34,8 +35,7 @@ export default function ConfidenceMeter({
       </div>
 
       <p className="mt-2 text-sm text-slate-500">
-        Based on prompt completeness and
-        detected prompt structure.
+        {description}
       </p>
 
     </div>

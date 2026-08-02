@@ -4,21 +4,32 @@ import { RecommendationResult } from "./RecommendationResult";
 
 class RecommendationEngine {
 
-    recommend(prompt: string): RecommendationContext {
+    recommend(
+        prompt: string,
+        analysis = null
+    ): RecommendationContext {
 
-        const analysis = KnowledgeAnalyzer.analyze(prompt);
+        const resolvedAnalysis =
+            analysis ??
+            KnowledgeAnalyzer.analyze(prompt);
 
-        const recommendation = analysis.recommendedFramework;
+        const recommendation =
+            resolvedAnalysis.recommendedFramework;
 
         return {
 
             framework: recommendation,
 
-            techniques: analysis.relatedTechniques,
+            techniques:
+                resolvedAnalysis.relatedTechniques,
 
-            examples: analysis.relatedExamples,
+            examples:
+                resolvedAnalysis.relatedExamples,
 
-            systemInstructions: this.buildInstructions(analysis)
+            systemInstructions:
+                this.buildInstructions(
+                    resolvedAnalysis
+                )
 
         };
 

@@ -1,12 +1,30 @@
-export default function PromptOutput({ value }) {
+export default function PromptOutput({
+  value,
+  status,
+  error,
+}) {
+  const placeholder = error
+    ? error
+    : status === "Improving"
+      ? "Improving prompt..."
+      : status === "Converting"
+        ? "Converting prompt..."
+        : "Improved prompt will appear here.";
+
   return (
     <div>
-      <h3 className="mb-2 font-semibold">
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <h3 className="font-semibold">
         Improved Prompt
-      </h3>
+        </h3>
 
-      <div className="min-h-48 whitespace-pre-wrap rounded-xl bg-slate-50 p-4">
-        {value || "Improved prompt will appear here."}
+        <span className="text-xs text-slate-500">
+          {status}
+        </span>
+      </div>
+
+      <div className="min-h-48 whitespace-pre-wrap rounded-xl bg-slate-50 p-4 text-slate-700">
+        {value || placeholder}
       </div>
     </div>
   );
