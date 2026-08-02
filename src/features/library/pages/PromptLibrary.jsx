@@ -7,6 +7,10 @@ import PromptLibraryLayout from "../layouts/PromptLibraryLayout";
 import PromptLibraryProvider from "../state/PromptLibraryProvider";
 import usePromptLibraryContext from "../state/usePromptLibraryContext";
 
+import FilterPanel from "../panels/FilterPanel";
+import GalleryPanel from "../panels/GalleryPanel";
+import PreviewPanel from "../panels/PreviewPanel";
+
 export default function PromptLibrary() {
   return (
     <PromptLibraryProvider>
@@ -17,6 +21,13 @@ export default function PromptLibrary() {
 
 function PromptLibraryContent() {
   const library = usePromptLibraryContext();
+
+  const statistics = {
+    total: library.templates.length,
+    categories: categories.length - 1,
+    favorites: library.favorites.length,
+    recent: library.recent.length,
+  };
 
   return (
     <div className="space-y-6">
@@ -35,34 +46,51 @@ function PromptLibraryContent() {
             Browse enterprise-ready prompt templates,
             search by category,
             preview prompts,
-            and load templates directly into Prompt Studio.
+            and load prompts into the library view.
           </p>
 
           <div className="mt-8 grid gap-4 md:grid-cols-4">
             <StatCard
               title="Templates"
-              value={library.templates.length}
+              value={statistics.total}
             />
 
             <StatCard
               title="Favorites"
-              value={library.favorites.length}
+              value={statistics.favorites}
             />
 
             <StatCard
               title="Recent"
-              value={library.recent.length}
+              value={statistics.recent}
             />
 
             <StatCard
               title="Categories"
-              value={categories.length - 1}
+              value={statistics.categories}
             />
           </div>
         </div>
       </div>
 
-      <PromptLibraryLayout />
+      <PromptLibraryLayout
+        statistics={statistics}
+        filters={<FilterPanel />}
+        gallery={
+          <GalleryPanel
+            templates={library.templates}
+            selected={library.selectedTemplate}
+            onSelect={library.setSelectedTemplate}
+            onFavorite={library.toggleFavorite}
+          />
+        }
+        preview={
+          <PreviewPanel
+            template={library.selectedTemplate}
+            onUse={library.useTemplate}
+          />
+        }
+      />
     </div>
   );
 }

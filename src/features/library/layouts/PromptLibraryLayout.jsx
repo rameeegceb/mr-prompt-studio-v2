@@ -1,22 +1,36 @@
-import FilterPanel from "../panels/FilterPanel";
-import GalleryPanel from "../panels/GalleryPanel";
-import PreviewPanel from "../panels/PreviewPanel";
+import LibraryStatistics from "../components/LibraryStatistics";
 
-export default function PromptLibraryLayout() {
+export default function PromptLibraryLayout({
+  statistics,
+  toolbar,
+  filters,
+  gallery,
+  preview,
+}) {
   return (
-    <div className="grid gap-6 xl:grid-cols-12">
+    <div className="space-y-6">
 
-      <aside className="xl:col-span-3">
-        <FilterPanel />
-      </aside>
+      <LibraryStatistics
+        stats={statistics}
+      />
 
-      <main className="xl:col-span-6">
-        <GalleryPanel />
-      </main>
+      {toolbar}
 
-      <aside className="xl:col-span-3">
-        <PreviewPanel />
-      </aside>
+      <div className="grid gap-6 xl:grid-cols-12">
+
+        <aside className="xl:col-span-3">
+          {filters}
+        </aside>
+
+        <section className="xl:col-span-5">
+          {gallery}
+        </section>
+
+        <aside className="xl:col-span-4">
+          {preview}
+        </aside>
+
+      </div>
 
     </div>
   );

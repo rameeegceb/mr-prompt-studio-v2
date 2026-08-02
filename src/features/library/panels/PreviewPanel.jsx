@@ -1,61 +1,80 @@
-import usePromptLibraryContext from "../state/usePromptLibraryContext";
+import DepartmentBadge from "../components/DepartmentBadge";
+import DifficultyBadge from "../components/DifficultyBadge";
+import FrameworkBadge from "../components/FrameworkBadge";
+import ScoreBadge from "../components/ScoreBadge";
 
-export default function PreviewPanel() {
-  const library = usePromptLibraryContext();
-
-  if (!library.selectedTemplate) {
+export default function PreviewPanel({
+  template,
+  onUse,
+}) {
+  if (!template) {
     return (
-      <div className="rounded-xl border bg-white p-8 shadow-sm">
-        <h2 className="text-lg font-semibold">
-          Template Preview
-        </h2>
-
-        <p className="mt-4 text-slate-500">
-          Select a prompt template to preview it.
-        </p>
+      <div className="rounded-xl border border-dashed border-slate-300 bg-white p-12 text-center text-slate-500">
+        Select a prompt to preview.
       </div>
     );
   }
 
-  const template = library.selectedTemplate;
-
   return (
-    <div className="rounded-xl border bg-white shadow-sm">
-      <div className="border-b p-5">
-        <h2 className="text-xl font-semibold">
+    <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+      <div className="border-b border-slate-200 p-6">
+
+        <h2 className="text-2xl font-bold">
           {template.title}
         </h2>
+
+        <p className="mt-2 text-slate-600">
+          {template.description}
+        </p>
+
       </div>
 
-      <div className="space-y-6 p-5">
-        <section>
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
-            Description
-          </h3>
+      <div className="space-y-5 p-6">
 
-          <p className="text-sm leading-6 text-slate-700">
-            {template.description}
-          </p>
-        </section>
+        <div className="flex flex-wrap gap-2">
 
-        <section>
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
-            Framework
-          </h3>
+          <DepartmentBadge
+            department={template.department}
+          />
 
-          <p>{template.framework}</p>
-        </section>
+          <DifficultyBadge
+            difficulty={template.difficulty}
+          />
 
-        <section>
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
+          <FrameworkBadge
+            framework={template.framework}
+          />
+
+          <ScoreBadge
+            score={
+              template.estimatedScore
+            }
+          />
+
+        </div>
+
+        <div>
+
+          <h3 className="mb-2 font-semibold">
             Prompt
           </h3>
 
           <pre className="overflow-auto rounded-lg bg-slate-100 p-4 text-sm whitespace-pre-wrap">
-            {template.prompt}
+{template.prompt}
           </pre>
-        </section>
+
+        </div>
+
+        <button
+          onClick={() => onUse(template)}
+          className="w-full rounded-lg bg-blue-600 py-3 font-medium text-white transition hover:bg-blue-700"
+        >
+          Use Prompt
+        </button>
+
       </div>
+
     </div>
   );
 }

@@ -1,21 +1,27 @@
-import { useEffect, useState } from "react";
-import { loadGuide } from "../services/guideLoader";
+import useLearningContext from "../state/useLearningContext";
+import LessonRenderer from "./LessonRenderer";
 
 export default function LearningContent() {
-  const [html, setHtml] = useState("");
+  const {
+    loading,
+    course,
+    selectedChapter,
+  } = useLearningContext();
 
-  useEffect(() => {
-    loadGuide()
-      .then(setHtml)
-      .catch(console.error);
-  }, []);
+  if (loading) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  const chapter =
+    course.getChapter(selectedChapter);
 
   return (
-    <div
-      className="flex-1 overflow-auto bg-white p-8"
-      dangerouslySetInnerHTML={{
-        __html: html,
-      }}
+    <LessonRenderer
+      chapter={chapter}
     />
   );
 }

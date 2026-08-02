@@ -3,7 +3,7 @@ import { createEvaluationResult } from "../models/EvaluationResult";
 import PromptAnalyzer from "./PromptAnalyzer";
 import PromptScorer from "./PromptScorer";
 import PromptComparer from "./PromptComparer";
-import PromptImprover from "./PromptImprover";
+import ImprovementService from "./ImprovementService";
 import PromptConverter from "./PromptConverter";
 import FrameworkEngine from "./FrameworkEngine";
 
@@ -50,9 +50,8 @@ export default class PromptEngine {
     return result;
   }
 
-  static improve(prompt) {
-    const improved =
-      PromptImprover.improve(prompt);
+  static async improve(prompt) {
+    const improved = await ImprovementService.improve(prompt);
 
     const evaluation =
       this.evaluate(improved);

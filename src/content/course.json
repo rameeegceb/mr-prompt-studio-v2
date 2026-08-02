@@ -1,0 +1,1920 @@
+{
+  "id": "enterprise-prompt-engineering",
+  "title": "Prompt Engineering for Agile Professionals",
+  "version": "2.0",
+  "chapters": [
+    {
+      "id": "chapter-1",
+      "title": "Table of Contents",
+      "order": 1,
+      "sections": [
+        {
+          "id": "ch1-sec1",
+          "title": "",
+          "content": "<ul>\n<comment-tag id=\"1\"><li><p class=\"toc-chapter\">Chapter 1: Introduction: Your Team's New Superpower</p></li></comment-tag>\n<li><p class=\"toc-chapter\">Chapter 2: The Anatomy of a Prompt</p></li>\n<li><p class=\"toc-chapter\">Chapter 3: Core Prompting Techniques (In-Context Learning)</p></li>\n<li><p class=\"toc-chapter\">Chapter 4: Foundational Prompting Frameworks</p></li>\n<li><p class=\"toc-chapter\">Chapter 5: The Agile Specialist's Toolkit: General Frameworks</p></li>\n<li><p class=\"toc-chapter\">Chapter 6: The Agile Specialist's Toolkit: Role-Based Frameworks</p></li>\n<li><p class=\"toc-chapter\">Chapter 7: A Lifecycle-Based Playbook</p></li>\n<li><p class=\"toc-chapter\">Chapter 8: A Deep Dive Into Your Role</p></li>\n<li><p class=\"toc-chapter\">Chapter 9: Advanced Playbooks for Cross-Functional Scenarios</p></li>\n<li><p class=\"toc-chapter\">Chapter 10: Advanced Strategies &amp; Workflows</p></li>\n<li><p class=\"toc-chapter\">Chapter 11: Implementation &amp; Best Practices</p></li>\n<li><p class=\"toc-chapter\">Our Services &amp; Contact</p></li>\n</ul>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-2",
+      "title": "Chapter 1: Introduction: Your Team's New Superpower",
+      "order": 2,
+      "sections": [
+        {
+          "id": "ch2-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed\"><comment-tag id=\"2\">For Agile professionals, the ultimate goal is to deliver value efficiently. Prompt Engineering is a new superpower in the Agile toolkit.</comment-tag> It’s the practice of designing targeted inputs for AI to streamline workflows, enhance communication, and accelerate nearly every phase of the development lifecycle.</p>\n<p class=\"text-lg leading-relaxed mt-4\">From a Business Analyst drafting better user stories, to a Developer generating boilerplate code, a QA Engineer creating comprehensive test cases, or a Scrum Master facilitating more effective retrospectives, mastering prompting allows your team to automate tedious tasks and focus on high-value, creative problem-solving. This guide is your complete playbook.</p>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-3",
+      "title": "Chapter 2: The Anatomy of a Prompt",
+      "order": 3,
+      "sections": [
+        {
+          "id": "ch3-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-6\">Every powerful prompt is built from fundamental components. Mastering them is the first step to predictable, high-quality results.</p>\n<div class=\"space-y-6\">\n<div>\n<h3 class=\"subsection-title flex items-center\"><span class=\"text-2xl mr-3 text-teal-600\">👤</span>Role: Assigning a persona or expertise.</h3>\n\n\n\n</div>\n<div>\n<h3 class=\"subsection-title flex items-center\"><span class=\"text-2xl mr-3 text-teal-600\">🎯</span>Task/Instruction: The specific, direct command.</h3>\n\n\n\n</div>\n<div>\n<h3 class=\"subsection-title flex items-center\"><span class=\"text-2xl mr-3 text-teal-600\">💡</span>Context: Background information that informs the \"why.\"</h3>\n\n\n\n</div>\n<div>\n<h3 class=\"subsection-title flex items-center\"><span class=\"text-2xl mr-3 text-teal-600\">💾</span>Input Data: The raw material for the AI to process.</h3>\n<p class=\"mt-2 text-slate-600\">This is distinct from Context. Context is the 'why,' while Input Data is the 'what' to work with.</p>\n\n\n\n</div>\n<div>\n<h3 class=\"subsection-title flex items-center\"><span class=\"text-2xl mr-3 text-teal-600\">🎨</span>Tone: The desired stylistic and emotional character.</h3>\n\n\n\n</div>\n<div>\n<h3 class=\"subsection-title flex items-center\"><span class=\"text-2xl mr-3 text-teal-600\">📦</span>Format: The specific structure for the output.</h3>\n\n\n\n</div>\n</div>\n<div class=\"mt-12\">\n<h3 class=\"section-title\">Structuring Your Prompt with Delimiters</h3>\n<p class=\"text-lg leading-relaxed\">To help the AI clearly distinguish between different parts of your prompt (like instructions versus input data), you can use delimiters. These are special characters or tags that act as separators, making your prompt easier for the model to parse and understand.</p>\n<p class=\"text-lg leading-relaxed mt-4\">Common delimiters include:</p>\n<ul class=\"list-disc list-inside mt-2 text-lg\">\n<li>Triple backticks: ```</li>\n<li>Triple dashes: ---</li>\n<li>Hashtags: ###</li>\n<li>XML tags: &lt;context&gt;...&lt;/context&gt;</li>\n</ul>\n\n</div>",
+          "frameworks": [],
+          "examples": [
+            {
+              "title": "Example 1 (Scrum Master)",
+              "content": "Act as a <strong>Scrum Master</strong> facilitating a sprint retrospective for a team that has experienced a drop in velocity."
+            },
+            {
+              "title": "Example 2 (Product Owner)",
+              "content": "You are a <strong>Product Owner</strong> presenting a new feature to stakeholders who are not technical."
+            },
+            {
+              "title": "Example 3 (Cybersecurity Analyst)",
+              "content": "Act as a senior <strong>cybersecurity analyst</strong> with expertise in cloud infrastructure."
+            },
+            {
+              "title": "Example 1 (User Stories)",
+              "content": "Generate acceptance criteria for the following user story: 'As a user, I want to reset my password via email.'"
+            },
+            {
+              "title": "Example 2 (Test Planning)",
+              "content": "Create a test plan outline for the new checkout feature, covering functional, performance, and security testing."
+            },
+            {
+              "title": "Example 3 (Summarization)",
+              "content": "Summarize the following article into five key bullet points."
+            },
+            {
+              "title": "Example 1 (Team Dynamics)",
+              "content": "We are in Sprint 3 of a 6-sprint project. The velocity has been lower than expected, and team morale seems to be dipping. The goal is to re-energize the team."
+            },
+            {
+              "title": "Example 2 (User Feedback)",
+              "content": "User feedback on the previous version was that it was 'too complicated'. The primary goal of this redesign is simplicity."
+            },
+            {
+              "title": "Example 3 (Business Strategy)",
+              "content": "My company is a small startup trying to compete with large corporations, so our marketing copy needs to be bold and highlight our unique advantages."
+            },
+            {
+              "title": "Example 1 (Retrospective Notes)",
+              "content": "Here are the anonymized notes from our last retrospective: [Paste raw notes like 'Too many meetings,' 'Blocked by API team,' 'Unclear requirements']."
+            },
+            {
+              "title": "Example 2 (User Story)",
+              "content": "Here is the user story to analyze: 'As a user, I want to filter products by color so I can find what I want faster.'"
+            },
+            {
+              "title": "Example 3 (Code Snippet)",
+              "content": "Analyze this Python function for potential bugs: ```python [code snippet] ```"
+            },
+            {
+              "title": "Example 1 (Retrospective)",
+              "content": "The tone should be constructive and blameless, suitable for a retrospective."
+            },
+            {
+              "title": "Example 2 (Stakeholder Update)",
+              "content": "Use an enthusiastic and confident tone to get stakeholders excited about the new feature."
+            },
+            {
+              "title": "Example 3 (Technical Document)",
+              "content": "The tone should be scholarly, objective, and highly detailed."
+            },
+            {
+              "title": "Example 1 (BDD Syntax)",
+              "content": "Provide the output in the Gherkin syntax for BDD (Given/When/Then)."
+            },
+            {
+              "title": "Example 2 (Markdown Table)",
+              "content": "Generate the output as a Markdown table with columns for \"Feature,\" \"User Value,\" and \"Estimated Effort.\""
+            },
+            {
+              "title": "Example 3 (JSON Object)",
+              "content": "Provide the output as a JSON object with keys for \"id,\" \"name,\" and \"dependencies.\""
+            },
+            {
+              "title": "Example of a well-structured prompt using delimiters",
+              "content": "<br/><br/>\n<p>### ROLE ###<br/>Act as a senior Business Analyst.</p>\n<p class=\"mt-2\">### TASK ###<br/>Analyze the user feedback below and summarize the top 3 feature requests.</p>\n<p class=\"mt-2\">### INPUT DATA ###<br/>```<br/>[Paste a long list of user feedback here...]<br/>```</p>\n<p class=\"mt-2\">### FORMAT ###<br/>Provide the output as a numbered list, with each item including the feature request and a brief justification.</p>"
+            }
+          ],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-4",
+      "title": "Chapter 3: Core Prompting Techniques (In-Context Learning)",
+      "order": 4,
+      "sections": [
+        {
+          "id": "ch4-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-6\">The techniques in this chapter are sometimes referred to as **In-Context Learning (ICL)**. They allow an AI model to learn from the examples and instructions within your prompt to perform a specific task, without needing to be permanently retrained. This is a fast and powerful alternative to costly model fine-tuning.</p>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch4-sec2",
+          "title": "Foundational Level",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "zero-shot-prompting",
+              "title": "Zero-Shot Prompting",
+              "description": "A direct request with no examples. The model relies entirely on its pre-existing knowledge. This is best for quick facts or simple, common tasks.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Developer)",
+                  "content": "What is the correct syntax for a try-catch block in JavaScript?"
+                },
+                {
+                  "title": "Example 2 (General Knowledge)",
+                  "content": "What is the capital of Australia?"
+                },
+                {
+                  "title": "Example 3 (Agile Definition)",
+                  "content": "Define the term 'user persona'."
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "try {\\n  // code to try\\n} catch (err) {\\n  // code to handle errors\\n}"
+                },
+                {
+                  "content": "Canberra"
+                },
+                {
+                  "content": "A user persona is a fictional character created to represent a user type that might use a site, brand, or product in a similar way."
+                }
+              ]
+            },
+            {
+              "id": "few-shot-prompting",
+              "title": "Few-Shot Prompting",
+              "description": "Providing a few input/output examples to guide the AI on the desired pattern and format.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (User Story Generation)",
+                  "content": "<br/>Request: \"Users should log in.\" -> User Story: \"As a registered user, I want to log in, so that I can access my dashboard.\"<br/>Request: \"Search for products.\" -> User Story:"
+                },
+                {
+                  "title": "Example 2 (Sentiment Analysis)",
+                  "content": "<br/>Tweet: \"I love the new update!\" -> Positive<br/>Tweet: \"My app keeps crashing.\" -> Negative<br/>Tweet: \"This service is fantastic!\" ->"
+                },
+                {
+                  "title": "Example 3 (Bug Report Titles)",
+                  "content": "<br/>Desc: \"It crashes on the main page.\" -> Title: \"[Critical] App crashes on launch for iOS 17 users.\"<br/>Desc: \"I can't add things to my cart.\" -> Title:"
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "\"As a shopper, I want to search for products, so that I can find what I'm looking for.\""
+                },
+                {
+                  "content": "Positive"
+                },
+                {
+                  "content": "\"[High] Add to Cart button is unresponsive on product pages.\""
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch4-sec3",
+          "title": "Intermediate Level",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "chain-of-thought-cot-prompting",
+              "title": "Chain-of-Thought (CoT) Prompting",
+              "description": "This powerful technique guides the model to break down a complex problem and \"think step-by-step\" to arrive at a more logical and accurate answer. It enables complex reasoning by having the AI show its work.",
+              "content": "<p class=\"mt-2\">Often, simply adding the phrase **\"Let's think step-by-step\"** is enough to trigger this more detailed reasoning process, dramatically improving results on logic puzzles, math problems, and complex planning tasks.</p>",
+              "examples": [
+                {
+                  "title": "Example 1 (Agile Estimation)",
+                  "content": "Our team's average velocity is 25 points. The backlog has 150 points. Our project has a deadline in 5 sprints. Are we on track? Let's analyze this step by step."
+                },
+                {
+                  "title": "Example 2 (Agile Debugging)",
+                  "content": "A user reports images are failing to upload. The front-end is React, the API is Node.js, and storage is S3. What are the potential points of failure? Let's trace the data flow step by step."
+                },
+                {
+                  "title": "Example 3 (Logic Puzzle)",
+                  "content": "Q: There are three boxes... All boxes are labeled incorrectly... Which box do you pick from? Explain your reasoning step-by-step."
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "1. First, let's calculate the total capacity over the remaining sprints: 5 sprints * 25 points/sprint = 125 points.<br/>2. The remaining backlog is 150 points.<br/>3. Comparing the capacity (125 points) to the remaining work (150 points), we are currently short by 25 points.<br/>4. Therefore, we are not on track to meet the deadline with the current velocity and backlog."
+                },
+                {
+                  "content": "1. The user selects an image in the React front-end. A potential failure point is the file selection logic or file size validation.<br/>2. The front-end makes an API call to the Node.js backend. A potential failure is a network error or an incorrect API endpoint.<br/>3. The Node.js backend receives the file and processes it. A potential failure is a server-side error or incorrect handling of the multipart/form-data.<br/>4. The backend attempts to upload the file to the S3 bucket. A potential failure is incorrect S3 credentials, bucket permissions, or an S3 service outage."
+                },
+                {
+                  "content": "1. Let's label the boxes A, B, and C. The labels are also A, B, and C, but all are incorrect.<br/>2. If I pick from the box labeled 'A and B', I know it cannot contain both. It must contain either only A or only B.<br/>3. If I draw one item and it is A, then I know that box is the 'A' box. This means the box labeled 'B' must be 'A and B', and the box labeled 'A' must be 'B'.<br/>4. By picking from the box with the combined label, I can deduce the contents of all three boxes with one pick."
+                }
+              ]
+            },
+            {
+              "id": "least-to-most-prompting",
+              "title": "Least-to-Most Prompting",
+              "description": "Breaking a complex task into a sequence of simpler prompts that build on each other. This is the foundation for Prompt Chaining (see Chapter 10).",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (QA Engineer)",
+                  "content": "<br/>\n<strong>Prompt 1:</strong> \"Brainstorm the main user scenarios for an e-commerce checkout page.\"<br/>\n<strong>Prompt 2:</strong> \"For the 'successful payment with credit card' scenario, list all the necessary user actions.\"<br/>\n<strong>Prompt 3:</strong> \"For each of those actions, write a detailed test case in Gherkin format.\""
+                },
+                {
+                  "title": "Example 2 (Product Manager)",
+                  "content": "<br/>\n<strong>Prompt 1:</strong> \"Generate a list of potential user personas for a new project management app for freelance designers.\"<br/>\n<strong>Prompt 2:</strong> \"For the 'Solo Freelancer' persona, list their primary pain points.\"<br/>\n<strong>Prompt 3:</strong> \"Based on those pain points, propose three key features for the app's MVP.\""
+                },
+                {
+                  "title": "Example 3 (Business Analyst)",
+                  "content": "<br/>\n<strong>Prompt 1:</strong> \"Outline the high-level steps in a typical e-commerce order fulfillment process.\"<br/>\n<strong>Prompt 2:</strong> \"For the 'Warehouse Picking' step, list the potential failure points or bottlenecks.\"<br/>\n<strong>Prompt 3:</strong> \"For each bottleneck, suggest a process improvement or a software feature that could help.\""
+                }
+              ],
+              "aiOutputs": []
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch4-sec4",
+          "title": "Advanced Level",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "self-consistency",
+              "title": "Self-Consistency",
+              "description": "This is an advanced technique to improve the reliability of answers for complex or subjective tasks. Instead of accepting the first answer, you run the same Chain-of-Thought prompt multiple times to generate several different reasoning paths.",
+              "content": "<p class=\"mt-2\"><strong>Why use it?</strong> To increase confidence in answers for subjective or complex tasks where there isn't a single \"right\" answer. It reduces the risk of getting a plausible but incorrect response from a single generation.</p>\n<p class=\"mt-2\"><strong>When to use it?</strong> For high-stakes decisions, strategic planning, complex estimations, or when prioritizing ambiguous items. It's overkill for simple, factual questions.</p>\n<p class=\"mt-2\"><strong>How to use it?</strong> First, craft a good Chain-of-Thought prompt. Run it 3-5 times. Then, look for the most common answer or theme in the responses. The majority consensus is likely the most reliable result.</p>",
+              "examples": [
+                {
+                  "title": "Example 1 (Agile Estimation)",
+                  "content": "A Program Manager runs a timeline estimation prompt 5 times, gets the results [6 sprints, 7 sprints, 7 sprints, 6 sprints, 7 sprints], and confidently chooses 7 sprints as the more reliable answer."
+                },
+                {
+                  "title": "Example 2 (Agile Prioritization)",
+                  "content": "A Business Analyst asks the AI to identify the most urgent feature from user feedback 5 times and gets ['speed', 'speed', 'UI', 'speed', 'cost']. They prioritize improving speed."
+                },
+                {
+                  "title": "Example 3 (Agile Bug Triage)",
+                  "content": "A QA Lead asks the AI to prioritize two bugs 5 times. The AI consistently concludes that a payment screen bug affecting 1% of users is more critical than a UI bug affecting 15%, solidifying the decision."
+                }
+              ],
+              "aiOutputs": []
+            },
+            {
+              "id": "react-reason--act",
+              "title": "ReAct (Reason + Act)",
+              "description": "A framework that enables the model to interact with external tools (like APIs) in a Thought → Action → Observation loop.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Agile - Scrum Master Bot)",
+                  "content": "<br/><strong>Thought:</strong> Find overdue tickets. -><br/><strong>Action:</strong> JiraAPI.search(\"sprint=current AND dueDate < today()\") -><br/><strong>Observation:</strong> [Returns ticket JIRA-123]. -><br/><strong>Final Answer:</strong> JIRA-123 is overdue."
+                },
+                {
+                  "title": "Example 2 (Agile - CI/CD Bot)",
+                  "content": "<br/><strong>Thought:</strong> Check the production deployment status. -><br/><strong>Action:</strong> JenkinsAPI.getLastBuildStatus(\"deploy-prod\") -><br/><strong>Observation:</strong> 'SUCCESS'. -><br/><strong>Final Answer:</strong> The last deployment was successful."
+                },
+                {
+                  "title": "Example 3 (Agile - Product Owner Bot)",
+                  "content": "<br/><strong>Thought:</strong> Find the latest user feedback on our 'Dashboard' feature. -><br/><strong>Action:</strong> ZendeskAPI.search(\"tag:dashboard ORDER BY date DESC LIMIT 1\") -><br/><strong>Observation:</strong> [Ticket #4567: \"The new dashboard is slow to load.\"]. -><br/><strong>Final Answer:</strong> The latest feedback is on ticket #4567, reporting a performance issue."
+                }
+              ],
+              "aiOutputs": []
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-5",
+      "title": "Chapter 4: Foundational Prompting Frameworks",
+      "order": 5,
+      "sections": [
+        {
+          "id": "ch5-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-4\">These frameworks provide simple, reusable blueprints for structuring your prompts for common, everyday tasks.</p>",
+          "frameworks": [
+            {
+              "id": "the-prompt-formula",
+              "title": "The PROMPT Formula",
+              "description": "This formula is a powerful mnemonic for your daily work, helping you structure your thinking to get a great result from the AI in one go by combining the concepts from Chapters 2 and 3.",
+              "content": "<div class=\"space-y-3 mt-4\">\n<div class=\"prompt-formula-item\"><p class=\"text-3xl font-bold text-teal-800 mr-4\">P</p><p class=\"font-semibold text-teal-900\">Purpose (The Task)</p></div>\n<div class=\"prompt-formula-item\"><p class=\"text-3xl font-bold text-teal-800 mr-4\">R</p><p class=\"font-semibold text-teal-900\">Role (The Role)</p></div>\n<div class=\"prompt-formula-item\"><p class=\"text-3xl font-bold text-teal-800 mr-4\">O</p><p class=\"font-semibold text-teal-900\">Output Format (The Format)</p></div>\n<div class=\"prompt-formula-item\"><p class=\"text-3xl font-bold text-teal-800 mr-4\">M</p><p class=\"font-semibold text-teal-900\">Marker (Using Few-Shot Prompting)</p></div>\n<div class=\"prompt-formula-item\"><p class=\"text-3xl font-bold text-teal-800 mr-4\">P</p><p class=\"font-semibold text-teal-900\">Pattern (Using Chain-of-Thought)</p></div>\n<div class=\"prompt-formula-item\"><p class=\"text-3xl font-bold text-teal-800 mr-4\">T</p><p class=\"font-semibold text-teal-900\">Tone (The Tone)</p></div>\n</div>\n<h4 class=\"subsection-title mt-6\">Master Example for Agile Professionals</h4>\n<p>A Product Manager needs to create a brief for the development team about a new feature.</p>",
+              "examples": [
+                {
+                  "title": "P (Purpose)",
+                  "content": "<comment-tag id=\"3\"><p> \"Write a brief for the dev team about a new feature.\"</p></comment-tag>\n<p><strong>R (Role):</strong> \"Act as a senior Product Manager skilled in communicating product vision to development teams.\"</p>\n<p><strong>O (Output Format):</strong> \"Give the output as a concise one-pager with sections for 'Problem Statement,' 'Proposed Solution,' and 'Key Success Metrics'.\"</p>\n<p><strong>M (Marker):</strong> \"The feature is an 'Admin Dashboard for User Management'. A key success metric is 'Reduce manual user support tickets by 15%'.\"</p>\n<p><strong>P (Pattern):</strong> \"First, frame the problem from the perspective of our customer support team. Then, outline the proposed solution. Finally, define how we will measure success.\"</p>\n<p><strong>T (Tone):</strong> \"The tone should be clear, concise, and focused on user value, empowering the development team to understand the 'why'.\"</p>"
+                }
+              ],
+              "aiOutputs": []
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-6",
+      "title": "Chapter 5: The Agile Specialist's Toolkit: General Frameworks",
+      "order": 6,
+      "sections": [
+        {
+          "id": "ch6-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-4\">This chapter introduces powerful, custom-designed frameworks that any member of an Agile team can use to tackle common, complex challenges.</p>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch6-sec2",
+          "title": "Theme 1: Product Definition & Value",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "value-proposition-refiner-vpr",
+              "title": "Value Proposition Refiner (VPR)",
+              "description": "To sharpen the core value statement of a new feature or product.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Product Owner)",
+                  "content": "\"Use VPR to define the value of a new 'Recipe Suggestion' feature in our grocery app. <strong>(P)roblem:</strong> Users often don't know what to cook with the items they buy. <strong>(S)olution:</strong> Suggest recipes based on their cart contents. <strong>(U)nique Differentiator:</strong> Our suggestions are personalized based on past purchases. <strong>(V)alue Statement:</strong> Generate a concise value statement based on this.\""
+                },
+                {
+                  "title": "Example 2 (Marketing Manager)",
+                  "content": "\"Use VPR for our new B2B analytics tool. <strong>(P)roblem:</strong> Small businesses struggle to understand their website traffic. <strong>(S)olution:</strong> A simplified dashboard showing key metrics. <strong>(U)nique Differentiator:</strong> We provide weekly plain-language email summaries of their data. <strong>(V)alue Statement:</strong> Craft a compelling one-liner for our landing page.\""
+                },
+                {
+                  "title": "Example 3 (Startup Founder)",
+                  "content": "\"Use VPR to pitch our new language-learning app to investors. <strong>(P)roblem:</strong> Most language apps focus on vocabulary, not conversation. <strong>(S)olution:</strong> An AI-powered conversation partner. <strong>(U)nique Differentiator:</strong> The AI adapts its difficulty to the user's skill level in real-time. <strong>(V)alue Statement:</strong> Formulate a powerful value statement for a pitch deck.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "For home cooks who want to reduce food waste, our Recipe Suggestion feature provides personalized meal ideas based on your shopping cart, unlike generic recipe sites, ensuring you always have a plan for the food you buy."
+                },
+                {
+                  "content": "\"Clarity Analytics: Stop guessing. Start growing. We deliver simple, actionable insights about your website visitors directly to your inbox.\""
+                },
+                {
+                  "content": "\"For aspiring polyglots who want to achieve fluency, 'ConverseAI' is an AI conversation platform that provides adaptive, real-world practice, unlike static apps that only teach vocabulary. We make you a confident speaker, not just a word memorizer.\""
+                }
+              ]
+            },
+            {
+              "id": "user-persona-creator-upc",
+              "title": "User Persona Creator (UPC)",
+              "description": "To generate a detailed, empathetic user persona to guide development.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (UX Designer)",
+                  "content": "\"Use UPC to create a persona for our fitness app. <strong>(D)emographics:</strong> 'Sarah, 35, marketing manager, 2 kids.' <strong>(G)oals &amp; Motivations:</strong> 'Wants to stay fit but is time-poor, motivated by seeing progress.' <strong>(F)rustrations &amp; Pain Points:</strong> 'Finds most fitness apps too complicated or demanding.' <strong>(B)ehaviors &amp; Habits:</strong> 'Uses her phone during her commute, can spare 20 minutes a day.' Generate a narrative persona.\""
+                },
+                {
+                  "title": "Example 2 (Product Manager for a finance app)",
+                  "content": "\"Use UPC to create a persona for a 'college student' user. <strong>(D)emographics:</strong> 'Alex, 20, university student, part-time job.' <strong>(G)oals:</strong> 'Save money for a trip, avoid overdraft fees.' <strong>(F)rustrations:</strong> 'Doesn't understand complex financial jargon.' <strong>(B)ehaviors:</strong> 'Checks bank balance multiple times a week on their phone.' Generate a persona to guide feature development.\""
+                },
+                {
+                  "title": "Example 3 (Business Analyst for an internal tool)",
+                  "content": "\"Use UPC to create a persona for an 'HR administrator' using our new internal HR software. <strong>(D)emographics:</strong> 'David, 48, HR Manager, 15 years experience.' <strong>(G)oals:</strong> 'Process payroll efficiently and accurately.' <strong>(F)rustrations:</strong> 'The current system is slow and requires manual data entry.' <strong>(B)ehaviors:</strong> 'Works primarily on a desktop computer, values keyboard shortcuts.' Generate a persona to help prioritize features.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "<strong>Meet Sarah, the \"Efficient Achiever\"</strong><br/>Sarah is a 35-year-old marketing manager juggling a demanding career and two young children. Her primary goal is to maintain a healthy lifestyle, but her biggest challenge is time. She's motivated by seeing clear progress and gets frustrated by apps with complex interfaces or long workout routines. She typically has about 20 minutes free during her train commute, where she uses her phone to catch up on tasks and find moments for self-improvement."
+                },
+                {
+                  "content": "<strong>Meet Alex, the \"Cautious Saver\"</strong><br/>Alex is a 20-year-old university student who is new to managing their own finances. Their main goals are to save up for a post-graduation trip and, most importantly, avoid costly bank fees. Alex finds traditional banking apps intimidating due to complex terms and hidden fees. They are a mobile-native user, frequently checking their account balance to ensure they stay within their budget."
+                },
+                {
+                  "content": "<strong>Meet David, the \"Process Optimizer\"</strong><br/>David is a 48-year-old HR Manager with deep expertise in his field. His primary goal is to ensure the company's payroll is processed flawlessly and on time. He is highly frustrated by the current software's slow performance and reliance on manual data entry, which he sees as a source of potential errors. David is a power user who works on a desktop and values efficiency above all else; features that streamline his workflow, like keyboard shortcuts and bulk actions, are critical to him."
+                }
+              ]
+            },
+            {
+              "id": "minimum-viable-product-mvp-sco",
+              "title": "Minimum Viable Product (MVP) Scoper",
+              "description": "To define the absolute smallest version of a product that can be released to deliver value and gather feedback.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Startup Founder)",
+                  "content": "\"Use the MVP Scoper for our new social networking app. <strong>(C)ore Problem:</strong> 'Local artists have no way to connect with each other.' <strong>(V)ital Features:</strong> 'Must-haves are user profiles, posting artwork, and a simple messaging system.' <strong>(L)earning Goal:</strong> 'We need to validate if artists will actually use the platform to connect.' <strong>(M)VP Statement:</strong> Generate a clear MVP definition.\""
+                },
+                {
+                  "title": "Example 2 (Product Owner for an e-commerce site)",
+                  "content": "\"Use the MVP Scoper for a new 'Customer Reviews' feature. <strong>(C)ore Problem:</strong> 'Users can't tell which products are high quality.' <strong>(V)ital Features:</strong> 'Ability to leave a star rating and a text comment.' <strong>(L)earning Goal:</strong> 'Do reviews increase conversion rates?' <strong>(M)VP Statement:</strong> Define the simplest possible version of this feature.\""
+                },
+                {
+                  "title": "Example 3 (Project Manager for an internal tool)",
+                  "content": "\"Use the MVP Scoper for a new 'Employee Directory'. <strong>(C)ore Problem:</strong> 'It's hard to find contact information for colleagues.' <strong>(V)ital Features:</strong> 'Search by name, view name, title, and email.' <strong>(L)earning Goal:</strong> 'Will employees use this tool instead of asking in Slack?' <strong>(M)VP Statement:</strong> Define the first-pass version of the directory.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "The MVP for our artist networking app will be a mobile application that allows artists to create a simple profile, upload images of their artwork, and send direct messages to other users. This will allow us to test our core hypothesis: that artists will use a dedicated platform to connect and collaborate."
+                },
+                {
+                  "content": "The MVP for Customer Reviews will allow logged-in users who have purchased a product to leave a 1-5 star rating and an optional text comment on the product page. This will test our hypothesis that displaying user-generated reviews increases the add-to-cart conversion rate."
+                },
+                {
+                  "content": "The MVP for the Employee Directory will be a web page that allows users to search for an employee by name and view their full name, job title, and email address. This will validate our assumption that a centralized directory is a more efficient solution for finding contact information than current methods."
+                }
+              ]
+            },
+            {
+              "id": "backlog-prioritization-engine-",
+              "title": "Backlog Prioritization Engine (BPE)",
+              "description": "To systematically apply a prioritization model to a list of backlog items.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Product Manager)",
+                  "content": "\"Use BPE with the RICE model to rank: 1. One-click checkout, 2. User profile redesign. <strong>(I)nput List:</strong> [Features]. <strong>(C)riteria:</strong> For each, estimate Reach, Impact, Confidence (1-10) and Effort (weeks). <strong>(O)utput:</strong> A ranked table with the calculated RICE score.\""
+                },
+                {
+                  "title": "Example 2 (Product Owner)",
+                  "content": "\"Use BPE with the MoSCoW method. <strong>(I)nput List:</strong> 'Password reset, push notifications, user avatars, dark mode.' <strong>(C)riteria:</strong> 'Categorize each as Must Have, Should Have, Could Have, or Won't Have for our upcoming release.' <strong>(O)utput:</strong> Four lists, one for each MoSCoW category.\""
+                },
+                {
+                  "title": "Example 3 (Tech Lead)",
+                  "content": "\"Use BPE with a simple 'Value vs. Effort' model. <strong>(I)nput List:</strong> 'Upgrade database, refactor login service, add caching layer.' <strong>(C)riteria:</strong> 'For each, assign a 'Value' score (1-10) and an 'Effort' score (1-10).' <strong>(O)utput:</strong> A 2x2 matrix (High Value/Low Effort, etc.) with the items placed in the correct quadrant.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "| Feature | Reach | Impact | Confidence | Effort | RICE Score |\\n|---|---|---|---|---|---|\\n| One-click checkout | 5000 | 9 | 8 | 3 | 120 |\\n| User profile redesign | 10000 | 4 | 9 | 5 | 72 |"
+                },
+                {
+                  "content": "**Must Have:**\\n- Password reset\\n\\n**Should Have:**\\n- Push notifications\\n\\n**Could Have:**\\n- User avatars\\n- Dark mode\\n\\n**Won't Have (this release):**\\n- (None)"
+                },
+                {
+                  "content": "**High Value / Low Effort (Quick Wins):**\\n- Add caching layer\\n\\n**High Value / High Effort (Major Projects):**\\n- Upgrade database\\n\\n**Low Value / Low Effort (Fill-ins):**\\n- Refactor login service\\n\\n**Low Value / High Effort (Reconsider):**\\n- (None)"
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch6-sec3",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch6-sec4",
+          "title": "Theme 2: Team Health & Collaboration",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "technical-debt-resolver-tdr",
+              "title": "Technical Debt Resolver (TDR)",
+              "description": "To create a clear, compelling business case for addressing technical debt.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Developer)",
+                  "content": "\"Use TDR to justify refactoring our legacy payment module. <strong>(T)echnical Debt:</strong> Outdated language, no test coverage. <strong>(D)aily Impact:</strong> Takes 3 days for a 2-hour change, causes 50% of production bugs. <strong>(R)esolution &amp; ROI:</strong> Rewrite in modern Python in 2 sprints. ROI is 75% fewer bugs and 50% faster feature delivery.\""
+                },
+                {
+                  "title": "Example 2 (QA Engineer)",
+                  "content": "\"Use TDR to justify building an automated testing framework. <strong>(T)echnical Debt:</strong> 100% manual regression testing. <strong>(D)aily Impact:</strong> Regression testing takes 5 person-days each sprint, delaying releases. <strong>(R)esolution &amp; ROI:</strong> Dedicate one sprint to building a core automation suite. ROI will be reducing regression testing time to 4 hours.\""
+                },
+                {
+                  "title": "Example 3 (Architect)",
+                  "content": "\"Use TDR to justify upgrading our server infrastructure. <strong>(T)echnical Debt:</strong> Running on unsupported, end-of-life servers. <strong>(D)aily Impact:</strong> Poses a major security risk and suffers from frequent downtime. <strong>(R)esolution &amp; ROI:</strong> Migrate to a modern cloud provider over one quarter. ROI is improved security posture and 99.99% uptime.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Business Case: Refactor Legacy Payment Module**\\n\\n* **Problem:** Our payment module is built on an outdated, unsupported language and lacks automated tests. This directly impacts our stability and agility.\\n* **Impact:** This debt causes a 50% production bug rate for payment-related issues and slows down development of new payment features by an estimated 90%.\\n* **Proposal:** We propose a two-sprint effort to rewrite the module in Python with over 90% test coverage. \\n* **ROI:** This investment will lead to a 75% reduction in payment-related bugs and will cut development time for future payment features in half."
+                },
+                {
+                  "content": "**Business Case: Implement Test Automation Framework**\\n\\n* **Problem:** Our reliance on 100% manual regression testing is a major bottleneck.\\n* **Impact:** This manual process consumes 40 hours of QA time every sprint, frequently delaying our release cycle and preventing QA from focusing on more complex exploratory testing.\\n* **Proposal:** We propose a one-sprint project to build a foundational automation framework targeting our most critical user flows.\\n* **ROI:** This will reduce our regression testing time by over 90% (from 5 days to 4 hours), enabling faster, more reliable releases."
+                },
+                {
+                  "content": "**Business Case: Server Infrastructure Modernization**\\n\\n* **Problem:** Our current servers are running on an operating system that is no longer supported by its vendor.\\n* **Impact:** This exposes us to significant security vulnerabilities and has been the root cause of two major outages in the last quarter, impacting customer trust.\\n* **Proposal:** We propose a one-quarter migration project to a modern, managed cloud infrastructure.\\n* **ROI:** This will eliminate a major security risk, improve our site reliability to an expected 99.99% uptime, and reduce server maintenance overhead by 20 hours per month."
+                }
+              ]
+            },
+            {
+              "id": "retrospective-insight-and-solu",
+              "title": "Retrospective Insight & Solution Engine (RISE)",
+              "description": "To process raw retrospective feedback and generate actionable improvement plans.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Scrum Master)",
+                  "content": "\"Use RISE on this data: [Paste notes: 'Too many meetings,' 'Planning is rushed']. <strong>(I)nsight Synthesis:</strong> Identify underlying themes. <strong>(S)olution Exploration:</strong> For 'Context Switching,' explore causes/solutions. <strong>(E)xperiment Formulation:</strong> Propose a SMART experiment, like 'Block 2 hours of no-meeting focus time daily.'\""
+                },
+                {
+                  "title": "Example 2 (Agile Coach)",
+                  "content": "\"Use RISE on this feedback: ['I don't know what other people are working on,' 'We keep breaking each other's code']. <strong>(I)nsight:</strong> Identify the theme of 'Poor cross-functional collaboration.' <strong>(S)olution:</strong> Explore solutions like pair programming or more frequent integration. <strong>(E)xperiment:</strong> Formulate an experiment: 'For the next sprint, two developers will pair program for at least one story.'\""
+                },
+                {
+                  "title": "Example 3 (Team Lead)",
+                  "content": "\"Use RISE on this retro data: ['The sprint goal was unclear,' 'We didn't know if we succeeded']. <strong>(I)nsight:</strong> Identify the theme of 'Unclear Sprint Goals.' <strong>(S)olution:</strong> Explore ways to make goals more measurable. <strong>(E)xperiment:</strong> Formulate an experiment: 'For the next Sprint Planning, we will not start until we have a Sprint Goal that includes a quantifiable metric.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Theme:** Constant Context Switching is reducing productivity and causing stress.\\n**Potential Cause:** Unstructured meeting culture.\\n**Experiment:** For the next sprint, we will implement \"Focus Wednesdays,\" with no scheduled meetings from 9 AM to 12 PM, to allow for deep work. We will measure success by tracking the number of stories completed on Wednesdays."
+                },
+                {
+                  "content": "**Theme:** Lack of shared understanding and code ownership is leading to integration issues.\\n**Potential Cause:** Developers are working in silos on their individual tasks.\\n**Experiment:** For the next sprint, we will require that at least two user stories are completed via pair programming. We will measure success by a reduction in integration-related bugs."
+                },
+                {
+                  "content": "**Theme:** Sprint Goals are not providing clear direction or a sense of accomplishment.\\n**Potential Cause:** Goals are a list of tasks, not a cohesive outcome.\\n**Experiment:** For the next sprint, our Sprint Goal must follow the template: \"Achieve [business outcome] by implementing [features].\" We will measure success by having 100% of the team able to state the goal and its purpose."
+                }
+              ]
+            },
+            {
+              "id": "agile-role-clarifier-arc",
+              "title": "Agile Role Clarifier (ARC)",
+              "description": "To resolve confusion about responsibilities within the team.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Team Lead)",
+                  "content": "\"Use ARC to clarify the Product Owner role on our new team. <strong>(R)ole in Question:</strong> Product Owner. <strong>(C)ore Responsibilities:</strong> 'Owns and prioritizes the backlog.' <strong>(B)oundaries:</strong> 'Does not assign work to developers.' <strong>(I)nteractions:</strong> 'Collaborates daily with the dev team.' Generate a clear summary.\""
+                },
+                {
+                  "title": "Example 2 (Scrum Master)",
+                  "content": "\"Use ARC to clarify my own role. <strong>(R)ole:</strong> Scrum Master. <strong>(C)ore Responsibilities:</strong> 'Facilitates events, removes impediments.' <strong>(B)oundaries:</strong> 'Is not the project manager or the team's boss.' <strong>(I)nteractions:</strong> 'Coaches the Product Owner on backlog management.' Generate a document to share with the team.\""
+                },
+                {
+                  "title": "Example 3 (Manager)",
+                  "content": "\"Use ARC to define the 'Tech Lead' role. <strong>(R)ole:</strong> Tech Lead. <strong>(C)ore Responsibilities:</strong> 'Makes final technical decisions, mentors junior developers.' <strong>(B)oundaries:</strong> 'Does not manage the project timeline.' <strong>(I)nteractions:</strong> 'Works with the Architect on high-level design.' Generate a clear role description.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**The Product Owner Role**\\n\\nThe Product Owner is responsible for maximizing the value of the product by owning and prioritizing the product backlog. They collaborate daily with the development team to ensure a shared understanding of the work. Crucially, the Product Owner does not assign tasks to individual developers; the team pulls work from the backlog themselves."
+                },
+                {
+                  "content": "**The Scrum Master Role**\\n\\nThe Scrum Master is a servant-leader for the team. Their primary responsibilities are to facilitate Agile events, remove impediments blocking the team's progress, and coach the team and Product Owner on Agile principles. The Scrum Master is not a project manager and does not dictate the team's work; they are a facilitator and coach."
+                },
+                {
+                  "content": "**The Tech Lead Role**\\n\\nThe Tech Lead is responsible for the technical excellence of the team's output. This includes making final technical decisions after team discussion, mentoring other developers, and collaborating with the Architect on system design. The Tech Lead is a technical guide, not a project manager, and does not manage timelines or backlog priority."
+                }
+              ]
+            },
+            {
+              "id": "team-working-agreement-generat",
+              "title": "Team Working Agreement Generator (TWAG)",
+              "description": "To create a foundational document of team norms and expectations.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Scrum Master)",
+                  "content": "\"Use TWAG to draft a working agreement. <strong>(C)ommunication Norms:</strong> 'Core hours are 10am-4pm; use Slack for urgent questions.' <strong>(M)eeting Etiquette:</strong> 'Cameras on for remote meetings.' <strong>(D)ecision-Making:</strong> 'Majority vote after discussion.' <strong>(C)onflict Resolution:</strong> 'Direct conversation first.' <strong>(D)efinition of 'Done':</strong> 'Code reviewed, tested, and merged.' Combine this into a formal document.\""
+                },
+                {
+                  "title": "Example 2 (New Team)",
+                  "content": "\"Use TWAG to create our initial team agreement. <strong>(C)omms:</strong> 'Daily stand-up notes posted in the team channel.' <strong>(Meetings):</strong> 'Agendas are required for any meeting over 30 minutes.' <strong>(Decisions):</strong> 'Technical decisions are made by the Tech Lead after team input.' <strong>(Conflict):</strong> 'We use the 'fist of five' for gauging consensus.' <strong>(DoD):</strong> 'User documentation is updated.' Generate our team charter.\""
+                },
+                {
+                  "title": "Example 3 (Remote Team)",
+                  "content": "\"Use TWAG to create an agreement for a fully remote team. <strong>(Comms):</strong> 'Over-communicate; default to public channels.' <strong>(Meetings):</strong> 'Be mindful of different time zones when scheduling.' <strong>(Decisions):</strong> 'Major decisions are documented in Confluence.' <strong>(Conflict):</strong> 'Assume good intent in written communication.' <strong>(DoD):</strong> 'Deployed to the staging environment.' Generate a remote-friendly working agreement.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Team Alpha - Working Agreement**\\n\\n1.  **Communication:** Our core working hours are 10 AM - 4 PM. Urgent questions should be directed to Slack; otherwise, use our project management tool.\\n2.  **Meetings:** All remote participants are expected to have their cameras on.\\n3.  **Decisions:** Decisions will be made by majority vote after an open discussion.\\n4.  **Conflict:** We agree to address conflicts directly and respectfully with the person involved before escalating.\\n5.  **Definition of Done:** A story is considered 'Done' when the code is peer-reviewed, all tests are passing, and it has been merged to the main branch."
+                },
+                {
+                  "content": "**Team Phoenix - Team Charter**\\n\\n* **Communication:** A summary of our daily stand-up will be posted in our Slack channel each day.\\n* **Meetings:** Any meeting scheduled for more than 30 minutes must include a clear agenda.\\n* **Decisions:** The Tech Lead will make final technical decisions after seeking input from the entire team.\\n* **Conflict:** We will use the 'fist of five' method to quickly gauge consensus on important topics.\\n* **Definition of Done:** Work is not 'Done' until the relevant user documentation has been updated."
+                },
+                {
+                  "content": "**Team Horizon - Remote Working Agreement**\\n\\n1.  **Communication:** We default to over-communication in public Slack channels to ensure everyone is informed.\\n2.  **Meetings:** We will be mindful of our different time zones when scheduling and will record all important meetings.\\n3.  **Decisions:** All significant decisions will be documented in our Confluence space to create a single source of truth.\\n4.  **Conflict:** We will always assume good intent in written communication and seek clarification before reacting.\\n5.  **Definition of Done:** A feature is 'Done' when it has been successfully deployed to our staging environment for PO review."
+                }
+              ]
+            },
+            {
+              "id": "impediment-demolisher-id",
+              "title": "Impediment Demolisher (ID)",
+              "description": "To create a structured plan for analyzing and removing a persistent team blocker.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Scrum Master)",
+                  "content": "\"Use ID to tackle our slow build times. <strong>(I)mpediment:</strong> 'CI/CD pipeline takes 45 minutes to run.' <strong>(R)oot Cause Analysis:</strong> 'Use the 5 Whys to determine the root cause.' <strong>(S)olution Brainstorming:</strong> 'Suggest 3 potential solutions (e.g., parallelize tests, upgrade hardware).' <strong>(A)ction Plan &amp; Owner:</strong> 'Create a ticket with sub-tasks and assign an owner.'\""
+                },
+                {
+                  "title": "Example 2 (Developer)",
+                  "content": "\"Use ID for our flaky testing environment. <strong>(I)mpediment:</strong> 'The staging environment is down at least once a day.' <strong>(R)oot Cause:</strong> 'The database runs out of memory.' <strong>(S)olutions:</strong> 'Increase memory, optimize queries, or use a smaller dataset.' <strong>(A)ction Plan:</strong> 'Create a story to investigate query optimization, owned by the database admin.'\""
+                },
+                {
+                  "title": "Example 3 (Product Owner)",
+                  "content": "\"Use ID for a non-technical blocker. <strong>(I)mpediment:</strong> 'We are waiting for stakeholder feedback on designs, which takes over a week.' <strong>(R)oot Cause:</strong> 'Stakeholders are too busy for a formal review meeting.' <strong>(S)olutions:</strong> 'Send a Loom video walkthrough, schedule 15-minute individual check-ins.' <strong>(A)ction Plan:</strong> 'I will schedule the 15-minute check-ins for the next design review.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Impediment Plan: Slow CI/CD Pipeline**\\n\\n* **Impediment:** The CI/CD pipeline's 45-minute runtime is slowing down our feedback loop.\\n* **Root Cause:** Our end-to-end tests are not running in parallel.\\n* **Solutions:** 1) Parallelize the test suite, 2) Upgrade the build server hardware, 3) Split the test suite into smaller, faster suites.\\n* **Action Plan:** Create a technical task to parallelize the test suite. Assign to the Tech Lead."
+                },
+                {
+                  "content": "**Impediment Plan: Unstable Staging Environment**\\n\\n* **Impediment:** The staging environment is unreliable, blocking testing.\\n* **Root Cause:** The staging database is running out of memory due to inefficient queries.\\n* **Solutions:** 1) Increase the database memory allocation, 2) Identify and optimize the slow queries, 3) Refresh staging with a smaller, anonymized dataset.\\n* **Action Plan:** Create a spike task for the next sprint to identify the top 3 slowest queries and propose optimizations. Assign to a senior developer."
+                },
+                {
+                  "content": "**Impediment Plan: Delayed Stakeholder Feedback**\\n\\n* **Impediment:** The slow feedback loop on designs is delaying the start of development.\\n* **Root Cause:** Stakeholders do not have a 1-hour block free for a traditional review meeting.\\n* **Solutions:** 1) Send a pre-recorded Loom video explaining the designs for asynchronous review, 2) Schedule brief, 15-minute one-on-one sessions with key stakeholders.\\n* **Action Plan:** For the next design cycle, the Product Owner will send a Loom video and schedule the 15-minute follow-up sessions."
+                }
+              ]
+            },
+            {
+              "id": "decision-log-creator-dlc",
+              "title": "Decision Log Creator (DLC)",
+              "description": "To document a significant decision for transparency and future reference.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Architect)",
+                  "content": "\"Use DLC to document our choice of database. <strong>(D)ecision Needed:</strong> 'Which database to use for our new microservice?' <strong>(O)ptions Considered:</strong> 'PostgreSQL vs. MongoDB, with pros and cons for each.' <strong>(R)ationale for Choice:</strong> 'We chose PostgreSQL due to its support for transactional integrity.' <strong>(I)mplications:</strong> 'The team will need training on PostgreSQL.'\""
+                },
+                {
+                  "title": "Example 2 (Product Manager)",
+                  "content": "\"Use DLC to document our pricing model decision. <strong>(D)ecision:</strong> 'What will our pricing model be?' <strong>(O)ptions:</strong> 'Per-user subscription vs. usage-based, with pros/cons.' <strong>(R)ationale:</strong> 'We chose per-user to have predictable revenue.' <strong>(I)mplications:</strong> 'We need to build a user management system.'\""
+                },
+                {
+                  "title": "Example 3 (Team Lead)",
+                  "content": "\"Use DLC to document our choice of a JavaScript framework. <strong>(D)ecision:</strong> 'React vs. Vue.js for our new front-end.' <strong>(O)ptions:</strong> 'List pros and cons related to performance, hiring, and team experience.' <strong>(R)ationale:</strong> 'We chose React because of the team's existing expertise.' <strong>(I)mplications:</strong> 'We will use the standard Create React App boilerplate.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Decision Log: New Microservice Database**\\n\\n* **Decision:** We have decided to use PostgreSQL for the new User service.\\n* **Options:** We considered PostgreSQL for its transactional integrity and MongoDB for its flexible schema.\\n* **Rationale:** As the User service will handle critical authentication and profile data, transactional integrity was deemed the most important factor.\\n* **Implications:** The development team will require training on PostgreSQL, and we will need to set up a new managed instance in our cloud environment."
+                },
+                {
+                  "content": "**Decision Log: Product Pricing Model**\\n\\n* **Decision:** We will adopt a per-user monthly subscription model.\\n* **Options:** We evaluated a per-user subscription model and a usage-based (per-transaction) model.\\n* **Rationale:** The subscription model provides more predictable monthly recurring revenue (MRR), which is a key goal for the business at this stage.\\n* **Implications:** The application will need to have robust user management and subscription-tier features."
+                },
+                {
+                  "content": "**Decision Log: Front-End JavaScript Framework**\\n\\n* **Decision:** We will use React for the new front-end application.\\n* **Options:** We considered React and Vue.js.\\n* **Rationale:** While both are excellent frameworks, the majority of our current front-end developers have extensive experience with React, which will significantly speed up development time.\\n* **Implications:** We will use the Create React App boilerplate for initial setup and will need to select a corresponding component library."
+                }
+              ]
+            },
+            {
+              "id": "stakeholder-alignment-matrix-s",
+              "title": "Stakeholder Alignment Matrix (SAM)",
+              "description": "To create a proactive and tailored communication strategy.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Product Owner)",
+                  "content": "\"Use SAM for our new feature launch. <strong>(S)takeholder Mapping:</strong> 'Head of Sales, Lead Engineer, Marketing Manager.' <strong>(A)ssessment:</strong> 'Sales needs to know the business value; Engineering needs technical specs.' <strong>(M)message &amp; Medium:</strong> 'For Sales: a bi-weekly email summary. For Engineering: daily check-ins on Slack.' Generate a communication plan table.\""
+                },
+                {
+                  "title": "Example 2 (Project Manager)",
+                  "content": "\"Use SAM for a project with a tight deadline. <strong>(S)takeholders:</strong> 'CEO, Head of Customer Support.' <strong>(A)ssessment:</strong> 'CEO needs high-level status (on/off track). Support needs to know about upcoming changes that will affect users.' <strong>(M)essage &amp; Medium:</strong> 'For CEO: a weekly 3-bullet-point email. For Support: a detailed walkthrough in their weekly team meeting.'\""
+                },
+                {
+                  "title": "Example 3 (Business Analyst)",
+                  "content": "\"Use SAM for a requirements gathering phase. <strong>(S)takeholders:</strong> 'Subject Matter Experts (SMEs), Development Team.' <strong>(A)ssessment:</strong> 'SMEs need to validate the detailed requirements. The dev team needs to understand the 'why' behind the requirements.' <strong>(M)essage &amp; Medium:</strong> 'For SMEs: a formal requirements document for sign-off. For Dev Team: a live story mapping session.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "| Stakeholder | Key Interest | Medium | Frequency |\\n|---|---|---|---|\\n| Head of Sales | Business Value, Launch Date | Email Summary | Bi-Weekly |\\n| Lead Engineer | Technical Specs, Dependencies | Slack & Daily Standup | Daily |\\n| Marketing Manager | User Benefits, Launch Date | Weekly Sync | Weekly |"
+                },
+                {
+                  "content": "| Stakeholder | Key Interest | Medium | Frequency |\\n|---|---|---|---|\\n| CEO | On/Off Track Status | Email | Weekly |\\n| Head of Customer Support | Impact on Users | Team Meeting Demo | Weekly |"
+                },
+                {
+                  "content": "| Stakeholder | Key Interest | Medium | Frequency |\\n|---|---|---|---|\\n| Subject Matter Experts | Accuracy of Requirements | Document Review | Per Feature |\\n| Development Team | The 'Why' & User Context | Story Mapping Workshop | At Epic Kick-off |"
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch6-sec5",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch6-sec6",
+          "title": "Theme 3: Planning & Quality",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "sprint-goal-formulator-sgf",
+              "title": "Sprint Goal Formulator (SGF)",
+              "description": "To craft a clear, compelling, and unifying Sprint Goal.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Product Owner)",
+                  "content": "\"Use SGF to create a sprint goal. <strong>(B)acklog Items:</strong> 'Implement Stripe payment,' 'Add order confirmation email,' 'Test checkout flow.' <strong>(U)ser Value Theme:</strong> 'A seamless and trustworthy checkout experience.' <strong>(O)utcome:</strong> 'Users can successfully purchase an item.' <strong>(S)print Goal Statement:</strong> Generate a compelling goal from this.\""
+                },
+                {
+                  "title": "Example 2 (Scrum Team)",
+                  "content": "\"Use SGF for a technical sprint. <strong>(B)acklog Items:</strong> 'Upgrade server to new OS,' 'Patch security vulnerability,' 'Improve logging.' <strong>(U)ser Value:</strong> 'A more stable and secure platform.' <strong>(O)utcome:</strong> 'The platform's security score improves by 10%.' <strong>(S)print Goal:</strong> Generate a goal that communicates the value of this infrastructure work.\""
+                },
+                {
+                  "title": "Example 3 (Marketing Team)",
+                  "content": "\"Use SGF for a marketing sprint. <strong>(B)acklog Items:</strong> 'Launch new ad campaign,' 'Write 3 blog posts,' 'Update landing page copy.' <strong>(U)ser Value:</strong> 'Clearer communication of our product's benefits.' <strong>(O)utcome:</strong> 'Increase website lead conversions by 5%.' <strong>(S)print Goal:</strong> Generate a motivating goal for the team.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "\"This sprint, we will enable a seamless and trustworthy checkout experience, allowing users to successfully purchase an item with their credit card and receive a confirmation.\""
+                },
+                {
+                  "content": "\"Our goal this sprint is to enhance platform stability and security by upgrading our core infrastructure and addressing critical vulnerabilities, leading to a 10% improvement in our security score.\""
+                },
+                {
+                  "content": "\"This sprint, we will launch a new ad campaign and refresh our web content to more clearly communicate our product's value, with the goal of increasing lead conversions by 5%.\""
+                }
+              ]
+            },
+            {
+              "id": "definition-of-done-dod-builder",
+              "title": "Definition of Done (DoD) Builder",
+              "description": "To create a comprehensive, shared checklist for what it means for work to be complete.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Dev Team)",
+                  "content": "\"Use the DoD Builder to create our team's Definition of Done. <strong>(C)oding Standards:</strong> 'Follows PEP 8.' <strong>(T)esting:</strong> 'Unit tests at 80% coverage.' <strong>(D)ocumentation:</strong> 'API endpoints documented.' <strong>(P)eer Review:</strong> 'Approved by one other developer.' <strong>(A)cceptance:</strong> 'PO has signed off.' Format this as a checklist.\""
+                },
+                {
+                  "title": "Example 2 (Content Team)",
+                  "content": "\"Use the DoD Builder for our blog posts. <strong>(C)ontent:</strong> 'Fact-checked and proofread.' <strong>(T)echnical:</strong> 'SEO keywords included.' <strong>(D)esign:</strong> 'Includes a header image.' <strong>(P)eer Review:</strong> 'Reviewed by one other writer.' <strong>(A)cceptance:</strong> 'Approved by the Head of Marketing.' Generate a checklist.\""
+                },
+                {
+                  "title": "Example 3 (Data Science Team)",
+                  "content": "\"Use the DoD Builder for our machine learning models. <strong>(C)ode:</strong> 'Code is commented and version controlled.' <strong>(T)esting:</strong> 'Model accuracy exceeds baseline.' <strong>(D)ocumentation:</strong> 'Model parameters and results are logged.' <strong>(P)eer Review:</strong> 'Code and methodology reviewed by another data scientist.' <strong>(A)cceptance:</strong> 'Business stakeholder confirms the model solves their problem.' Generate a DoD checklist.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "- Code follows PEP 8 standards.\\n- Unit test coverage is at or above 80%.\\n- All new API endpoints are documented in Swagger.\\n- The pull request has been approved by at least one other developer.\\n- The Product Owner has reviewed and accepted the feature."
+                },
+                {
+                  "content": "- All claims and data are fact-checked.\\n- The post has been proofread for grammar and spelling errors.\\n- Target SEO keywords are naturally integrated.\\n- A relevant, licensed header image is included.\\n- The post has been reviewed and approved by another writer and the Head of Marketing."
+                },
+                {
+                  "content": "- The model's training code is commented and checked into Git.\\n- The model's accuracy on the test set is better than the established baseline.\\n- The experiment, including parameters and results, is logged in our tracking tool.\\n- The code and methodology have been peer-reviewed.\\n- The primary business stakeholder has confirmed the model's output meets their needs."
+                }
+              ]
+            },
+            {
+              "id": "dependency-mapper-dmap",
+              "title": "Dependency Mapper (DMAP)",
+              "description": "To identify and manage cross-team or technical dependencies.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Project Manager)",
+                  "content": "\"Use DMAP for our 'Mobile App V2' project. <strong>(F)eature:</strong> 'New user dashboard.' <strong>(I)dentify Upstream:</strong> 'We need the new User Profile API from the API team.' <strong>(I)dentify Downstream:</strong> 'The marketing team needs our final designs for their launch campaign.' <strong>(C)ommunication Plan:</strong> 'Set up a weekly sync with the API team.'\""
+                },
+                {
+                  "title": "Example 2 (Product Owner)",
+                  "content": "\"Use DMAP for a new 'Promotions' feature. <strong>(F)eature:</strong> 'Apply discount codes at checkout.' <strong>(I)Upstream:</strong> 'We need the list of valid codes from the Marketing team.' <strong>(I)Downstream:</strong> 'The Finance team needs to be able to track code usage.' <strong>(C)ommunication:</strong> 'Add Marketing and Finance reps to our Sprint Review.'\""
+                },
+                {
+                  "title": "Example 3 (Tech Lead)",
+                  "content": "\"Use DMAP for a database migration. <strong>(F)eature:</strong> 'Migrate from MySQL to PostgreSQL.' <strong>(I)Upstream:</strong> 'We need the DevOps team to provision the new database.' <strong>(I)Downstream:</strong> 'All other development teams will need to update their connection strings.' <strong>(C)ommunication:</strong> 'Create a shared Slack channel for the migration and publish a clear cutover plan.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Dependency Plan: New User Dashboard**\\n\\n* **Upstream Dependency:** We are dependent on the API Team for the new User Profile API, expected by Sprint 4.\\n* **Downstream Dependency:** The Marketing Team is dependent on us for the final UI designs, needed by Sprint 5.\\n* **Communication Plan:** We will hold a weekly sync with the API team to monitor progress and a bi-weekly check-in with Marketing to share design updates."
+                },
+                {
+                  "content": "**Dependency Plan: Promotions Feature**\\n\\n* **Upstream Dependency:** We require the final list of discount codes from the Marketing team before development can begin.\\n* **Downstream Dependency:** The Finance team will need access to the data on discount code usage for their reporting.\\n* **Communication Plan:** We will invite representatives from both Marketing and Finance to our Sprint Review to ensure alignment."
+                },
+                {
+                  "content": "**Dependency Plan: Database Migration**\\n\\n* **Upstream Dependency:** We are dependent on the DevOps team to provision and configure the new PostgreSQL instance.\\n* **Downstream Dependency:** All other development teams in the company are dependent on us for the new connection strings and cutover timing.\\n* **Communication Plan:** We will create a dedicated #db-migration Slack channel for all updates and will publish a detailed cutover plan two weeks in advance."
+                }
+              ]
+            },
+            {
+              "id": "release-planning-simulator-rps",
+              "title": "Release Planning Simulator (RPS)",
+              "description": "To create a high-level, multi-sprint release plan and explore potential scenarios.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Product Manager)",
+                  "content": "\"Use RPS for our Q4 release. <strong>(O)bjective:</strong> 'Launch the new enterprise features.' <strong>(E)pics:</strong> 'Reporting Suite, User Permissions.' <strong>(V)elocity:</strong> 'Assume 30 points/sprint.' <strong>(S)print-by-Sprint:</strong> 'Generate a possible breakdown of epics across 6 sprints.' <strong>(R)isk Analysis:</strong> 'What if velocity drops to 20 points? Show the revised timeline.'\""
+                },
+                {
+                  "title": "Example 2 (Program Manager)",
+                  "content": "\"Use RPS for a multi-team project. <strong>(O)bjective:</strong> 'Integrate our product with Salesforce.' <strong>(E)pics:</strong> 'Auth Service, Data Sync Service, UI Integration.' <strong>(V)elocity:</strong> 'Team A: 20 points, Team B: 25 points.' <strong>(S)print-by-Sprint:</strong> 'Generate a plan showing the work for both teams over 4 sprints.' <strong>(R)isks:</strong> 'What is the impact if the Auth Service is delayed by one sprint?'\""
+                },
+                {
+                  "title": "Example 3 (Scrum Master)",
+                  "content": "\"Use RPS to visualize the rest of the quarter for the team. <strong>(O)bjective:</strong> 'Complete the 'User Profile' epic.' <strong>(E)pics:</strong> '[List of remaining stories in the epic].' <strong>(V)elocity:</strong> 'Use our historical average of 22 points.' <strong>(S)print-by-Sprint:</strong> 'Show which stories will likely fall into the next 3 sprints.' <strong>(R)isks:</strong> 'Highlight any sprints that are overloaded.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Release Plan (30 Point Velocity):**\\n- Sprints 1-3: Reporting Suite\\n- Sprints 4-6: User Permissions\\n\\n**Risk Scenario (20 Point Velocity):**\\n- The User Permissions epic would be pushed to the next quarter. We may need to de-scope features to meet the deadline."
+                },
+                {
+                  "content": "**Release Plan:**\\n- **Team A:** Sprints 1-2: Auth Service; Sprints 3-4: UI Integration\\n- **Team B:** Sprints 1-4: Data Sync Service\\n\\n**Risk Scenario:** If the Auth Service is delayed by one sprint, the UI Integration work will also be delayed by one sprint, pushing the final delivery date back by two weeks."
+                },
+                {
+                  "content": "**Forecast:**\\n- **Sprint 4:** [Stories A, B, C] (20 points)\\n- **Sprint 5:** [Stories D, E] (22 points)\\n- **Sprint 6:** [Stories F, G, H] (25 points) - **Warning: This sprint is overloaded based on our average velocity.**"
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch6-sec7",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch6-sec8",
+          "title": "Theme 4: User Feedback & Testing",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "user-feedback-synthesizer-ufs",
+              "title": "User Feedback Synthesizer (UFS)",
+              "description": "To process raw user feedback and extract actionable insights.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Product Manager)",
+                  "content": "\"Use UFS to analyze these 50 survey responses: [Paste responses]. <strong>(R)aw Feedback:</strong> [Data]. <strong>(T)heme Identification:</strong> 'Identify the top 5 themes (e.g., performance, UI, pricing).' <strong>(I)nsight Extraction:</strong> 'For each theme, provide a key insight.' <strong>(P)rioritized Recommendations:</strong> 'Suggest 3 actionable recommendations for the backlog.'\""
+                },
+                {
+                  "title": "Example 2 (UX Researcher)",
+                  "content": "\"Use UFS to analyze the transcripts from 5 user interviews: [Paste transcripts]. <strong>(R)aw Feedback:</strong> [Data]. <strong>(T)hemes:</strong> 'Identify common pain points in the onboarding flow.' <strong>(I)nsights:</strong> 'Extract direct quotes that exemplify each pain point.' <strong>(P)rioritized Recommendations:</strong> 'Suggest improvements for the top 3 pain points.'\""
+                },
+                {
+                  "title": "Example 3 (Customer Support Lead)",
+                  "content": "\"Use UFS to analyze the last 100 support tickets: [Paste ticket summaries]. <strong>(R)aw Feedback:</strong> [Data]. <strong>(T)hemes:</strong> 'Categorize the tickets into bug reports, feature requests, and usage questions.' <strong>(I)nsights:</strong> 'What is the most frequently reported bug?' <strong>(P)rioritized Recommendations:</strong> 'Provide a summary to share with the product team.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Top Themes from User Survey:**\\n1.  **Performance:** Users report that the app is slow to load.\\n2.  **User Interface:** Many users find the new dashboard confusing.\\n3.  **Pricing:** Several users mentioned that the pro plan is too expensive.\\n\\n**Recommendations:**\\n1.  Create a technical story to investigate performance bottlenecks.\\n2.  Schedule usability testing sessions for the new dashboard.\\n3.  Conduct a competitive analysis of our pricing tiers."
+                },
+                {
+                  "content": "**Onboarding Pain Points:**\\n1.  **Unclear Value Proposition:** \"I wasn't sure what the app actually did when I first opened it.\"\\n2.  **Too Many Steps:** \"It felt like I had to click through ten screens before I could do anything.\"\\n3.  **Forced Notifications:** \"I didn't like that I had to enable notifications before I had even used the app.\"\\n\\n**Recommendations:**\\n1.  Simplify the initial welcome screen to focus on the core value.\\n2.  Reduce the number of steps in the onboarding tour from five to three.\\n3.  Allow users to skip the notification permission step."
+                },
+                {
+                  "content": "**Support Ticket Analysis:**\\n* **Bug Reports (45%):** The most common bug is the 'Export to PDF' feature failing.\\n* **Feature Requests (30%):** The most common request is for a 'dark mode' option.\\n* **Usage Questions (25%):** The most common question is 'How do I change my password?'\\n\\n**Recommendation:** Prioritize fixing the PDF export bug and consider adding a 'dark mode' feature to the backlog. Also, make the 'change password' option more prominent in the UI."
+                }
+              ]
+            },
+            {
+              "id": "bug-report-refiner-brr",
+              "title": "Bug Report Refiner (BRR)",
+              "description": "To turn a vague user bug report into a clear, actionable ticket for developers.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (QA Engineer)",
+                  "content": "\"Use BRR to refine this bug. <strong>(O)riginal Report:</strong> 'The search is broken.' <strong>(S)teps to Reproduce:</strong> Ask me clarifying questions to determine the steps. <strong>(E)xpected Behavior:</strong> 'Searching for 'shoes' should show shoe products.' <strong>(A)ctual Behavior:</strong> 'It shows an error page.' <strong>(S)uggested Severity:</strong> 'High'.\""
+                },
+                {
+                  "title": "Example 2 (Support Agent)",
+                  "content": "\"Use BRR for this customer report. <strong>(O)riginal:</strong> 'I can't log in.' <strong>(S)teps:</strong> 'Ask me questions to get the user's browser, OS, and the exact error message.' <strong>(E)xpected:</strong> 'User can log in.' <strong>(A)ctual:</strong> 'User sees 'Invalid credentials' error.' <strong>(S)everity:</strong> 'Medium'.\""
+                },
+                {
+                  "title": "Example 3 (Developer)",
+                  "content": "\"Use BRR to improve this bug report I received. <strong>(O)riginal:</strong> 'The API is slow.' <strong>(S)teps:</strong> 'Ask me questions to identify the specific API endpoint, the request parameters, and the measured response time.' <strong>(E)xpected:</strong> 'Response time < 200ms.' <strong>(A)ctual:</strong> 'Response time > 3000ms.' <strong>(S)everity:</strong> 'Low'.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Title:** [High] Search returns an error page for valid queries\\n\\n**Steps to Reproduce:**\\n1. Navigate to the home page.\\n2. Enter 'shoes' into the search bar.\\n3. Click the 'Search' button.\\n\\n**Expected Behavior:** A list of shoe products is displayed.\\n\\n**Actual Behavior:** The user is redirected to an error page."
+                },
+                {
+                  "content": "**Title:** [Medium] Users receiving 'Invalid credentials' error with correct password\\n\\n**Steps to Reproduce:**\\n1. Go to the login page.\\n2. Enter a known valid email and password.\\n3. Click 'Log In'.\\n\\n**Expected Behavior:** The user is logged in and redirected to their dashboard.\\n\\n**Actual Behavior:** An 'Invalid credentials' error message is displayed.\\n\\n**Additional Info:** Reported by a user on Chrome on Windows 11."
+                },
+                {
+                  "content": "**Title:** [Low] Performance issue with GET /api/v1/products endpoint\\n\\n**Steps to Reproduce:**\\n1. Make a GET request to the /api/v1/products endpoint.\\n\\n**Expected Behavior:** The API should respond in under 200ms.\\n\\n**Actual Behavior:** The API takes over 3 seconds to respond.\\n\\n**Additional Info:** This occurs even with no query parameters."
+                }
+              ]
+            },
+            {
+              "id": "ab-test-designer-abtd",
+              "title": "A/B Test Designer (ABTD)",
+              "description": "To structure a sound A/B test for a new feature or change.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Marketing)",
+                  "content": "\"Use ABTD to design a test for our landing page. <strong>(H)ypothesis:</strong> 'Changing the headline will increase sign-ups.' <strong>(C)ontrol &amp; Variant:</strong> Control: 'Manage Your Tasks Effortlessly.' Variant: 'Achieve Your Goals Faster.' <strong>(M)etrics:</strong> 'Sign-up conversion rate.' <strong>(S)uccess Criteria:</strong> '10% lift in conversions with 95% confidence.' <strong>(D)uration:</strong> '14 days.' Summarize this into a test plan.\""
+                },
+                {
+                  "title": "Example 2 (Product Manager)",
+                  "content": "\"Use ABTD for a new feature. <strong>(H)ypothesis:</strong> 'Adding social proof (e.g., '2,000 people bought this') will increase 'Add to Cart' clicks.' <strong>(C)ontrol:</strong> 'The product page with no social proof.' <strong>(V)ariant:</strong> 'The page with the social proof text.' <strong>(M)etrics:</strong> 'Click-through rate on the 'Add to Cart' button.' <strong>(S)uccess:</strong> '5% increase in clicks.' <strong>(D)uration:</strong> 'Until we have 10,000 visitors to each variant.' Generate a test plan.\""
+                },
+                {
+                  "title": "Example 3 (UX Designer)",
+                  "content": "\"Use ABTD to test a new checkout flow. <strong>(H)ypothesis:</strong> 'A one-page checkout will have a higher completion rate than our current three-page flow.' <strong>(C)ontrol:</strong> 'The existing three-page checkout.' <strong>(V)ariant:</strong> 'The new one-page design.' <strong>(M)etrics:</strong> 'Checkout completion rate.' <strong>(S)uccess:</strong> '8% improvement in completion rate.' <strong>(D)uration:</strong> '4 weeks.' Summarize the A/B test design.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**A/B Test Plan: Landing Page Headline**\\n\\n* **Hypothesis:** A more benefit-oriented headline will increase sign-up conversions.\\n* **Control (A):** \"Manage Your Tasks Effortlessly.\"\\n* **Variant (B):** \"Achieve Your Goals Faster.\"\\n* **Primary Metric:** Sign-up conversion rate.\\n* **Success Criteria:** We will consider the test successful if Variant B shows a 10% or greater lift in conversions with a statistical significance of 95%.\\n* **Duration:** The test will run for 14 days."
+                },
+                {
+                  "content": "**A/B Test Plan: Social Proof on Product Page**\\n\\n* **Hypothesis:** Displaying the number of recent purchases will increase user trust and drive more 'Add to Cart' actions.\\n* **Control (A):** The standard product page.\\n* **Variant (B):** The product page with a \"2,000 people bought this in the last month\" banner.\\n* **Primary Metric:** The click-through rate of the 'Add to Cart' button.\\n* **Success Criteria:** A 5% or greater increase in the click-through rate for the variant.\\n* **Duration:** The test will run until each variant has received 10,000 unique visitors."
+                },
+                {
+                  "content": "**A/B Test Plan: One-Page vs. Three-Page Checkout**\\n\\n* **Hypothesis:** Reducing the number of steps in the checkout process will decrease user friction and increase the overall completion rate.\\n* **Control (A):** Our current three-page checkout flow.\\n* **Variant (B):** The redesigned one-page checkout flow.\\n* **Primary Metric:** The percentage of users who start checkout and complete a purchase.\\n* **Success Criteria:** An 8% or greater increase in the checkout completion rate for the variant.\\n* **Duration:** The test will run for 4 weeks to account for weekly variations in user behavior."
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch6-sec9",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-7",
+      "title": "Chapter 6: The Agile Specialist's Toolkit: Role-Based Frameworks",
+      "order": 7,
+      "sections": [
+        {
+          "id": "ch7-sec1",
+          "title": "",
+          "content": "<div class=\"text-lg leading-relaxed mb-6\">\n<p>Assigning a role to the AI is one of the most powerful techniques in prompt engineering. By specifying an area of expertise, you focus the model's vast knowledge, guiding it to generate responses that are more relevant, nuanced, and aligned with a specific professional domain.</p>\n<p class=\"mt-4\">This chapter provides hyper-relevant frameworks tailored to the specific challenges of your role. However, it's important to remember that while role-based prompts improve the quality of responses, they do not make the model a true expert. The AI's answers are based on patterns from its training data, and all outputs should be critically reviewed by a human with genuine expertise.</p>\n</div>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec2",
+          "title": "For Project & Program Managers",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "progress-reporting-synthesizer",
+              "title": "Progress Reporting Synthesizer (PRS)",
+              "description": "To generate a status report tailored to a specific audience.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (To Executives)",
+                  "content": "\"Use PRS to write a status update. <strong>(A)udience:</strong> C-level executives. <strong>(K)PIs:</strong> Budget burn is 45% (5% under projection). <strong>(M)ilestones:</strong> Phase 1 user testing is complete with 92% satisfaction. <strong>(C)hallenges:</strong> Dependency on legal review is 3 days behind schedule. <strong>(N)ext Steps:</strong> Phase 2 kicks off Monday.\""
+                },
+                {
+                  "title": "Example 2 (To Technical Team)",
+                  "content": "\"Use PRS to write a weekly update. <strong>(A)udience:</strong> Development Team. <strong>(K)PIs:</strong> 'Sprint goal is 80% complete.' <strong>(M)ilestones:</strong> 'API integration with the new service is done.' <strong>(C)hallenges:</strong> 'We're blocked by a bug in the testing environment.' <strong>(N)ext Steps:</strong> 'Focus on fixing the blocker and completing the remaining stories.'\""
+                },
+                {
+                  "title": "Example 3 (To External Client)",
+                  "content": "\"Use PRS for our client update. <strong>(A)udience:</strong> The client's project manager. <strong>(K)PIs:</strong> 'We are on track with the agreed-upon timeline.' <strong>(M)ilestones:</strong> 'The wireframes for the new feature have been delivered.' <strong>(C)hallenges:</strong> 'We need your feedback on the wireframes by Friday.' <strong>(N)ext Steps:</strong> 'Incorporate your feedback and begin UI design.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Subject: Project Phoenix - Weekly Status Update**\\n\\n* **Status:** Green. We are on track with our timeline and 5% under budget.\\n* **Key Achievement:** We successfully completed user testing for Phase 1, achieving a 92% user satisfaction score.\\n* **Risks:** There is a 3-day delay in receiving feedback from the legal team, which is a key dependency. We are actively following up.\\n* **Next Steps:** We will kick off Phase 2 development next Monday."
+                },
+                {
+                  "content": "**Subject: Weekly Team Sync**\\n\\n* **Progress:** We've completed 80% of our sprint goal.\\n* **Wins:** Great job on completing the API integration ahead of schedule!\\n* **Blockers:** The bug in the testing environment is currently our top priority.\\n* **Focus:** Let's swarm on the blocker and then knock out the last two stories."
+                },
+                {
+                  "content": "**Subject: Project Update & Feedback Request**\\n\\nHi [Client Name],\\n\\nQuick update: we are on track with the project timeline and have delivered the initial wireframes for the new feature as planned. \\n\\nWe would appreciate your feedback by this Friday so we can incorporate it and move on to the UI design phase next week. \\n\\nThanks!"
+                }
+              ]
+            },
+            {
+              "id": "risk-radar-rr",
+              "title": "Risk Radar (RR)",
+              "description": "To proactively identify, categorize, and plan for potential project risks.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Technical Risk)",
+                  "content": "\"Use RR to identify risks for a new mobile app launch. <strong>(C)ategory:</strong> Technical. <strong>(R)isk Description:</strong> 'Unexpected App Store rejection.' <strong>(I)mpact &amp; Probability:</strong> High Impact, Medium Probability. <strong>(M)itigation &amp; Contingency:</strong> 'Submit for review 2 weeks early; have a PR response ready for common rejection reasons.'\""
+                },
+                {
+                  "title": "Example 2 (Resource Risk)",
+                  "content": "\"Use RR for our project. <strong>(C)ategory:</strong> Resource. <strong>(R)isk:</strong> 'Our lead developer might leave the company.' <strong>(I)mpact &amp; Probability:</strong> High Impact, Low Probability. <strong>(M)itigation:</strong> 'Ensure documentation is up-to-date and encourage knowledge sharing.'\""
+                },
+                {
+                  "title": "Example 3 (Schedule Risk)",
+                  "content": "\"Use RR for our project. <strong>(C)ategory:</strong> Schedule. <strong>(R)isk:</strong> 'A key dependency from another team may be delayed.' <strong>(I)mpact &amp; Probability:</strong> Medium Impact, High Probability. <strong>(M)itigation:</strong> 'Establish a clear point of contact with the other team and have weekly check-ins.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Risk:** App Store Rejection\\n**Category:** Technical\\n**Impact:** High\\n**Probability:** Medium\\n**Mitigation:** We will submit the app for review two weeks ahead of our internal deadline to allow time for resubmission if needed. We will also pre-write responses to common rejection reasons."
+                },
+                {
+                  "content": "**Risk:** Loss of Key Personnel\\n**Category:** Resource\\n**Impact:** High\\n**Probability:** Low\\n**Mitigation:** We will enforce our policy of keeping technical documentation updated and will schedule regular knowledge-sharing sessions to reduce dependency on a single person."
+                },
+                {
+                  "content": "**Risk:** Dependency Delay\\n**Category:** Schedule\\n**Impact:** Medium\\n**Probability:** High\\n**Mitigation:** We have established a single point of contact with the dependency team and will conduct weekly check-ins to monitor their progress and proactively address any issues."
+                }
+              ]
+            },
+            {
+              "id": "resource-allocation-modeler-ra",
+              "title": "Resource Allocation Modeler (RAM)",
+              "description": "To plan and optimize the allocation of team members across different project phases or tasks.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Simple Project)",
+                  "content": "\"Use RAM for our Q3 project. <strong>(P)roject Phases:</strong> 'Design (1 month), Dev (2 months).' <strong>(R)oles Required:</strong> '1 UX Designer, 2 Senior Devs, 1 QA.' <strong>(A)llocation %:</strong> 'Designer 100% in month 1, 25% after. Devs 100% in months 2-3.' <strong>(C)onstraint Identification:</strong> 'One senior dev is on vacation for 2 weeks in August.' Generate a resource plan.\""
+                },
+                {
+                  "title": "Example 2 (Multiple Projects)",
+                  "content": "\"Use RAM to allocate the design team for Q4. <strong>(P)rojects:</strong> 'Project A (High Priority), Project B (Medium Priority).' <strong>(R)oles:</strong> '2 UX Designers, 1 UI Designer.' <strong>(A)llocation:</strong> 'Allocate 70% of the team's capacity to Project A and 30% to Project B.' <strong>(C)onstraints:</strong> 'The UI designer is only available 50% of the time.' Generate a high-level allocation plan.\""
+                },
+                {
+                  "title": "Example 3 (Skills-Based)",
+                  "content": "\"Use RAM for a new AI project. <strong>(P)hases:</strong> 'Data Collection, Model Training, Deployment.' <strong>(R)oles/Skills:</strong> 'Python developer, Data Scientist, DevOps Engineer.' <strong>(A)llocation:</strong> 'Data Scientist 100% in Model Training. DevOps 100% in Deployment.' <strong>(C)onstraints:</strong> 'We only have one Data Scientist.' Generate a staffing plan.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Q3 Resource Plan**\\n\\n* **July (Design):** 1 UX Designer (100%), 2 Senior Devs (25% for prototyping)\\n* **August (Dev):** 1 UX Designer (25%), 2 Senior Devs (100% - Note: one dev has 2 weeks PTO), 1 QA (50%)\\n* **September (Dev):** 1 UX Designer (25%), 2 Senior Devs (100%), 1 QA (100%)"
+                },
+                {
+                  "content": "**Q4 Design Team Allocation**\\n\\n* **Total Capacity:** 2.5 FTE (2 UX, 0.5 UI)\\n* **Project A (70%):** 1.75 FTE (Allocate 1.5 UX, 0.25 UI)\\n* **Project B (30%):** 0.75 FTE (Allocate 0.5 UX, 0.25 UI)"
+                },
+                {
+                  "content": "**AI Project Staffing Plan**\\n\\n* **Phase 1 (Data Collection):** 1 Python Developer\\n* **Phase 2 (Model Training):** 1 Data Scientist, 1 Python Developer\\n* **Phase 3 (Deployment):** 1 DevOps Engineer, 1 Python Developer\\n\\n**Constraint:** The Model Training phase is dependent on the availability of our single Data Scientist."
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec3",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec4",
+          "title": "For Agile Coaches",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "team-maturity-assessor-tma",
+              "title": "Team Maturity Assessor (TMA)",
+              "description": "To gauge a team's proficiency in Agile practices and identify coaching opportunities.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Sprint Planning)",
+                  "content": "\"Use TMA to assess our team's Sprint Planning. <strong>(D)imension:</strong> Sprint Planning. <strong>(O)bserved Behaviors:</strong> 'Team does not create a clear sprint goal; estimations are consistently wrong.' <strong>(L)evel of Maturity:</strong> Novice. <strong>(S)uggested Coaching Action:</strong> 'Facilitate a workshop on the purpose of a Sprint Goal and introduce a different estimation technique like Planning Poker.'\""
+                },
+                {
+                  "title": "Example 2 (Retrospectives)",
+                  "content": "\"Use TMA to assess our team's retrospectives. <strong>(D)imension:</strong> Sprint Retrospective. <strong>(O)bserved:</strong> 'The same issues are raised every sprint, and action items are not followed up on.' <strong>(L)evel:</strong> Developing. <strong>(S)uggested Action:</strong> 'Introduce a format for creating SMART action items and a process for reviewing them at the start of the next retro.'\""
+                },
+                {
+                  "title": "Example 3 (Backlog Refinement)",
+                  "content": "\"Use TMA for our backlog refinement. <strong>(D)imension:</strong> Backlog Refinement. <strong>(O)bserved:</strong> 'Stories at the top of the backlog are often not ready for the sprint.' <strong>(L)evel:</strong> Novice. <strong>(S)uggested Action:</strong> 'Coach the PO and team on creating a Definition of Ready and dedicating time for refinement sessions.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Assessment:** Team Maturity in Sprint Planning is at a **Novice** level.\\n**Observation:** The team struggles to create a cohesive Sprint Goal and their story point estimations are unreliable.\\n**Coaching Plan:** Schedule a 1-hour workshop on \"Crafting Effective Sprint Goals.\" Follow up by facilitating the next Sprint Planning session using the Planning Poker technique to improve estimation."
+                },
+                {
+                  "content": "**Assessment:** Team Maturity in Retrospectives is at a **Developing** level.\\n**Observation:** The team is good at identifying issues but struggles with creating and following through on actionable improvements.\\n**Coaching Plan:** Introduce the concept of SMART (Specific, Measurable, Achievable, Relevant, Time-bound) action items. Dedicate the last 15 minutes of the next retrospective to crafting one SMART action item and assign a clear owner."
+                },
+                {
+                  "content": "**Assessment:** Team Maturity in Backlog Refinement is at a **Novice** level.\\n**Observation:** The team frequently enters Sprint Planning with user stories that are not well understood or estimated.\\n**Coaching Plan:** Facilitate a session with the Product Owner and the team to collaboratively create a \"Definition of Ready.\" Coach the team on the importance of dedicating time for backlog refinement during the sprint."
+                }
+              ]
+            },
+            {
+              "id": "organizational-impediment-navi",
+              "title": "Organizational Impediment Navigator (OIN)",
+              "description": "To analyze and create a strategy for tackling a systemic issue beyond a single team's ability to solve.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Slow Deployments)",
+                  "content": "\"Use OIN for our slow deployment process. <strong>(I)mpediment:</strong> 'Deployments take 3 days and require manual approval from 4 departments.' <strong>(S)ystemic Root Cause:</strong> 'Lack of automated testing and trust.' <strong>(S)takeholders:</strong> 'Head of Ops, Director of Eng, Security Lead.' <strong>(I)nfluence Strategy:</strong> 'Draft a proposal showing the cost of delay and present it to the stakeholders.'\""
+                },
+                {
+                  "title": "Example 2 (Siloed Teams)",
+                  "content": "\"Use OIN for our team silos. <strong>(I)mpediment:</strong> 'Teams block each other because they don't communicate.' <strong>(S)ystemic Cause:</strong> 'Teams are organized by component, not by feature.' <strong>(S)takeholders:</strong> 'CTO, VPs of Engineering.' <strong>(I)nfluence Strategy:</strong> 'Propose a pilot project with a cross-functional feature team and measure its performance.'\""
+                },
+                {
+                  "title": "Example 3 (Budgeting Process)",
+                  "content": "\"Use OIN for our annual budgeting process. <strong>(I)mpediment:</strong> 'The annual, project-based budgeting prevents us from adapting to change.' <strong>(S)ystemic Cause:</strong> 'Traditional financial planning.' <strong>(S)takeholders:</strong> 'CFO, Head of PMO.' <strong>(I)nfluence Strategy:</strong> 'Present a case study on how agile, value-stream-based funding works in other companies.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Strategy for Addressing Slow Deployments**\\n\\n* **The Problem:** Our 3-day manual deployment process is a major bottleneck.\\n* **The Root Cause:** A lack of trust in our process, stemming from insufficient automated testing.\\n* **Key Stakeholders:** Head of Ops, Director of Engineering, Security Lead.\\n* **Strategy:** 1. Calculate the Cost of Delay caused by the slow process. 2. Draft a proposal for a phased investment in a modern CI/CD pipeline. 3. Present this proposal to the key stakeholders, focusing on the ROI of faster, safer deployments."
+                },
+                {
+                  "content": "**Strategy for Breaking Down Team Silos**\\n\\n* **The Problem:** Component-based teams are creating communication overhead and project delays.\\n* **The Root Cause:** Our organizational structure is not aligned with how we deliver customer value.\\n* **Key Stakeholders:** CTO, VPs of Engineering.\\n* **Strategy:** 1. Identify an upcoming high-priority feature. 2. Propose forming a temporary, cross-functional \"feature team\" to deliver it. 3. Define clear metrics (e.g., lead time, deployment frequency) to measure this team's performance against the baseline. 4. Present the results to stakeholders as a case for restructuring."
+                },
+                {
+                  "content": "**Strategy for Improving the Budgeting Process**\\n\\n* **The Problem:** Our annual, project-based budgeting process is fundamentally at odds with our agile way of working.\\n* **The Root Cause:** A mismatch between our delivery methodology (Agile) and our financial planning (traditional).\\n* **Key Stakeholders:** CFO, Head of the PMO.\\n* **Strategy:** 1. Research 2-3 case studies of companies in our industry that have adopted agile/value-stream funding models. 2. Prepare a presentation for the CFO and Head of PMO that highlights the benefits (e.g., faster time to market, reduced waste). 3. Propose a small pilot for one value stream in the next quarter."
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec5",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec6",
+          "title": "For Product Owners & Product Managers",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "user-journey-mapper-ujm",
+              "title": "User Journey Mapper (UJM)",
+              "description": "To map the end-to-end user experience to find pain points and opportunities.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Onboarding)",
+                  "content": "\"Use UJM to map the journey for a first-time user signing up. <strong>(P)ersona:</strong> Busy working mother. <strong>(G)oal:</strong> Sign up and create her first to-do list. <strong>(S)tages:</strong> Discovery, Sign-up, Onboarding, First Use. <strong>(A)ctions, Thoughts, &amp; Feelings:</strong> Analyze likely actions, thoughts ('Is this worth my time?'), and feelings ('Confused') per stage. <strong>(O)pportunities:</strong> Identify 3 key opportunities to improve onboarding.\""
+                },
+                {
+                  "title": "Example 2 (E-commerce Checkout)",
+                  "content": "\"Use UJM for our checkout process. <strong>(P)ersona:</strong> A price-conscious online shopper. <strong>(G)oal:</strong> To purchase an item quickly. <strong>(S)tages:</strong> 'View Cart, Enter Shipping, Enter Payment, Confirm Order.' <strong>(A)ctions, etc.:</strong> 'Analyze the user's thoughts, especially around shipping costs and security.' <strong>(O)pportunities:</strong> 'Identify where users are most likely to abandon their cart.'\""
+                },
+                {
+                  "title": "Example 3 (Password Reset)",
+                  "content": "\"Use UJM for the 'forgot password' flow. <strong>(P)ersona:</strong> A frustrated user who can't log in. <strong>(G)oal:</strong> To reset their password and access their account. <strong>(S)tages:</strong> 'Click 'Forgot Password', Check Email, Create New Password, Log In.' <strong>(A)ctions, etc.:</strong> 'Analyze the user's feelings of anxiety and relief.' <strong>(O)pportunities:</strong> 'Identify ways to make the process faster and more secure.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**User Journey: First-Time Onboarding**\\n\\n* **Stage: Sign-up**\\n    * **Action:** Fills out the sign-up form.\\n    * **Thought:** \"I hope this doesn't take long.\"\\n    * **Feeling:** Impatient.\\n    * **Opportunity:** Can we simplify the form or allow social sign-in?\\n* **Stage: Onboarding**\\n    * **Action:** Clicks through the tutorial.\\n    * **Thought:** \"This is a lot of information.\"\\n    * **Feeling:** Overwhelmed.\\n    * **Opportunity:** Can we make the tutorial more interactive and context-sensitive?"
+                },
+                {
+                  "content": "**User Journey: E-commerce Checkout**\\n\\n* **Stage: Enter Shipping**\\n    * **Action:** Enters their address.\\n    * **Thought:** \"How much is shipping going to be?\"\\n    * **Feeling:** Anxious.\\n    * **Opportunity:** Can we show the shipping cost earlier in the process?\\n* **Stage: Enter Payment**\\n    * **Action:** Enters credit card details.\\n    * **Thought:** \"Is this site secure?\"\\n    * **Feeling:** Wary.\\n    * **Opportunity:** Can we add more trust signals like security badges on this page?"
+                },
+                {
+                  "content": "**User Journey: Forgot Password**\\n\\n* **Stage: Check Email**\\n    * **Action:** Waits for the reset email.\\n    * **Thought:** \"Did it go to my spam folder?\"\\n    * **Feeling:** Frustrated.\\n    * **Opportunity:** Can we send the email faster and provide clear instructions to check the spam folder?\\n* **Stage: Create New Password**\\n    * **Action:** Tries to create a new password.\\n    * **Thought:** \"What are the password requirements again?\"\\n    * **Feeling:** Annoyed.\\n    * **Opportunity:** Can we display the password requirements clearly and validate them in real-time?"
+                }
+              ]
+            },
+            {
+              "id": "product-vision-communicator-pv",
+              "title": "Product Vision Communicator (PVC)",
+              "description": "To craft a compelling and memorable narrative for the product's long-term vision.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Virtual Office)",
+                  "content": "\"Use the PVC template to create a vision statement for our product, 'ConnectSphere'. <strong>(F)or:</strong> 'Remote teams'. <strong>(W)ho:</strong> 'Struggle with informal communication'. <strong>(T)he:</strong> 'ConnectSphere is a virtual office platform'. <strong>(T)hat:</strong> 'Simulates the spontaneous interactions of a physical office.' <strong>(U)nlike:</strong> 'Tools like Slack and Zoom'. <strong>(O)ur Product:</strong> 'Focuses on presence and serendipitous conversation.'\""
+                },
+                {
+                  "title": "Example 2 (Fitness App)",
+                  "content": "\"Use PVC for our app, 'Momentum'. <strong>(F)or:</strong> 'Busy professionals'. <strong>(W)ho:</strong> 'Want to stay active'. <strong>(T)he:</strong> 'Momentum is a mobile fitness app'. <strong>(T)hat:</strong> 'Provides effective 15-minute workouts.' <strong>(U)nlike:</strong> 'Gym memberships and long workout apps'. <strong>(O)ur Product:</strong> 'Fits exercise into your existing schedule.'\""
+                },
+                {
+                  "title": "Example 3 (Budgeting Tool)",
+                  "content": "\"Use PVC for our tool, 'Clarity'. <strong>(F)or:</strong> 'Young adults'. <strong>(W)ho:</strong> 'Are overwhelmed by personal finance'. <strong>(T)he:</strong> 'Clarity is a budgeting app'. <strong>(T)hat:</strong> 'Automates expense tracking and provides simple insights.' <strong>(U)nlike:</strong> 'Complex spreadsheets and traditional banking apps'. <strong>(O)ur Product:</strong> 'Makes financial literacy easy and accessible.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "\"For remote teams who struggle with informal communication, ConnectSphere is a virtual office platform that simulates the spontaneous interactions of a physical office. Unlike tools like Slack and Zoom, our product focuses on presence and serendipitous conversation.\""
+                },
+                {
+                  "content": "\"For busy professionals who want to stay active, Momentum is a mobile fitness app that provides effective 15-minute workouts. Unlike gym memberships and long workout apps, our product fits exercise into your existing schedule.\""
+                },
+                {
+                  "content": "\"For young adults who are overwhelmed by personal finance, Clarity is a budgeting app that automates expense tracking and provides simple insights. Unlike complex spreadsheets and traditional banking apps, our product makes financial literacy easy and accessible.\""
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec7",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec8",
+          "title": "For Scrum Masters",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "ceremony-effectiveness-checker",
+              "title": "Ceremony Effectiveness Checker (CEC)",
+              "description": "To diagnose and get suggestions for improving a specific Agile ceremony.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Retrospective)",
+                  "content": "\"Use CEC to improve our Sprint Retrospective. <strong>(C)eremony:</strong> Sprint Retrospective. <strong>(I)ntended Purpose:</strong> Inspect and adapt. <strong>(A)nti-Patterns:</strong> 'Same two people talk; focuses on blame; action items are forgotten.' <strong>(S)uggested Techniques:</strong> 'Provide three novel formats (like 'Starfish' or 'Sailboat') that encourage equal participation and forward-looking solutions.'\""
+                },
+                {
+                  "title": "Example 2 (Daily Scrum)",
+                  "content": "\"Use CEC for our Daily Scrum. <strong>(C)eremony:</strong> Daily Scrum. <strong>(I)ntended Purpose:</strong> 'To plan the work for the next 24 hours.' <strong>(A)nti-Patterns:</strong> 'It turns into a status report for the manager; it consistently runs over 15 minutes.' <strong>(S)uggested Techniques:</strong> 'Suggest re-focusing on the three questions and using a 'parking lot' for longer discussions.'\""
+                },
+                {
+                  "title": "Example 3 (Sprint Planning)",
+                  "content": "\"Use CEC for our Sprint Planning. <strong>(C)eremony:</strong> Sprint Planning. <strong>(I)ntended Purpose:</strong> 'To create a plan for the sprint.' <strong>(A)nti-Patterns:</strong> 'The team doesn't have a clear goal; they just pull in a list of stories.' <strong>(S)uggested Techniques:</strong> 'Introduce the Sprint Goal Formulator (SGF) framework and facilitate a goal-setting discussion before story selection.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Recommendations for Your Retrospective:**\\n1.  **Starfish Retrospective:** Use categories (Keep Doing, More Of, Less Of, Start Doing, Stop Doing) to broaden the discussion.\\n2.  **Sailboat Retrospective:** Use the metaphor of a sailboat (wind in our sails, anchors holding us back) to frame the conversation positively.\\n3.  **Action Item Review:** Start every retrospective by reviewing the action items from the previous one to create accountability."
+                },
+                {
+                  "content": "**Recommendations for Your Daily Scrum:**\\n1.  **Re-center on the Goal:** Remind the team that the goal is to create a plan for the day, not to report status.\\n2.  **Use a 'Parking Lot':** Create a space on the board for topics that require longer discussion. Address these after the Daily Scrum with only the relevant people.\\n3.  **Walk the Board:** Instead of going person by person, go ticket by ticket from right to left on the board to focus on the work, not the people."
+                },
+                {
+                  "content": "**Recommendations for Your Sprint Planning:**\\n1.  **Goal First:** Insist that the team collaborates with the Product Owner to define a clear, compelling Sprint Goal before any stories are selected.\\n2.  **Capacity Planning:** Have the team calculate their actual capacity for the sprint (accounting for holidays, PTO, etc.) to create a more realistic plan.\\n3.  **Tasking Out:** Encourage the team to break down the top priority stories into tasks during the meeting to ensure a shared understanding of the work involved."
+                }
+              ]
+            },
+            {
+              "id": "agile-metrics-interpreter-ami",
+              "title": "Agile Metrics Interpreter (AMI)",
+              "description": "To analyze Agile metrics and derive meaningful insights, not just raw numbers.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Cycle Time)",
+                  "content": "\"Use AMI to analyze our team's cycle time. <strong>(M)etric Data:</strong> '[List of cycle times for last 10 stories: 3, 4, 3, 8, 9, 4, 3, 8, 9, 10 days].' <strong>(T)rend Identification:</strong> 'The cycle time seems to be bimodal, with some stories being fast and others slow.' <strong>(P)otential Causes:</strong> 'Unplanned work, unclear requirements on larger stories.' <strong>(Q)uestions to Ask:</strong> 'What was different about the stories that took over a week? How can we break down work more effectively?'\""
+                },
+                {
+                  "title": "Example 2 (Velocity)",
+                  "content": "\"Use AMI for our team's velocity. <strong>(M)etric Data:</strong> '[Last 5 sprints: 25, 28, 15, 26, 24].' <strong>(T)rend:</strong> 'The velocity is mostly stable, but there was a significant dip in the middle sprint.' <strong>(P)otential Causes:</strong> 'Public holiday, team members on leave, a major production issue.' <strong>(Q)uestions:</strong> 'What happened during that one sprint that we can learn from?'\""
+                },
+                {
+                  "title": "Example 3 (Bug Count)",
+                  "content": "\"Use AMI for our bug count. <strong>(M)etric Data:</strong> '[Bugs found per sprint: 5, 8, 12, 15, 20].' <strong>(T)rend:</strong> 'The number of bugs found after the sprint is increasing.' <strong>(P)otential Causes:</strong> 'Rushed testing, incomplete Definition of Done, new complex feature.' <strong>(Q)uestions:</strong> 'Is our Definition of Done sufficient? Do we need to allocate more time for testing?'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Cycle Time Analysis**\\n\\n* **Trend:** Your cycle time is inconsistent, with a clear split between fast and slow stories.\\n* **Potential Causes:** This could be due to a mix of well-defined small stories and poorly-defined large stories, or it could be caused by external blockers affecting only certain types of work.\\n* **Questions for the Team:** 1. What do our slow stories have in common? 2. Are we doing a good enough job of breaking down large epics? 3. Were the slow stories blocked by external dependencies?"
+                },
+                {
+                  "content": "**Velocity Analysis**\\n\\n* **Trend:** Your velocity is predictable, with one clear outlier (a 15-point sprint).\\n* **Potential Causes:** The dip could be explained by planned events like holidays or unplanned events like a production fire that consumed the team's time.\\n* **Questions for the Team:** 1. What events occurred during that sprint? 2. If it was an unplanned event, how can we better protect ourselves in the future? 3. Does our capacity planning account for holidays and PTO?"
+                },
+                {
+                  "content": "**Bug Count Analysis**\\n\\n* **Trend:** There is a concerning upward trend in the number of bugs being found.\\n* **Potential Causes:** This could indicate that quality is suffering due to pressure to deliver, that our Definition of Done is inadequate, or that the complexity of the product is increasing without a corresponding change in our testing practices.\\n* **Questions for the Team:** 1. Are we consistently meeting every item in our Definition of Done? 2. Do we feel rushed at the end of the sprint? 3. Is it time to invest more in automated testing?"
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec9",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec10",
+          "title": "For Business Analysts",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "acceptance-criteria-generator-",
+              "title": "Acceptance Criteria Generator (ACG)",
+              "description": "To create a thorough set of testable acceptance criteria for a given user story.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Login Story)",
+                  "content": "\"Use ACG for the story 'As a user, I want to log in with my email and password.' <strong>(U)ser Story:</strong> [Story text]. <strong>(H)appy Path:</strong> 'Given a valid email/password, When I click login, Then I am taken to the dashboard.' <strong>(N)egative Scenarios:</strong> 'Generate criteria for invalid password, non-existent email.' <strong>(E)dge Cases:</strong> 'Generate criteria for a locked account, empty fields.'\""
+                },
+                {
+                  "title": "Example 2 (Search Story)",
+                  "content": "\"Use ACG for the story 'As a user, I want to search for products.' <strong>(U)ser Story:</strong> [Story text]. <strong>(H)appy Path:</strong> 'Given I search for 'shirt', I see a list of shirts.' <strong>(N)egative:</strong> 'Generate criteria for a search with no results.' <strong>(E)dge Cases:</strong> 'Generate criteria for a search with special characters or a very long query.'\""
+                },
+                {
+                  "title": "Example 3 (File Upload Story)",
+                  "content": "\"Use ACG for the story 'As a user, I want to upload a profile picture.' <strong>(U)ser Story:</strong> [Story text]. <strong>(H)appy Path:</strong> 'Given I upload a valid JPG, it appears as my profile picture.' <strong>(N)egative:</strong> 'Generate criteria for uploading a non-image file or a file that is too large.' <strong>(E)dge Cases:</strong> 'Generate criteria for a file with no extension.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Acceptance Criteria:**\\n* **Happy Path:** Given I am on the login page and I enter a valid email and password, when I click \"Log In\", then I am redirected to my dashboard.\\n* **Negative Scenario (Invalid Password):** Given I am on the login page and I enter a valid email and an invalid password, when I click \"Log In\", then I see an \"Invalid credentials\" error message.\\n* **Edge Case (Locked Account):** Given I am on the login page and I enter the credentials for a locked account, when I click \"Log In\", then I see a message explaining that my account is locked and how to unlock it."
+                },
+                {
+                  "content": "**Acceptance Criteria:**\\n* **Happy Path:** Given I am on the home page and I enter \"shirt\" in the search bar, when I click \"Search\", then I see a list of products that are shirts.\\n* **Negative Scenario (No Results):** Given I search for \"xyzabc\", when I click \"Search\", then I see a \"No results found\" message.\\n* **Edge Case (Special Characters):** Given I search for \"t-shirt & cap\", when I click \"Search\", then the search executes correctly without errors."
+                },
+                {
+                  "content": "**Acceptance Criteria:**\\n* **Happy Path:** Given I am on my profile page and I select a valid JPG file under 5MB, when I click \"Upload\", then my profile picture is updated.\\n* **Negative Scenario (Wrong File Type):** Given I select a PDF file, when I click \"Upload\", then I see an \"Invalid file type\" error message.\\n* **Negative Scenario (File Too Large):** Given I select a JPG file that is 10MB, when I click \"Upload\", then I see a \"File size exceeds the 5MB limit\" error message."
+                }
+              ]
+            },
+            {
+              "id": "requirements-elicitation-guide",
+              "title": "Requirements Elicitation Guide (REG)",
+              "description": "To structure a stakeholder interview to effectively uncover detailed needs.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Finance Report)",
+                  "content": "\"Use REG to prepare for an interview with the Head of Finance about a new report. <strong>(S)takeholder Role:</strong> Head of Finance. <strong>(O)bjective:</strong> 'Understand the key metrics needed for the quarterly board report.' <strong>(O)pening Questions:</strong> 'Can you describe the current process for creating this report?' <strong>(D)rilling-Down Questions:</strong> 'What are the top 3 most important data points for the board?' <strong>(C)onfirmation:</strong> 'So, to confirm, you need to see X, Y, and Z.' Generate a full question list.\""
+                },
+                {
+                  "title": "Example 2 (Marketing Campaign)",
+                  "content": "\"Use REG for an interview with the Head of Marketing. <strong>(S)takeholder:</strong> Head of Marketing. <strong>(O)bjective:</strong> 'Define the requirements for a new landing page builder.' <strong>(O)pening:</strong> 'What is the biggest challenge with our current landing page process?' <strong>(D)rilling-Down:</strong> 'What specific components should be available in the builder?' <strong>(C)onfirmation:</strong> 'To recap, the key features are A, B, and C.' Generate a question guide.\""
+                },
+                {
+                  "title": "Example 3 (Operations Tool)",
+                  "content": "\"Use REG for an interview with an Operations Manager. <strong>(S)takeholder:</strong> Operations Manager. <strong>(O)bjective:</strong> 'Understand the workflow for processing customer orders.' <strong>(O)pening:</strong> 'Can you walk me through the steps you take when a new order comes in?' <strong>(D)rilling-Down:</strong> 'Where does the process slow down? What information is missing?' <strong>(C)onfirmation:</strong> 'So the main bottleneck is step X.' Generate a list of interview questions.\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Interview Guide: Head of Finance**\\n\\n1.  **(Opening):** \"Could you walk me through how you currently prepare the quarterly board report?\"\\n2.  **(Opening):** \"What are the biggest challenges or frustrations with the current process?\"\\n3.  **(Drilling-Down):** \"When the board reviews this report, what are the top 3 questions they always ask?\"\\n4.  **(Drilling-Down):** \"If you could have any piece of data you don't currently have, what would it be?\"\\n5.  **(Confirmation):** \"To summarize, it sounds like the most critical metrics are customer acquisition cost, monthly recurring revenue, and churn rate. Is that correct?\""
+                },
+                {
+                  "content": "**Interview Guide: Head of Marketing**\\n\\n1.  **(Opening):** \"What is the biggest bottleneck when your team wants to launch a new campaign landing page?\"\\n2.  **(Drilling-Down):** \"What are the most common content blocks you use on landing pages (e.g., hero image, testimonials, pricing table)?\"\\n3.  **(Drilling-Down):** \"What level of customization is needed? Should users be able to change colors and fonts, or just text and images?\"\\n4.  **(Confirmation):** \"So, the must-have components are a hero section, a features section, and a contact form. Is that right?\""
+                },
+                {
+                  "content": "**Interview Guide: Operations Manager**\\n\\n1.  **(Opening):** \"Could you describe the journey of a customer order from the moment it's placed to the moment it's shipped?\"\\n2.  **(Drilling-Down):** \"At which step in that process do errors or delays most often occur?\"\\n3.  **(Drilling-Down):** \"What information do you have to look up in other systems while processing an order?\"\\n4.  **(Confirmation):** \"It sounds like the biggest time sink is manually verifying the shipping address. Is that an accurate summary?\""
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec11",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec12",
+          "title": "For Developers & QA Engineers",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "edge-case-explorer-ece",
+              "title": "Edge Case Explorer (ECE)",
+              "description": "To brainstorm non-obvious, \"unhappy path,\" and boundary scenarios that need to be tested.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (File Upload)",
+                  "content": "\"Use ECE for a 'file upload' feature. <strong>(F)eature:</strong> 'Upload JPG/PNG under 5MB.' <strong>(I)nput Boundaries:</strong> 'What about a file that is exactly 5.0MB? 5.1MB? 0KB?' <strong>(U)ser Errors:</strong> 'What if they upload a PDF? A file with a malicious script name?' <strong>(S)ystem Failures:</strong> 'What if the network drops mid-upload?' <strong>(C)oncurrency:</strong> 'What if they upload two files at once?'\""
+                },
+                {
+                  "title": "Example 2 (Discount Code)",
+                  "content": "\"Use ECE for a 'discount code' field. <strong>(F)eature:</strong> 'Apply a discount code at checkout.' <strong>(I)nput Boundaries:</strong> 'What about an expired code? A code for a different product?' <strong>(U)ser Errors:</strong> 'What if the user enters the code with extra spaces or in the wrong case?' <strong>(S)ystem Failures:</strong> 'What if the pricing service is down?' <strong>(C)oncurrency:</strong> 'What if the user tries to apply two codes at once?'\""
+                },
+                {
+                  "title": "Example 3 (Username Creation)",
+                  "content": "\"Use ECE for a 'create username' field. <strong>(F)eature:</strong> 'Users can create a unique username.' <strong>(I)nput Boundaries:</strong> 'What about the minimum and maximum character length? What about non-alphanumeric characters?' <strong>(U)ser Errors:</strong> 'What if the username is already taken?' <strong>(S)ystem Failures:</strong> 'What if the database connection fails during creation?' <strong>(C)oncurrency:</strong> 'What if two users try to create the same username at the same time?'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Potential Edge Cases for File Upload:**\\n* **Boundaries:** File is exactly 5.0MB; file is 0KB.\\n* **User Errors:** Uploading a file with a non-standard extension (e.g., .jpeg); uploading a file with no extension.\\n* **System Failures:** The user loses their internet connection during the upload process.\\n* **Concurrency:** The user clicks the \"Upload\" button multiple times in quick succession."
+                },
+                {
+                  "content": "**Potential Edge Cases for Discount Codes:**\\n* **Boundaries:** A discount code that has expired one second ago; a code that is valid for a different user segment.\\n* **User Errors:** Entering the code with leading/trailing spaces; entering the code with mixed case (e.g., 'SAVE10' vs 'save10').\\n* **System Failures:** The API that validates the discount code is unavailable.\\n* **Concurrency:** The user has two browser tabs open and tries to apply the same single-use code in both."
+                },
+                {
+                  "content": "**Potential Edge Cases for Username Creation:**\\n* **Boundaries:** A username that is exactly the minimum allowed length; a username that is exactly the maximum allowed length.\\n* **User Errors:** A username that consists only of numbers or special characters; a username that is a reserved word (e.g., 'admin').\\n* **System Failures:** The network fails after the username is validated but before the form is submitted.\\n* **Concurrency:** Two users attempt to register with the exact same username at the exact same millisecond."
+                }
+              ]
+            },
+            {
+              "id": "technical-design-outliner-tdo",
+              "title": "Technical Design Outliner (TDO)",
+              "description": "To create a high-level technical approach for a new user story before writing code.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Like Button)",
+                  "content": "\"Use TDO for the story 'Add a 'like' button to a post.' <strong>(S)tory Requirements:</strong> 'Users can like/unlike a post; the like count updates in real-time.' <strong>(C)omponents:</strong> 'New 'LikeButton' UI component, update to the 'Post' component.' <strong>(D)ata Model:</strong> 'Add a 'likes' array to the Post schema.' <strong>(A)PI/Service Interactions:</strong> 'Need a new API endpoint: POST /posts/{id}/like.' <strong>(T)esting:</strong> 'Unit test the button, integration test the API call.' Outline this technical approach.\""
+                },
+                {
+                  "title": "Example 2 (Password Reset)",
+                  "content": "\"Use TDO for the story 'Reset password via email.' <strong>(S)tory Req:</strong> 'User gets a secure link in their email to reset their password.' <strong>(C)omponents:</strong> 'New 'ForgotPassword' form, new 'ResetPassword' page.' <strong>(D)ata Model:</strong> 'Add a 'passwordResetToken' field to the User schema.' <strong>(A)PI:</strong> 'Need endpoints for requesting a reset and submitting the new password.' <strong>(T)esting:</strong> 'Test token expiration and invalid tokens.'\""
+                },
+                {
+                  "title": "Example 3 (Export Data)",
+                  "content": "\"Use TDO for the story 'Export user data as a CSV.' <strong>(S)tory Req:</strong> 'User can download a CSV of their data from their profile page.' <strong>(C)omponents:</strong> 'New 'ExportButton' component.' <strong>(D)ata Model:</strong> 'No change.' <strong>(A)PI:</strong> 'New endpoint GET /users/me/export that generates and returns a CSV file.' <strong>(T)esting:</strong> 'Verify the CSV content and format are correct.'\""
+                }
+              ],
+              "aiOutputs": [
+                {
+                  "content": "**Technical Design: 'Like' Button**\\n\\n1.  **Front-End:** Create a new React `LikeButton` component that manages its own state (liked/unliked) and makes an API call on click. Add this component to the `Post` component.\\n2.  **Back-End:** Create a new API endpoint `POST /api/posts/:id/like`. This will add or remove the user's ID from the post's `likes` array.\\n3.  **Database:** Modify the `Post` schema in MongoDB to include a `likes` field, which will be an array of User IDs.\\n4.  **Testing:** Write unit tests for the `LikeButton` component and integration tests for the new API endpoint."
+                },
+                {
+                  "content": "**Technical Design: Password Reset**\\n\\n1.  **Front-End:** Create two new pages: a `ForgotPassword` page with an email input field, and a `ResetPassword` page with a password input field that accepts a token from the URL.\\n2.  **Back-End:** Create two new API endpoints: `POST /api/auth/forgot-password` (generates a token and sends an email) and `POST /api/auth/reset-password` (validates the token and updates the user's password).\\n3.  **Database:** Add `passwordResetToken` and `passwordResetExpires` fields to the User schema.\\n4.  **Testing:** Write tests to ensure that expired or invalid tokens are rejected."
+                },
+                {
+                  "content": "**Technical Design: Export User Data**\\n\\n1.  **Front-End:** Create a new `ExportButton` component on the user profile page. When clicked, it will make a GET request to the new API endpoint.\\n2.  **Back-End:** Create a new API endpoint `GET /api/users/me/export`. This endpoint will fetch the user's data, convert it to a CSV format using a library like `csv-writer`, and return it with the correct `Content-Disposition` headers to trigger a file download.\\n3.  **Database:** No changes needed.\\n4.  **Testing:** Write an integration test that calls the endpoint and verifies that the returned CSV file contains the correct headers and data."
+                }
+              ]
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch7-sec13",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-8",
+      "title": "Chapter 7: A Lifecycle-Based Playbook",
+      "order": 8,
+      "sections": [
+        {
+          "id": "ch8-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-4\">This chapter organizes frameworks based on where you are in your product or project lifecycle, helping you find the right tool at the right time.</p>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch8-sec2",
+          "title": "Part A: The Product Lifecycle",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "1-introduction--market-researc",
+              "title": "1. Introduction / Market Research",
+              "description": "Use these frameworks when you are exploring a new product idea.",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Market Viability Assessor (MVA):</strong> To quickly assess the potential of a new product idea.</li>\n<li><strong>User Persona Creator (UPC):</strong> To understand the target audience.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "2-growth",
+              "title": "2. Growth",
+              "description": "Use these frameworks when your product is in the market and you're focused on increasing adoption and engagement.",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>A/B Test Designer (ABTD):</strong> To optimize features for engagement.</li>\n<li><strong>User Feedback Synthesizer (UFS):</strong> To process growing user feedback.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "3-maturity--optimization",
+              "title": "3. Maturity / Optimization",
+              "description": "Use these frameworks when your product is established and the focus shifts to efficiency, and refinement.",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Technical Debt Resolver (TDR):</strong> To address issues that accumulate over time.</li>\n<li><strong>Feature Enhancement Prioritizer (FEP):</strong> To decide whether to build, improve, or kill an existing feature.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "4-decline--sunsetting",
+              "title": "4. Decline / Sunsetting",
+              "description": "Use this framework when a product or feature is reaching the end of its life.",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Product Sunsetting Planner (PSP):</strong> To create a clear and empathetic plan for retiring a product or feature.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch8-sec3",
+          "title": "Part B: The Agile Sprint Lifecycle",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "1-sprint-planning",
+              "title": "1. Sprint Planning",
+              "description": "Frameworks to help you and your team prepare for a successful sprint.",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Sprint Goal Formulator (SGF):</strong> To craft a clear, compelling, and unifying Sprint Goal.</li>\n<li><strong>Backlog Prioritization Engine (BPE):</strong> To decide what work to pull into the sprint.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "2-during-the-sprint-execution",
+              "title": "2. During the Sprint (Execution)",
+              "description": "Frameworks to use during the sprint to keep work flowing smoothly.",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Impediment Demolisher (ID):</strong> To create a structured plan for removing a blocker.</li>\n<li><strong>Technical Design Outliner (TDO):</strong> To create a technical approach for a new user story.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "3-sprint-review",
+              "title": "3. Sprint Review",
+              "description": "A framework for effectively demonstrating the value delivered in the sprint.",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Sprint Review Narrator (SRN):</strong> To structure a compelling story for the Sprint Review, focusing on the \"why\" not just the \"what\".</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "4-sprint-retrospective",
+              "title": "4. Sprint Retrospective",
+              "description": "A framework for turning retrospective discussions into concrete actions.",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Retrospective Insight &amp; Solution Engine (RISE):</strong> To process raw feedback and generate actionable improvement plans.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-9",
+      "title": "Chapter 8: A Deep Dive Into Your Role",
+      "order": 9,
+      "sections": [
+        {
+          "id": "ch9-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-4\">This chapter organizes the frameworks by role and core responsibility, making it easy to find the right tool for the job you need to do right now.</p>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch9-sec2",
+          "title": "The Product Owner's Complete Toolkit",
+          "content": "",
+          "frameworks": [
+            {
+              "id": "core-responsibility-defining-v",
+              "title": "Core Responsibility: Defining Vision & Strategy",
+              "description": "",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Product Vision Communicator (PVC):</strong> To craft a compelling and memorable narrative for the product's long-term vision.</li>\n<li><strong>Value Proposition Refiner (VPR):</strong> To sharpen the core value statement of a new feature or product.</li>\n<li><strong>User Persona Creator (UPC):</strong> To generate a detailed, empathetic user persona to guide development.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "core-responsibility-managing-t",
+              "title": "Core Responsibility: Managing the Product Backlog",
+              "description": "",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Backlog Prioritization Engine (BPE):</strong> To systematically apply a prioritization model to a list of backlog items.</li>\n<li><strong>Minimum Viable Product (MVP) Scoper:</strong> To define the smallest version of a product that can be released.</li>\n<li><strong>User Story Deep Dive (USDD):</strong> For creating comprehensive and well-defined user stories.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "core-responsibility-stakeholde",
+              "title": "Core Responsibility: Stakeholder Communication & Alignment",
+              "description": "",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>Stakeholder Alignment Matrix (SAM):</strong> To create a proactive and tailored communication strategy.</li>\n<li><strong>Progress Reporting Synthesizer (PRS):</strong> To generate a status report tailored to a specific audience.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            },
+            {
+              "id": "core-responsibility-validating",
+              "title": "Core Responsibility: Validating Value & Iterating",
+              "description": "",
+              "content": "<ul class=\"list-disc pl-5 mt-2 space-y-1\">\n<li><strong>User Feedback Synthesizer (UFS):</strong> To process raw user feedback and extract actionable insights.</li>\n<li><strong>A/B Test Designer (ABTD):</strong> To structure a sound A/B test for a new feature or change.</li>\n<li><strong>Sprint Goal Outcome Assessor (SGOA):</strong> To assess if the completed work actually achieved the intended outcome of the Sprint Goal.</li>\n</ul>",
+              "examples": [],
+              "aiOutputs": []
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch9-sec3",
+          "title": "",
+          "content": "",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-10",
+      "title": "Chapter 9: Advanced Playbooks for Cross-Functional Scenarios",
+      "order": 10,
+      "sections": [
+        {
+          "id": "ch10-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-4\">These advanced frameworks are designed for strategic, high-impact scenarios that often involve multiple roles and critical project milestones.</p>",
+          "frameworks": [
+            {
+              "id": "kick-off-canvas-creator-kcc",
+              "title": "Kick-off Canvas Creator (KCC)",
+              "description": "To generate a comprehensive agenda and a structured canvas for a project kick-off meeting, ensuring all critical topics are covered and all stakeholders are aligned from day one.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Project Manager)",
+                  "content": "\"Act as a senior program manager. Use the KCC framework to generate a detailed agenda and a Mural/Miro board layout for the kick-off of 'Project Phoenix', a 6-month mobile app development project. Cover: <strong>(O)</strong>bjectives & Success Criteria, <strong>(S)</strong>cope (In/Out), <strong>(R)</strong>oles & Responsibilities, <strong>(W)</strong>ays of Working (Ceremonies, Tools), <strong>(A)</strong>ssumptions & Risks, and <strong>(Q)</strong>uestions to Answer.\""
+                },
+                {
+                  "title": "Example 2 (Scrum Master)",
+                  "content": "\"Use KCC to plan a 'Sprint 0' for a new team. <strong>(O)</strong>bjectives: 'Set up environments and establish team norms.' <strong>(S)</strong>cope: 'Does not include any feature work.' <strong>(R)</strong>oles: 'Clarify PO and SM roles.' <strong>(W)</strong>ays of Working: 'Decide on sprint length and meeting times.' <strong>(A)</strong>ssumptions: 'All team members are fully allocated.' <strong>(Q)</strong>uestions: 'What is our Definition of Done?' Generate a Sprint 0 plan.\""
+                },
+                {
+                  "title": "Example 3 (Product Owner)",
+                  "content": "\"Use KCC to kick off a new feature epic. <strong>(O)</strong>bjectives: 'Increase user engagement by 10%.' <strong>(S)</strong>cope: 'Includes user profiles but not direct messaging.' <strong>(R)</strong>oles: 'Marketing will lead the go-to-market plan.' <strong>(W)</strong>ays of Working: 'We will have weekly stakeholder demos.' <strong>(A)</strong>ssumptions: 'The required APIs will be ready.' <strong>(Q)</strong>uestions: 'What is the biggest risk?' Generate a kick-off presentation outline.\""
+                }
+              ],
+              "aiOutputs": []
+            },
+            {
+              "id": "agile-scaling-pattern-selector",
+              "title": "Agile Scaling Pattern Selector (ASPS)",
+              "description": "To help leadership and Agile Coaches analyze their organizational context and get a recommendation for which Agile scaling approach (e.g., SAFe, LeSS, Scrum@Scale) might be the best fit.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Agile Coach)",
+                  "content": "\"Act as an enterprise Agile Coach. Our company is a 500-person fintech firm with 10 engineering teams struggling with cross-team dependencies. Use the ASPS framework to compare SAFe and LeSS and recommend a starting point. Analyze our <strong>(C)</strong>ompany Context, the <strong>(P)</strong>roblem to Solve, and our <strong>(C)</strong>ultural Assessment ('Top-down vs. bottom-up') to <strong>(C)</strong>ompare Frameworks and provide a <strong>(R)</strong>ecommendation.\""
+                },
+                {
+                  "title": "Example 2 (CTO)",
+                  "content": "\"Use ASPS to evaluate scaling options. <strong>(C)</strong>ontext: 'We are a 50-person startup with 4 dev teams that need to stay aligned.' <strong>(P)</strong>roblem: 'We need a lightweight way to coordinate without heavy process.' <strong>(C)</strong>ulture: 'Highly autonomous and collaborative.' <strong>(C)</strong>ompare: 'Scrum@Scale vs. LeSS.' <strong>(R)</strong>ecommendation: 'Suggest the best fit for our culture.'\""
+                },
+                {
+                  "title": "Example 3 (Head of Product)",
+                  "content": "\"Use ASPS to see if we need a scaling framework. <strong>(C)</strong>ontext: '25 teams, but they work on very different products.' <strong>(P)</strong>roblem: 'It's hard to manage the overall portfolio and budget.' <strong>(C)</strong>ulture: 'Each product line operates as a separate business unit.' <strong>(C)</strong>ompare: 'SAFe vs. a simple portfolio management process.' <strong>(R)</strong>ecommendation: 'Advise on whether a full scaling framework is necessary.'\""
+                }
+              ],
+              "aiOutputs": []
+            },
+            {
+              "id": "architectural-decision-record-",
+              "title": "Architectural Decision Record (ADR) Generator",
+              "description": "To formalize and document a significant technical decision in a clear, consistent format. This is a known industry best practice, perfectly suited for an AI framework.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Tech Lead)",
+                  "content": "\"Act as a principal engineer. Use the ADR Generator to document the decision to use a microservices architecture. Include the <strong>(T)</strong>itle, the business and technical <strong>(C)</strong>ontext, the <strong>(D)</strong>ecision made, the current <strong>(S)</strong>tatus (Accepted), and the positive and negative <strong>(C)</strong>onsequences of this choice.\""
+                },
+                {
+                  "title": "Example 2 (Senior Developer)",
+                  "content": "\"Use the ADR Generator to document our choice of a front-end state management library. <strong>(T)</strong>itle: 'Use Redux Toolkit for State Management.' <strong>(C)</strong>ontext: 'Our app has complex state that is becoming hard to manage.' <strong>(D)</strong>ecision: 'We will adopt Redux Toolkit.' <strong>(S)</strong>tatus: 'Accepted.' <strong>(C)</strong>onsequences: 'Faster development, but a steeper learning curve for new developers.'\""
+                },
+                {
+                  "title": "Example 3 (Architect)",
+                  "content": "\"Use the ADR Generator to document a decision *not* to do something. <strong>(T)</strong>itle: 'Do Not Adopt a GraphQL API at This Time.' <strong>(C)</strong>ontext: 'We considered GraphQL for its flexible data querying.' <strong>(D)</strong>ecision: 'We will continue to use REST APIs.' <strong>(S)</strong>tatus: 'Accepted.' <strong>(C)</strong>onsequences: 'Less flexible queries, but we avoid the complexity of a new technology stack.'\""
+                }
+              ],
+              "aiOutputs": []
+            },
+            {
+              "id": "user-story-map-builder-usmb",
+              "title": "User Story Map Builder (USMB)",
+              "description": "To generate the high-level structure for a user story mapping workshop, which is a collaborative requirement-gathering technique.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example 1 (Product Owner)",
+                  "content": "\"Act as a user story mapping facilitator. For a new event ticketing app, use the USMB framework to generate the structure for a story map. Define the product <strong>(G)</strong>oal, a potential <strong>(B)</strong>ackbone of high-level user activities (e.g., 'Browse Events', 'Purchase Tickets'), a <strong>(W)</strong>alking Skeleton of essential tasks for the first release, and potential <strong>(R)</strong>elease Slices for future functionality.\""
+                },
+                {
+                  "title": "Example 2 (Business Analyst)",
+                  "content": "\"Use USMB for a new internal expense reporting tool. <strong>(G)</strong>oal: 'Allow employees to submit expenses easily.' <strong>(B)</strong>ackbone: 'Create Report, Add Expenses, Submit for Approval, Get Reimbursed.' <strong>(W)</strong>alking Skeleton: 'Generate the essential stories for a user to complete one expense report.' <strong>(R)</strong>elease Slices: 'Suggest future releases like 'Mobile App Integration' and 'Advanced Reporting'.'\""
+                },
+                {
+                  "title": "Example 3 (UX Designer)",
+                  "content": "\"Use USMB to map the user journey for a food delivery app. <strong>(G)</strong>oal: 'Get a meal delivered quickly.' <strong>(B)</strong>ackbone: 'Choose Restaurant, Select a Meal, Customize Order, Checkout, Track Delivery.' <strong>(W)</strong>alking Skeleton: 'Generate the minimum stories needed to place a simple, non-customized order.' <strong>(R)</strong>elease Slices: 'Suggest future releases like 'Group Orders' and 'Scheduled Deliveries'.'\""
+                }
+              ],
+              "aiOutputs": []
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-11",
+      "title": "Chapter 10: Advanced Strategies & Workflows",
+      "order": 11,
+      "sections": [
+        {
+          "id": "ch11-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-6\">Transition from single prompts to professional, multi-step workflows to tackle highly complex challenges.</p>",
+          "frameworks": [
+            {
+              "id": "prompt-chaining--pipelining",
+              "title": "Prompt Chaining / Pipelining",
+              "description": "Break a complex task into a sequence of smaller prompts, where the output of one becomes the input for the next.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Example (Retrospective Analysis Workflow)",
+                  "content": "<br/><strong>Prompt 1 (Scrum Master):</strong> \"Categorize these raw retrospective notes into themes: [Paste notes].\" -><br/><strong>Prompt 2:</strong> \"For the 'Communication' theme you identified, summarize the key issue in one sentence.\" -><br/><strong>Prompt 3:</strong> \"Based on that issue, brainstorm three potential, actionable improvements for the team.\""
+                }
+              ],
+              "aiOutputs": []
+            },
+            {
+              "id": "building-your-personal-prompt-",
+              "title": "Building Your Personal Prompt Library",
+              "description": "A critical workflow for any serious practitioner is to document and organize your most effective prompts for reuse.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Prompt Name / Use Case",
+                  "content": "<h4 class=\"font-bold text-lg mb-2\">Prompt Documentation Template</h4>\n<ul class=\"list-disc pl-5\">\n<li> e.g., \"Generate Acceptance Criteria\"</li>\n<li><strong>Full Prompt Text:</strong> \"Act as a BA. For the user story '[USER STORY]', generate a comprehensive set of acceptance criteria in Gherkin format, considering happy paths, negative scenarios, and edge cases.\"</li>\n<li><strong>Techniques/Frameworks Used:</strong> ACG Framework, Role Prompting</li>\n<li><strong>LLM &amp; Version:</strong> e.g., GPT-4</li>\n<li><strong>Results Metrics:</strong> Accuracy: 5/5, Relevance: 5/5</li>\n<li><strong>Notes/Improvements:</strong> \"Works best when the user story is well-defined.\"</li>\n</ul>"
+                }
+              ],
+              "aiOutputs": []
+            },
+            {
+              "id": "troubleshooting-common-issues",
+              "title": "Troubleshooting Common Issues",
+              "description": "Practical solutions for frequent prompting challenges.",
+              "content": "",
+              "examples": [
+                {
+                  "title": "Problem",
+                  "content": "<p> \"The AI doesn't understand our team's specific context or jargon.\"</p>\n<p><strong>Solution:</strong> \"Provide a 'context' block at the beginning of your prompt. Example: 'Context: We are an e-commerce company. A 'SKU' is a stock-keeping unit. Our sprints are two weeks long.' This pre-loads the AI with the necessary background information.\"</p>\n<p class=\"mt-4\"><strong>Problem:</strong> \"The AI's outputs are too generic and not very creative.\"</p>\n<p><strong>Solution:</strong> \"Add constraints and a creative persona. Example: 'Act as a marketing genius known for out-of-the-box thinking. Brainstorm 5 unconventional names for our new feature. Do not use the words 'synergy' or 'streamline'.'\"</p>"
+                }
+              ],
+              "aiOutputs": []
+            }
+          ],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    },
+    {
+      "id": "chapter-12",
+      "title": "Chapter 11: Implementation, Best Practices & Next Steps",
+      "order": 12,
+      "sections": [
+        {
+          "id": "ch12-sec1",
+          "title": "",
+          "content": "<p class=\"text-lg leading-relaxed mb-6\">A practical guide to integrating these skills into your daily work and ensuring responsible AI use.</p>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch12-sec2",
+          "title": "A 4-Week Implementation Roadmap",
+          "content": "<p>Follow this structured plan to progressively build your skills.</p>\n<ul class=\"space-y-4 text-lg mt-4\">\n<li class=\"p-4 bg-teal-50 rounded-lg\"><comment-tag id=\"4\"><strong>Week 1: Master the Basics.</strong> Focus on daily tasks using Zero-Shot and Few-Shot prompting. Practice writing clear instructions and using the RTF framework.</comment-tag></li>\n<li class=\"p-4 bg-teal-50 rounded-lg\"><strong>Week 2: Intermediate Techniques.</strong> Apply Chain-of-Thought and advanced Role Prompting. Experiment with the general frameworks from Chapter 5, like TDR and RISE.</li>\n<li class=\"p-4 bg-teal-50 rounded-lg\"><strong>Week 3: Applying Role-Based Frameworks.</strong> Dive into the role-specific toolkits in Chapter 6. Use the frameworks that directly apply to your job to solve a real problem.</li>\n<li class=\"p-4 bg-teal-50 rounded-lg\"><strong>Week 4: Collaboration and Library Building.</strong> Share your successful prompts with your team. Start documenting your best prompts in a personal or shared library using the template from Chapter 10.</li>\n</ul>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "ch12-sec3",
+          "title": "Ethics, Quality, and Responsible AI Use",
+          "content": "<p>Using AI effectively means using it responsibly. Here are non-negotiable best practices.</p>\n<ul class=\"space-y-4 text-lg mt-4\">\n<li class=\"flex items-start\"><svg class=\"w-6 h-6 text-emerald-500 mr-3 flex-shrink-0\" fill=\"currentColor\" viewbox=\"0 0 20 20\"><path clip-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z\" fill-rule=\"evenodd\"></path></svg> <strong>Protect Data Privacy:</strong> Never use confidential or sensitive customer/company data in public AI tools. Anonymize or use synthetic data instead.</li>\n<li class=\"flex items-start\"><svg class=\"w-6 h-6 text-emerald-500 mr-3 flex-shrink-0\" fill=\"currentColor\" viewbox=\"0 0 20 20\"><path clip-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z\" fill-rule=\"evenodd\"></path></svg> <strong>Ensure Human Oversight:</strong> AI is an assistant, not a replacement for human judgment. All outputs must be critically reviewed, fact-checked, and validated by a knowledgeable person.</li>\n<li class=\"flex items-start\"><svg class=\"w-6 h-6 text-emerald-500 mr-3 flex-shrink-0\" fill=\"currentColor\" viewbox=\"0 0 20 20\"><path clip-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z\" fill-rule=\"evenodd\"></path></svg> <strong>Be Transparent:</strong> Disclose when AI has been significantly used to generate content or make a decision. This builds trust and maintains accountability.</li>\n<li class=\"flex items-start\"><svg class=\"w-6 h-6 text-emerald-500 mr-3 flex-shrink-0\" fill=\"currentColor\" viewbox=\"0 0 20 20\"><path clip-rule=\"evenodd\" d=\"M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z\" fill-rule=\"evenodd\"></path></svg> <strong>Validate AI Output:</strong> Use a quality assurance framework. Check for Factual Accuracy, Contextual Relevance, Team Alignment, and Practical Feasibility before acting on any AI-generated information.</li>\n</ul>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "implementation-roadmap",
+          "title": "Your 4 Week Learning Journey",
+          "content": "<p>A structured plan to integrate prompt engineering into your routine over the next four weeks.</p>",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "daily-habits",
+          "title": "Daily Prompt Engineering Habits",
+          "content": "\n                    <ul class=\"list-none space-y-2\">\n                        <li>✓ Always assign a role</li>\n                        <li>✓ Give context</li>\n                        <li>✓ State the objective</li>\n                        <li>✓ Define output format</li>\n                        <li>✓ Include examples</li>\n                        <li>✓ Review AI output</li>\n                        <li>✓ Save successful prompts</li>\n                    </ul>\n                ",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "enterprise-checklist",
+          "title": "Enterprise Prompt Checklist",
+          "content": "\n                    <ul class=\"list-none space-y-2\">\n                        <li>□ Goal defined</li>\n                        <li>□ Audience identified</li>\n                        <li>□ Context included</li>\n                        <li>□ Constraints defined</li>\n                        <li>□ Output format specified</li>\n                        <li>□ Sensitive data removed</li>\n                        <li>□ Human review completed</li>\n                    </ul>\n                ",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "common-mistakes",
+          "title": "Common Prompting Mistakes",
+          "content": "\n                    <table class=\"w-full text-left border-collapse\">\n                        <thead>\n                            <tr>\n                                <th class=\"border-b p-2\">Poor</th>\n                                <th class=\"border-b p-2\">Better</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <tr>\n                                <td class=\"p-2 border-b\">Summarize this</td>\n                                <td class=\"p-2 border-b\">Summarize this meeting into executive actions</td>\n                            </tr>\n                            <tr>\n                                <td class=\"p-2 border-b\">Improve this</td>\n                                <td class=\"p-2 border-b\">Improve this email for executives</td>\n                            </tr>\n                            <tr>\n                                <td class=\"p-2 border-b\">Write code</td>\n                                <td class=\"p-2 border-b\">Generate a React component using TypeScript</td>\n                            </tr>\n                        </tbody>\n                    </table>\n                ",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "quality-checklist",
+          "title": "Prompt Quality Checklist",
+          "content": "\n                    <ul class=\"list-none space-y-2\">\n                        <li>★★★★★ Clarity</li>\n                        <li>★★★★★ Context</li>\n                        <li>★★★★☆ Constraints</li>\n                        <li>★★★★★ Output Format</li>\n                        <li>★★★★☆ Examples</li>\n                    </ul>\n                ",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "maturity-model",
+          "title": "Prompt Engineering Maturity",
+          "content": "\n                    <div class=\"flex flex-col items-center space-y-2\">\n                        <div class=\"p-2 bg-slate-100 rounded\">Explorer</div>\n                        <div>↓</div>\n                        <div class=\"p-2 bg-slate-200 rounded\">Practitioner</div>\n                        <div>↓</div>\n                        <div class=\"p-2 bg-slate-300 rounded\">Advanced</div>\n                        <div>↓</div>\n                        <div class=\"p-2 bg-slate-400 rounded\">Prompt Engineer</div>\n                        <div>↓</div>\n                        <div class=\"p-2 bg-teal-500 text-white rounded font-bold\">AI Champion</div>\n                    </div>\n                ",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        },
+        {
+          "id": "completion",
+          "title": "Congratulations!",
+          "content": "\n                    <div class=\"text-center p-6 bg-green-50 rounded-lg\">\n                        <h3 class=\"text-2xl font-bold text-green-800 mb-2\">You have completed</h3>\n                        <p class=\"text-xl text-green-700 mb-6\">Prompt Engineering Fundamentals</p>\n                        <div class=\"flex flex-wrap justify-center gap-4\">\n                            <button class=\"px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700\">Create Prompt</button>\n                            <button class=\"px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700\">Improve Prompt</button>\n                            <button class=\"px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700\">Evaluate Prompt</button>\n                            <button class=\"px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700\">Prompt Library</button>\n                        </div>\n                    </div>\n                ",
+          "frameworks": [],
+          "examples": [],
+          "aiOutputs": []
+        }
+      ]
+    }
+  ]
+}
