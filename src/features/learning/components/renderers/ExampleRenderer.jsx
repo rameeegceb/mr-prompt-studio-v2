@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import toast from "react-hot-toast";
 
 function stripHtml(value = "") {
 	return value
@@ -175,6 +176,17 @@ function PromptBody({ html }) {
 }
 
 function StagePanel({ stage }) {
+	const handleCopyPrompt = async () => {
+		if (!stage.prompt) return;
+
+		try {
+			await navigator.clipboard.writeText(stage.prompt);
+			toast.success("Prompt copied to clipboard");
+		} catch {
+			toast.error("Unable to copy prompt");
+		}
+	};
+
 	return (
 		<div className={`rounded-xl border p-4 ${stage.tone}`}>
 			<div className="flex flex-wrap items-start justify-between gap-3">
@@ -243,6 +255,17 @@ function StagePanel({ stage }) {
 						</div>
 					</div>
 				) : null}
+			</div>
+
+			<div className="mt-4 flex justify-end">
+				<button
+					type="button"
+					onClick={handleCopyPrompt}
+					disabled={!stage.prompt}
+					className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+				>
+					Copy Prompt
+				</button>
 			</div>
 		</div>
 	);
