@@ -1,7 +1,4 @@
-import { useMemo, useState } from "react";
-import { Copy, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
-import PromptRepository from "../../../studio/repository/PromptRepository";
-import { useNavigate } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 
 function stripHtml(value = "") {
 	return value
@@ -68,32 +65,28 @@ function inferTechnique({
 }
 
 function buildExpectedOutput({
-	promptText,
 	frameworkOutput,
 	stageKey,
+	promptText,
 }) {
 	if (frameworkOutput?.content) {
 		return frameworkOutput.content;
 	}
 
-	const subject = promptText
-		? promptText.replace(/^.*?\bfor\b\s+/i, "")
-		: "the task";
-
-	if (stageKey === "bad") {
+	if (stageKey === "excellent") {
 		return toParagraph(
-			`An inconsistent response that may miss the intended role, structure, or scope for ${subject}.`
+			`Expected AI output should be clearer, more structured, and more reliable for ${promptText}.`
 		);
 	}
 
 	if (stageKey === "good") {
 		return toParagraph(
-			`A focused response aligned to ${subject}, with better context and clearer direction.`
+			`Expected AI output should better match the goal and context of ${promptText}.`
 		);
 	}
 
 	return toParagraph(
-		`A structured, enterprise-ready response with clearer output format, stronger constraints, and more reliable quality for ${subject}.`
+		`Expected AI output may be incomplete or inconsistent for ${promptText}.`
 	);
 }
 
@@ -104,10 +97,13 @@ function buildStages({
 	frameworkTitle,
 	frameworkOutput,
 }) {
-	const goodPrompt = normalizePrompt(example?.content ?? example?.prompt ?? example?.title ?? "");
-	const badPrompt = simplifyPrompt(goodPrompt) || goodPrompt;
-	const excellentPrompt = goodPrompt
-		? `${goodPrompt}\n\nReturn the result in a concise, well-structured format with any assumptions, action items, or examples clearly labeled.`
+	const sourcePrompt = normalizePrompt(
+		example?.content ?? example?.prompt ?? example?.title ?? ""
+	);
+	const goodPrompt = sourcePrompt;
+	const badPrompt = simplifyPrompt(sourcePrompt) || sourcePrompt;
+	const excellentPrompt = sourcePrompt
+		? `${sourcePrompt}\n\nUse a concise, structured response. Include assumptions, steps, and the final answer clearly.`
 		: "";
 
 	const technique = inferTechnique({
@@ -115,7 +111,6 @@ function buildStages({
 		promptText: goodPrompt,
 	});
 
-	const frameworkLabel = frameworkTitle ?? "Not applicable";
 	const contextLabel = sectionTitle || chapterTitle || "Learning Hub";
 
 	return [
@@ -126,14 +121,14 @@ function buildStages({
 			description:
 				"Too broad, underspecified, or missing enough context for the model to respond reliably.",
 			principle: "Missing specificity and structure",
-			framework: frameworkLabel,
+			framework: frameworkTitle || null,
 			technique,
 			expectedOutput: buildExpectedOutput({
 				promptText: goodPrompt || contextLabel,
 				frameworkOutput,
 				stageKey: "bad",
 			}),
-			actionTone: "border-slate-200 bg-slate-50 text-slate-700",
+			tone: "border-slate-200 bg-slate-50 text-slate-700",
 		},
 		{
 			key: "good",
@@ -142,14 +137,14 @@ function buildStages({
 			description:
 				"Adds a clearer request and more useful context so the model can stay on task.",
 			principle: "Role, task, and context",
-			framework: frameworkLabel,
+			framework: frameworkTitle || null,
 			technique,
 			expectedOutput: buildExpectedOutput({
 				promptText: goodPrompt || contextLabel,
 				frameworkOutput,
 				stageKey: "good",
 			}),
-			actionTone: "border-sky-200 bg-sky-50 text-sky-700",
+			tone: "border-sky-200 bg-sky-50 text-sky-700",
 		},
 		{
 			key: "excellent",
@@ -158,14 +153,14 @@ function buildStages({
 			description:
 				"Adds output guidance and stronger constraints for more consistent enterprise-quality results.",
 			principle: "Structure + constraints + output format",
-			framework: frameworkLabel,
+			framework: frameworkTitle || null,
 			technique,
 			expectedOutput: buildExpectedOutput({
 				promptText: goodPrompt || contextLabel,
 				frameworkOutput,
 				stageKey: "excellent",
 			}),
-			actionTone: "border-emerald-200 bg-emerald-50 text-emerald-700",
+			tone: "border-emerald-200 bg-emerald-50 text-emerald-700",
 		},
 	];
 }
@@ -179,9 +174,9 @@ function PromptBody({ html }) {
 	);
 }
 
-function StagePanel({ stage, onCopy, onTry }) {
+function StagePanel({ stage }) {
 	return (
-		<div className={`rounded-xl border p-4 ${stage.actionTone}`}>
+		<div className={`rounded-xl border p-4 ${stage.tone}`}>
 			<div className="flex flex-wrap items-start justify-between gap-3">
 				<div>
 					<div className="text-xs font-semibold uppercase tracking-wide opacity-80">
@@ -193,9 +188,11 @@ function StagePanel({ stage, onCopy, onTry }) {
 					</p>
 				</div>
 
-				<div className="rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-slate-700">
-					{stage.framework}
-				</div>
+				{stage.framework ? (
+					<div className="rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-slate-700">
+						Framework used: {stage.framework}
+					</div>
+				) : null}
 			</div>
 
 			<div className="mt-4 rounded-lg border border-white/70 bg-white p-4 shadow-sm">
@@ -215,45 +212,37 @@ function StagePanel({ stage, onCopy, onTry }) {
 
 				<div className="rounded-lg bg-white/75 p-3">
 					<div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-						Principle and technique
+						Prompt engineering principle
 					</div>
 
 					<p className="mt-1 text-sm text-slate-700">
 						{stage.principle}
 					</p>
-
-					<p className="mt-1 text-sm text-slate-700">
-						Technique: {stage.technique}
-					</p>
 				</div>
 
-				<div className="rounded-lg bg-white/75 p-3 md:col-span-2">
-					<div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-						Expected AI output
+				{stage.technique ? (
+					<div className="rounded-lg bg-white/75 p-3">
+						<div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+							Technique used
+						</div>
+
+						<p className="mt-1 text-sm text-slate-700">
+							{stage.technique}
+						</p>
 					</div>
+				) : null}
 
-					<div className="mt-1">
-						<PromptBody html={stage.expectedOutput || "<p>Output unavailable.</p>"} />
+				{stage.expectedOutput ? (
+					<div className="rounded-lg bg-white/75 p-3 md:col-span-2">
+						<div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+							Expected AI output
+						</div>
+
+						<div className="mt-1">
+							<PromptBody html={stage.expectedOutput || "<p>Output unavailable.</p>"} />
+						</div>
 					</div>
-				</div>
-			</div>
-
-			<div className="mt-4 flex flex-wrap items-center gap-2">
-				<button
-					onClick={() => onCopy(stage.prompt)}
-					className="inline-flex items-center gap-2 rounded-lg border border-white/80 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
-				>
-					<Copy size={16} />
-					Copy Prompt
-				</button>
-
-				<button
-					onClick={() => onTry(stage.prompt)}
-					className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-slate-800"
-				>
-					<ExternalLink size={16} />
-					Try in Prompt Studio
-				</button>
+				) : null}
 			</div>
 		</div>
 	);
@@ -268,43 +257,13 @@ export default function ExampleRenderer({
 	frameworkOutput = null,
 	sourceType = "section",
 }) {
-	const navigate = useNavigate();
-	const [expanded, setExpanded] = useState(exampleIndex === 0);
-
-	const stages = useMemo(
-		() =>
-			buildStages({
-				example,
-				chapterTitle,
-				sectionTitle,
-				frameworkTitle,
-				frameworkOutput,
-			}),
-		[
-			example,
-			chapterTitle,
-			sectionTitle,
-			frameworkTitle,
-			frameworkOutput,
-		]
-	);
-
-	const handleCopy = async (prompt) => {
-		if (!prompt) return;
-
-		try {
-			await navigator.clipboard.writeText(prompt);
-		} catch {
-			// Intentionally silent; copy is a convenience action.
-		}
-	};
-
-	const handleTryInStudio = async (prompt) => {
-		if (!prompt) return;
-
-		PromptRepository.save(prompt);
-		navigate("/studio");
-	};
+	const stages = buildStages({
+		example,
+		chapterTitle,
+		sectionTitle,
+		frameworkTitle,
+		frameworkOutput,
+	});
 
 	const sourceLabel =
 		sourceType === "framework"
@@ -312,13 +271,8 @@ export default function ExampleRenderer({
 			: sectionTitle || chapterTitle || "Lesson example";
 
 	return (
-		<article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-			<button
-				type="button"
-				onClick={() => setExpanded((current) => !current)}
-				className="flex w-full items-center justify-between gap-4 border-b border-slate-100 px-5 py-4 text-left transition hover:bg-slate-50"
-				aria-expanded={expanded}
-			>
+		<details className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm" open={exampleIndex === 0}>
+			<summary className="flex w-full cursor-pointer list-none items-center justify-between gap-4 border-b border-slate-100 px-5 py-4 text-left transition hover:bg-slate-50">
 				<div className="min-w-0">
 					<div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
 						{sourceLabel}
@@ -331,28 +285,24 @@ export default function ExampleRenderer({
 
 				<div className="flex items-center gap-2 text-slate-500">
 					<span className="hidden text-xs font-medium md:inline">
-						{expanded ? "Collapse" : "Expand"}
+						Expand
 					</span>
-					{expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+					<ChevronDown size={18} />
 				</div>
-			</button>
+			</summary>
 
-			{expanded ? (
-				<div className="space-y-4 p-5">
-					{stages.map((stage) => (
-						<StagePanel
-							key={stage.key}
-							stage={stage}
-							onCopy={handleCopy}
-							onTry={handleTryInStudio}
-						/>
-					))}
+			<div className="space-y-4 p-5">
+				<div className="rounded-lg border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+					{example?.title ?? `Example ${exampleIndex + 1}`}
 				</div>
-			) : (
-				<div className="px-5 py-4 text-sm text-slate-500">
-					Expand to review the bad, good, and excellent prompt progression.
-				</div>
-			)}
-		</article>
+
+				{stages.map((stage) => (
+					<StagePanel
+						key={stage.key}
+						stage={stage}
+					/>
+				))}
+			</div>
+		</details>
 	);
 }
