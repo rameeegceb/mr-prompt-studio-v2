@@ -35,6 +35,14 @@ export default function LearningProvider({ children }) {
   const [selectedSection, setSelectedSection] =
     useState(saved.selectedSection ?? null);
 
+  const [viewMode, setViewMode] = useState(
+    saved.viewMode ?? "paths"
+  );
+
+  const [selectedPath, setSelectedPath] = useState(
+    saved.selectedPath ?? "fundamentals"
+  );
+
   const [search, setSearch] = useState("");
 
   const [bookmarks, setBookmarks] = useState(
@@ -53,6 +61,9 @@ export default function LearningProvider({ children }) {
       STORAGE_KEY,
       JSON.stringify({
         selectedChapter,
+        selectedSection,
+        viewMode,
+        selectedPath,
         bookmarks,
         favorites,
         completedLessons,
@@ -60,6 +71,9 @@ export default function LearningProvider({ children }) {
     );
   }, [
     selectedChapter,
+    selectedSection,
+    viewMode,
+    selectedPath,
     bookmarks,
     favorites,
     completedLessons,
@@ -104,6 +118,12 @@ export default function LearningProvider({ children }) {
       selectedSection,
       setSelectedSection,
 
+      viewMode,
+      setViewMode,
+
+      selectedPath,
+      setSelectedPath,
+
       bookmarks,
       toggleBookmark,
 
@@ -121,6 +141,8 @@ export default function LearningProvider({ children }) {
 
       selectedChapter,
       selectedSection,
+      viewMode,
+      selectedPath,
 
       bookmarks,
       favorites,
