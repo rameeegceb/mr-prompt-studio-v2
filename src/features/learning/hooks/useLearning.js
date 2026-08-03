@@ -63,6 +63,18 @@ export default function useLearning() {
     setViewMode("paths");
   }
 
+  function openFrameworksWorkspace() {
+    setViewMode("frameworks");
+  }
+
+  function openTechniquesWorkspace() {
+    setViewMode("techniques");
+  }
+
+  function openPracticeWorkspace() {
+    setViewMode("practice");
+  }
+
   function continuePath(pathId) {
     const path =
       paths.find((item) => item.id === pathId) ?? null;
@@ -101,6 +113,9 @@ export default function useLearning() {
     viewMode,
     openLessonWorkspace,
     openPathsWorkspace,
+    openFrameworksWorkspace,
+    openTechniquesWorkspace,
+    openPracticeWorkspace,
 
     selectedPath,
     setSelectedPath,

@@ -11,6 +11,9 @@ import ContinueLearningCard from "../components/ContinueLearningCard";
 import BookmarkPanel from "../components/BookmarkPanel";
 import FavoritesPanel from "../components/FavoritesPanel";
 import LearningPathsDashboard from "../components/LearningPathsDashboard";
+import FrameworkExplorerDashboard from "../components/FrameworkExplorerDashboard";
+import TechniqueExplorerDashboard from "../components/TechniqueExplorerDashboard";
+import PracticeModeDashboard from "../components/PracticeModeDashboard";
 
 import useLearning from "../hooks/useLearning";
 
@@ -35,6 +38,9 @@ function LearningHubContent() {
     viewMode,
     openLessonWorkspace,
     openPathsWorkspace,
+    openFrameworksWorkspace,
+    openTechniquesWorkspace,
+    openPracticeWorkspace,
 
     setSelectedPath,
     paths,
@@ -90,6 +96,39 @@ function LearningHubContent() {
           >
             Lesson Workspace
           </button>
+
+          <button
+            onClick={openPracticeWorkspace}
+            className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${
+              viewMode === "practice"
+                ? "bg-blue-600 text-white"
+                : "text-slate-600 hover:bg-slate-50"
+            }`}
+          >
+            Practice Mode
+          </button>
+
+          <button
+            onClick={openFrameworksWorkspace}
+            className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${
+              viewMode === "frameworks"
+                ? "bg-blue-600 text-white"
+                : "text-slate-600 hover:bg-slate-50"
+            }`}
+          >
+            Framework Explorer
+          </button>
+
+          <button
+            onClick={openTechniquesWorkspace}
+            className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${
+              viewMode === "techniques"
+                ? "bg-blue-600 text-white"
+                : "text-slate-600 hover:bg-slate-50"
+            }`}
+          >
+            Technique Explorer
+          </button>
         </div>
       </PageHeader>
 
@@ -100,6 +139,15 @@ function LearningHubContent() {
           onSelectPath={setSelectedPath}
           onContinuePath={continuePath}
           onOpenWorkspace={openLessonWorkspace}
+        />
+      ) : viewMode === "frameworks" ? (
+        <FrameworkExplorerDashboard course={course} />
+      ) : viewMode === "techniques" ? (
+        <TechniqueExplorerDashboard course={course} />
+      ) : viewMode === "practice" ? (
+        <PracticeModeDashboard
+          chapter={currentChapter}
+          onOpenLessonWorkspace={openLessonWorkspace}
         />
       ) : (
         <>
@@ -134,21 +182,30 @@ function LearningHubContent() {
                 </div>
 
                 {currentChapter?.id ? (
-                  <button
-                    onClick={() =>
-                      completeLesson(currentChapter.id)
-                    }
-                    className={`mt-3 w-full rounded-lg px-3 py-2 text-sm font-medium transition ${
-                      isCurrentChapterCompleted
-                        ? "border border-emerald-200 bg-emerald-50 text-emerald-700"
-                        : "bg-blue-600 text-white hover:bg-blue-700"
-                    }`}
-                    disabled={isCurrentChapterCompleted}
-                  >
-                    {isCurrentChapterCompleted
-                      ? "Lesson Completed"
-                      : "Mark Lesson Complete"}
-                  </button>
+                  <div className="mt-3 space-y-2">
+                    <button
+                      onClick={() =>
+                        completeLesson(currentChapter.id)
+                      }
+                      className={`w-full rounded-lg px-3 py-2 text-sm font-medium transition ${
+                        isCurrentChapterCompleted
+                          ? "border border-emerald-200 bg-emerald-50 text-emerald-700"
+                          : "bg-blue-600 text-white hover:bg-blue-700"
+                      }`}
+                      disabled={isCurrentChapterCompleted}
+                    >
+                      {isCurrentChapterCompleted
+                        ? "Lesson Completed"
+                        : "Mark Lesson Complete"}
+                    </button>
+
+                    <button
+                      onClick={openPracticeWorkspace}
+                      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                    >
+                      Practice This Lesson
+                    </button>
+                  </div>
                 ) : null}
               </div>
             </div>
