@@ -22,6 +22,7 @@ export default function LessonRenderer({ chapter }) {
             <SectionRenderer
               key={section.id}
               section={section}
+              chapterTitle={chapter.title}
             />
           ))}
         </div>
