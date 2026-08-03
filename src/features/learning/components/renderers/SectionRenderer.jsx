@@ -1,4 +1,6 @@
 import ExampleRenderer from "./ExampleRenderer";
+import FrameworkRenderer from "./FrameworkRenderer";
+import { buildFrameworkRecord } from "../../utils/frameworkExplorer";
 
 export default function SectionRenderer({
   section,
@@ -26,50 +28,14 @@ export default function SectionRenderer({
 
       {/* Frameworks */}
       {section.frameworks?.map((framework) => (
-        <div
+        <FrameworkRenderer
           key={framework.id}
-          className="space-y-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
-        >
-          <h3 className="text-xl font-semibold text-teal-700">
-            {framework.title}
-          </h3>
-
-          {framework.description && (
-            <p className="mt-2 text-slate-700">
-              {framework.description}
-            </p>
-          )}
-
-          {framework.content && (
-            <div
-              className="prose prose-slate mt-4 max-w-none"
-              dangerouslySetInnerHTML={{
-                __html: framework.content,
-              }}
-            />
-          )}
-
-          {framework.examples?.length > 0 ? (
-            <div className="space-y-4">
-              <h4 className="font-semibold text-slate-800">
-                Interactive Examples
-              </h4>
-
-              {framework.examples.map((example, index) => (
-                <ExampleRenderer
-                  key={index}
-                  example={example}
-                  exampleIndex={index}
-                  chapterTitle={chapterTitle}
-                  sectionTitle={section.title}
-                  frameworkTitle={framework.title}
-                  frameworkOutput={framework.aiOutputs?.[index] ?? null}
-                  sourceType="framework"
-                />
-              ))}
-            </div>
-          ) : null}
-        </div>
+          framework={buildFrameworkRecord({
+            framework,
+            chapter: { title: chapterTitle },
+            section,
+          })}
+        />
       ))}
 
       {/* Section Examples */}
