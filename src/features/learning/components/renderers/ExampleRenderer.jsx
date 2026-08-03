@@ -1,5 +1,7 @@
 import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import PromptRepository from "../../../studio/repository/PromptRepository";
 
 function stripHtml(value = "") {
 	return value
@@ -175,7 +177,7 @@ function PromptBody({ html }) {
 	);
 }
 
-function StagePanel({ stage }) {
+function StagePanel({ stage, onTryInStudio }) {
 	const handleCopyPrompt = async () => {
 		if (!stage.prompt) return;
 
@@ -185,6 +187,13 @@ function StagePanel({ stage }) {
 		} catch {
 			toast.error("Unable to copy prompt");
 		}
+	};
+
+	const handleTryInStudio = () => {
+		if (!stage.prompt) return;
+
+		PromptRepository.save(stage.prompt);
+		onTryInStudio(stage.prompt);
 	};
 
 	return (
@@ -260,6 +269,15 @@ function StagePanel({ stage }) {
 			<div className="mt-4 flex justify-end">
 				<button
 					type="button"
+					onClick={handleTryInStudio}
+					disabled={!stage.prompt}
+					className="mr-2 rounded-lg border border-blue-200 bg-white px-3 py-2 text-sm font-medium text-blue-700 shadow-sm transition hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-50"
+				>
+					Try in Prompt Studio
+				</button>
+
+				<button
+					type="button"
 					onClick={handleCopyPrompt}
 					disabled={!stage.prompt}
 					className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
@@ -280,6 +298,8 @@ export default function ExampleRenderer({
 	frameworkOutput = null,
 	sourceType = "section",
 }) {
+	const navigate = useNavigate();
+
 	const stages = buildStages({
 		example,
 		chapterTitle,
@@ -292,6 +312,10 @@ export default function ExampleRenderer({
 		sourceType === "framework"
 			? frameworkTitle ?? "Framework example"
 			: sectionTitle || chapterTitle || "Lesson example";
+
+	const handleTryInStudio = () => {
+		navigate("/studio");
+	};
 
 	return (
 		<details className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm" open={exampleIndex === 0}>
@@ -323,6 +347,7 @@ export default function ExampleRenderer({
 					<StagePanel
 						key={stage.key}
 						stage={stage}
+						onTryInStudio={handleTryInStudio}
 					/>
 				))}
 			</div>
